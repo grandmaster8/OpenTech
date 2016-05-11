@@ -21,9 +21,7 @@ public class BlockPlayerInventoryBinder extends BlockContainer {
 
     @Override
     public TileEntity createNewTileEntity(World world, int p_149915_2_) {
-        TileEntityPlayerInventoryBinder binder = new TileEntityPlayerInventoryBinder();
-        TileEntityPlayerInventoryBinder.binders.add(binder);
-        return binder;
+        return new TileEntityPlayerInventoryBinder();
     }
 
     @Override

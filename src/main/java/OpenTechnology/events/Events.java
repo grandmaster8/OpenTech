@@ -16,11 +16,4 @@ public class Events {
         if (ChatBoxEventSystem.eventMessage(event.player, event.message))
             event.setCanceled(true);
     }
-
-    @SubscribeEvent
-    public void loggedIn(PlayerEvent.PlayerLoggedInEvent event){
-        for (TileEntityPlayerInventoryBinder binder : TileEntityPlayerInventoryBinder.binders){
-            binder.addPlayer(event.player);
-        }
-    }
 }

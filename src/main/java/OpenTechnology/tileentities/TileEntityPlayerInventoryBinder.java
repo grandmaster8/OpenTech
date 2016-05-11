@@ -15,16 +15,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import java.util.ArrayList;
-
 /**
  * Created by Avaja on 11.05.2016.
  */
 public class TileEntityPlayerInventoryBinder extends TileEntityEnvironment implements SimpleComponent, Analyzable {
 
-    public static ArrayList<TileEntityPlayerInventoryBinder> binders = new ArrayList<TileEntityPlayerInventoryBinder>();
-
-    private String player_uuid;
+    private String player_name;
     private EntityPlayer player;
 
     public TileEntityPlayerInventoryBinder() {
@@ -51,7 +47,7 @@ public class TileEntityPlayerInventoryBinder extends TileEntityEnvironment imple
     }
 
     public boolean addPlayer(EntityPlayer player){
-        if (player_uuid.equals(player.getUniqueID().toString())){
+        if (player_name.equals(player.getUniqueID().toString())){
             this.player = player;
             return true;
         }
@@ -59,14 +55,15 @@ public class TileEntityPlayerInventoryBinder extends TileEntityEnvironment imple
     }
 
     public boolean isConnected(){
-        return player != null || player_uuid != null && player_uuid.isEmpty();
+
+        return player != null || player_name != null && player_name.isEmpty();
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        if (nbt.hasKey("player_uuid")){
-            player_uuid = nbt.getString("player_uuid");
+        if (nbt.hasKey("player_name")){
+            player_name = nbt.getString("player_name");
         }
     }
 
@@ -74,7 +71,7 @@ public class TileEntityPlayerInventoryBinder extends TileEntityEnvironment imple
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         if (player != null){
-            nbt.setString("player_uuid", player.getUniqueID().toString());
+            nbt.setString("player_name", player.getDisplayName());
         }
     }
 
@@ -82,6 +79,9 @@ public class TileEntityPlayerInventoryBinder extends TileEntityEnvironment imple
     public Object[] getStackInSlot(Context context, Arguments arguments) throws Exception{
         if (!isConnected())
             return new Object[]{false, "player not connected"};
+
+        if (player == null)
+            player = worldObj.getPlayerEntityByName(player_name);
 
         int slot = arguments.checkInteger(0);
         if (player != null){
