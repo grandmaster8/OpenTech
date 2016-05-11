@@ -16,7 +16,7 @@ public class BlockChatBox extends BlockContainer{
 
     public BlockChatBox() {
         super(Material.iron);
-        setBlockName("ot_chatbox");
+        setBlockName("OpenTechnology_chatbox");
         setBlockTextureName(OpenTechnology.MODID+":chatbox");
         setCreativeTab(OpenTechnology.tab);
     }

@@ -16,7 +16,7 @@ public class BlockAdminChatBox extends BlockContainer {
 
     public BlockAdminChatBox() {
         super(Material.iron);
-        this.setBlockName("ot_adminchatbox");
+        this.setBlockName("OpenTechnology_adminchatbox");
         this.setBlockTextureName(OpenTechnology.MODID+":adminchatbox");
         this.setCreativeTab(OpenTechnology.tab);
     }

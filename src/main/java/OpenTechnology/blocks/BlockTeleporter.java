@@ -17,7 +17,7 @@ public class BlockTeleporter extends Block implements ITileEntityProvider{
 	public BlockTeleporter() {
 		super(Material.iron);
 		super.setHardness(10);
-		super.setBlockName("ot_teleporter");
+		super.setBlockName("OpenTechnology_teleporter");
 		this.setCreativeTab(OpenTechnology.tab);
 	}
 

@@ -21,6 +21,7 @@ public class Config {
     public static double teslaFactor;
     public static double teslaDamage;
     public static int teslaTimeReload;
+    public static double binderEnergyFactor;
 
     public static void init(File file){
         configuration = new Configuration(file);
@@ -35,6 +36,8 @@ public class Config {
         teslaFactor = configuration.get("tesla", "teslaFactor", 5.0).getDouble();
         teslaDamage = configuration.get("tesla", "teslaDamage", 30.0).getDouble();
         teslaTimeReload = configuration.get("tesla", "teslaTimeReload", 90, "ticks").getInt();
+
+        binderEnergyFactor = configuration.get("binder", "binderEnergyFactor", 30, "").getDouble();
 
         configuration.save();
     }

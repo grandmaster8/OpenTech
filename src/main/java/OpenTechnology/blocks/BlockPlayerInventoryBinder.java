@@ -15,7 +15,7 @@ public class BlockPlayerInventoryBinder extends BlockContainer {
 
     protected BlockPlayerInventoryBinder() {
         super(Material.iron);
-        setBlockName("ot_player_inventory_binder");
+        setBlockName("OpenTechnology_player_inventory_binder");
         setCreativeTab(OpenTechnology.tab);
     }
 
@@ -27,7 +27,7 @@ public class BlockPlayerInventoryBinder extends BlockContainer {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
         TileEntityPlayerInventoryBinder binder = (TileEntityPlayerInventoryBinder) world.getTileEntity(x, y, z);
-        if (!binder.isConnected())
+        //if (!binder.isConnected())
             binder.setPlayer(player);
 
         return true;

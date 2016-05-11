@@ -46,7 +46,6 @@ public class TileEntityTeleporter extends TileEntityEnvironment implements Simpl
     public void updateEntity() {
         super.updateEntity();
         if (!connect && node != null){
-            System.out.println(String.format("add to list=%s", node.address()));
             teleporterList.put(node.address(), this);
             connect = true;
         }

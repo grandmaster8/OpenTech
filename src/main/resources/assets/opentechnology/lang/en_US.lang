@@ -1,4 +1,8 @@
 itemGroup.OpenTechnology=OpenTechnology
-tile.ot_teleporter.name=Universal Teleporter
-tile.ot_chatbox.name=Chatbox
-tile.ot_chatboxadmin.name=Admin Chatbox
+tile.OpenTechnology_teleporter.name=Universal Teleporter
+tile.OpenTechnology_chatbox.name=Chatbox
+tile.OpenTechnology_chatboxadmin.name=Admin Chatbox
+tile.OpenTechnology_player_inventory_binder.name=Inventory Binder
+
+item.OpenTechnology_teslaUpgrade.name=Tesla Upgrade
+item.OpenTechnology_tesseractUpgrade.name=Tesseract Upgrade

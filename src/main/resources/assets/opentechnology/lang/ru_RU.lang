@@ -1,4 +1,8 @@
 itemGroup.OpenTechnology=OpenTechnology
-tile.Teleporter.name=Универсальный Телепортер
-tile.ot_chatbox.name=Чатбокс
-tile.ot_chatboxadmin.name=Админский чатбокс
+tile.OpenTechnology_teleporter.name=Универсальный Телепортер
+tile.OpenTechnology_chatbox.name=Чатбокс
+tile.OpenTechnology_chatboxadmin.name=Админский чатбокс
+tile.OpenTechnology_player_inventory_binder.name=Связыватель инвентаря
+
+item.OpenTechnology_teslaUpgrade.name=Тесла Улучшение
+item.OpenTechnology_tesseractUpgrade.name=Тессеракт Улучшение
