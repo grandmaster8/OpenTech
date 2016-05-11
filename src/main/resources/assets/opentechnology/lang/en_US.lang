@@ -1,0 +1,4 @@
+itemGroup.OpenTechnology=OpenTechnology
+tile.ot_teleporter.name=Universal Teleporter
+tile.ot_chatbox.name=Chatbox
+tile.ot_chatboxadmin.name=Admin Chatbox
