@@ -95,7 +95,7 @@ public class TileEntityTeleporter extends TileEntityEnvironment implements Simpl
             ItemStack stack = getStackInSlot(slot);
             if (stack != null && stack.stackSize >= count) {
                 double dist = Utils.distance(node, teleporter.node);
-                double energy = 4 * (dist / 10) * dist * count;
+                double energy = calculateEnergy(dist);
                 if (teleporter.addToInventory(stack.splitStack(count))) {
                     if (connector.tryChangeBuffer(-energy)) {
                         if (stack.stackSize <= 0)
@@ -121,8 +121,8 @@ public class TileEntityTeleporter extends TileEntityEnvironment implements Simpl
 
             ItemStack stack = getStackInSlot(slot);
             if (stack != null && stack.stackSize >= count) {
-                double dist = Utils.distance(xCoord, yCoord, zCoord, tesseract.getRobot().xPosition(), tesseract.getRobot().yPosition(), tesseract.getRobot().zPosition());
-                double energy = 4 * (dist / 10) * dist * count;
+                double dist = getDistanceFrom(tesseract.getRobot().xPosition(), tesseract.getRobot().yPosition(), tesseract.getRobot().zPosition());
+                double energy = calculateEnergy(dist);
                 if (tesseract.addToInventory(stack.splitStack(count))) {
                     if (connector.tryChangeBuffer(-energy)) {
                         if (stack.stackSize <= 0)
@@ -157,9 +157,7 @@ public class TileEntityTeleporter extends TileEntityEnvironment implements Simpl
 
                 for (Entity entity : entityList) {
                     double dist = entity.getDistance(teleporter.xCoord, teleporter.yCoord, teleporter.zCoord);
-                    double factor = (dist / 10) > 0 ? dist / 10 : 1;
-                    double energy = dist * factor;
-                    if (connector.tryChangeBuffer(-energy)) {
+                    if (connector.tryChangeBuffer(-calculateEnergy(dist))) {
                         if (entity instanceof EntityPlayer) {
                             EntityPlayer player = (EntityPlayer) entity;
                             player.setWorld(teleporter.worldObj);
@@ -286,5 +284,10 @@ public class TileEntityTeleporter extends TileEntityEnvironment implements Simpl
             return ret;
         }
         return null;
+    }
+
+    private double calculateEnergy(double dist){
+        double factor = (dist / 10) > 0 ? dist / 10 : 1;
+        return dist * factor;
     }
 }

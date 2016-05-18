@@ -1,6 +1,5 @@
 package OpenTechnology;
 
-import OpenTechnology.blocks.BlockTeleporter;
 import OpenTechnology.blocks.Blocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

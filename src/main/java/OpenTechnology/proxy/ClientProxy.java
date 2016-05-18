@@ -18,6 +18,7 @@ public class ClientProxy extends CommonProxy{
 		super.init(e);
 
 		wrapper.registerMessage(PacketTeleporter.HandlerClient.class, PacketTeleporter.class, 1, Side.CLIENT);
+
 	}
 
 	@Override
