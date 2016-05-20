@@ -35,7 +35,8 @@ public class TileEntityAdminChatBox extends TileEntityEnvironment implements Sim
     }
 
     public void eventCommand(EntityPlayer player, String message){
-        this.node().sendToReachable("computer.signal", "chat_command", player.getDisplayName(), message);
+        if(this.node() != null)
+            this.node().sendToReachable("computer.signal", "chat_command", player.getDisplayName(), message);
     }
 
     @Override
@@ -45,7 +46,9 @@ public class TileEntityAdminChatBox extends TileEntityEnvironment implements Sim
 
     @Callback(doc="function(message:string); say some text")
     public Object[] say(Context context, Arguments arguments) throws Exception{
+
         System.out.println(String.format("say: x=%d, y=%d, z=%d", xCoord, yCoord, zCoord));
+
         for (WorldServer world : MinecraftServer.getServer().worldServers){
             List<EntityPlayer> playerList = world.playerEntities;
             for (EntityPlayer entityPlayer : playerList){
@@ -81,7 +84,7 @@ public class TileEntityAdminChatBox extends TileEntityEnvironment implements Sim
             List<EntityPlayer> playerList = world.playerEntities;
             for (EntityPlayer entityPlayer : playerList){
                 if (entityPlayer.getDisplayName().equals(name))
-                    entityPlayer.addChatMessage(new ChatComponentText(String.format("%s", arguments.checkString(1))));
+                    entityPlayer.addChatMessage(new ChatComponentText(message));
             }
         }
         return new Object[]{};
@@ -89,7 +92,7 @@ public class TileEntityAdminChatBox extends TileEntityEnvironment implements Sim
 
     @Override
     public String getComponentName() {
-        return "chatbox";
+        return "admin_chatbox";
     }
 
     @Override

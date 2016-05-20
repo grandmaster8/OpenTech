@@ -1,7 +1,7 @@
 itemGroup.OpenTechnology=OpenTechnology
 tile.OpenTechnology_teleporter.name=Универсальный Телепортер
 tile.OpenTechnology_chatbox.name=Чатбокс
-tile.OpenTechnology_chatboxadmin.name=Админский чатбокс
+tile.OpenTechnology_adminchatbox.name=Админский чатбокс
 tile.OpenTechnology_player_inventory_binder.name=Связыватель инвентаря
 
 item.OpenTechnology_teslaUpgrade.name=Тесла Улучшение

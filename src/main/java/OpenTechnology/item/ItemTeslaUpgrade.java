@@ -11,5 +11,6 @@ public class ItemTeslaUpgrade extends Item  {
     public ItemTeslaUpgrade() {
         setCreativeTab(OpenTechnology.tab);
         setUnlocalizedName("OpenTechnology_teslaUpgrade");
+        setTextureName(OpenTechnology.MODID+":teslaUpgrade");
     }
 }
