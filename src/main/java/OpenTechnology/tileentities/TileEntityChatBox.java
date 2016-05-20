@@ -54,7 +54,7 @@ public class TileEntityChatBox extends TileEntityEnvironment implements SimpleCo
             this.node(  ).sendToReachable( "computer.signal", "chat_command", player.getDisplayName(  ), message );
     }
 
-    @Callback
+    @Callback(doc="function(message:string); say some text")
     public Object[] say( Context context, Arguments arguments ) throws Exception{
 
         String message = arguments.checkString( 0 );
@@ -73,7 +73,7 @@ public class TileEntityChatBox extends TileEntityEnvironment implements SimpleCo
         return new Object[]{};
     }
 
-    @Callback
+    @Callback(doc="function(message:string); formatting function, @ replace §. It works like, say.")
     public Object[] sayColored( Context context, Arguments arguments ) throws Exception{
 
         String message = arguments.checkString( 0 );
