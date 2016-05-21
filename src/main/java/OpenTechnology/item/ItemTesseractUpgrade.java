@@ -11,5 +11,6 @@ public class ItemTesseractUpgrade extends Item {
     public ItemTesseractUpgrade() {
         setCreativeTab(OpenTechnology.tab);
         setUnlocalizedName("OpenTechnology_tesseractUpgrade");
+        setTextureName(OpenTechnology.MODID+":UpgradeTesseract");
     }
 }
