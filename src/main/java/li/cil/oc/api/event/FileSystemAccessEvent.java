@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 /**
- * Events for handling file system access and representing it on the client.
+ * CommonEvents for handling file system access and representing it on the client.
  * <p/>
  * This is used to play file system access sounds and render disk activity
  * indicators on some containers (e.g. disk drive, computer, server).

@@ -1,6 +1,7 @@
 package OpenTechnology.tileentities;
 
 import OpenTechnology.Config;
+import OpenTechnology.system.ChatBoxEventSystem;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import li.cil.oc.api.Network;
 import li.cil.oc.api.machine.Arguments;
@@ -27,6 +28,7 @@ public class TileEntityAdminChatBox extends TileEntityEnvironment implements Sim
 
     public TileEntityAdminChatBox() {
         node = Network.newNode(this, Visibility.Network).withComponent(getComponentName()).create();
+        ChatBoxEventSystem.add(this);
     }
 
     public void eventMessage(EntityPlayer player, String message){
@@ -93,10 +95,5 @@ public class TileEntityAdminChatBox extends TileEntityEnvironment implements Sim
     @Override
     public String getComponentName() {
         return "admin_chatbox";
-    }
-
-    @Override
-    public void updateEntity() {
-        super.updateEntity();
     }
 }

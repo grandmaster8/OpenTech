@@ -7,7 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 /**
- * Events for handling network activity and representing it on the client.
+ * CommonEvents for handling network activity and representing it on the client.
  * <p/>
  * This is used to render network activity
  * indicators on some containers (e.g. computer, server).

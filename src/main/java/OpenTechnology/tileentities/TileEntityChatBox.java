@@ -1,6 +1,7 @@
 package OpenTechnology.tileentities;
 
 import OpenTechnology.Config;
+import OpenTechnology.system.ChatBoxEventSystem;
 import li.cil.oc.api.Network;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
@@ -28,6 +29,7 @@ public class TileEntityChatBox extends TileEntityEnvironment implements SimpleCo
 
     public TileEntityChatBox(  ) {
         node = Network.newNode( this, Visibility.Network ).withComponent( getComponentName(  ) ).create(  );
+        ChatBoxEventSystem.add(this);
     }
 
     @Override

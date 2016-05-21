@@ -22,14 +22,16 @@ public class BlockChatBox extends BlockContainer{
     }
 
     @Override
-    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+    public TileEntity createNewTileEntity(World world, int p_149915_2_) {
         return new TileEntityChatBox();
     }
 
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int p_149749_6_) {
         TileEntityChatBox box = (TileEntityChatBox) world.getTileEntity(x, y, z);
-        ChatBoxEventSystem.remove(box);
+        if (!world.isRemote)
+            ChatBoxEventSystem.remove(box);
+
         super.breakBlock(world, x, y, z, block, p_149749_6_);
     }
 }

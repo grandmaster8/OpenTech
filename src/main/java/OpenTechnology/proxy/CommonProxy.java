@@ -2,7 +2,7 @@ package OpenTechnology.proxy;
 
 import OpenTechnology.OpenTechnology;
 import OpenTechnology.blocks.Blocks;
-import OpenTechnology.events.Events;
+import OpenTechnology.events.CommonEvents;
 import OpenTechnology.gui.GuiHandler;
 import OpenTechnology.item.Items;
 import OpenTechnology.item.recipes.Recipes;
@@ -28,10 +28,10 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent e) {
+        MinecraftForge.EVENT_BUS.register(new CommonEvents());
+
         wrapper = NetworkRegistry.INSTANCE.newSimpleChannel("OpenTechnology");
         NetworkRegistry.INSTANCE.registerGuiHandler(OpenTechnology.instance, new GuiHandler());
-
-        MinecraftForge.EVENT_BUS.register(new Events());
 
         Blocks.init();
         Items.init();

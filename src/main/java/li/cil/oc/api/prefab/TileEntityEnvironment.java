@@ -105,6 +105,7 @@ public abstract class TileEntityEnvironment extends TileEntity implements Enviro
         if (!addedToNetwork) {
             addedToNetwork = true;
             Network.joinOrCreateNetwork(this);
+            System.out.println(node());
         }
     }
 

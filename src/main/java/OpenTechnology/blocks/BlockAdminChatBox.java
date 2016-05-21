@@ -23,15 +23,14 @@ public class BlockAdminChatBox extends BlockContainer {
 
     @Override
     public TileEntity createNewTileEntity(World world, int i1) {
-        TileEntityAdminChatBox box = new TileEntityAdminChatBox();
-        ChatBoxEventSystem.add(box);
-        return box;
+        return new TileEntityAdminChatBox();
     }
 
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int p_149749_6_) {
         TileEntityAdminChatBox box = (TileEntityAdminChatBox) world.getTileEntity(x, y, z);
         ChatBoxEventSystem.remove(box);
+
         super.breakBlock(world, x, y, z, block, p_149749_6_);
     }
 }

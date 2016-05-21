@@ -10,8 +10,8 @@ import java.util.ArrayList;
  * Created by Avaja on 05.05.2016.
  */
 public class ChatBoxEventSystem {
-    public static ArrayList<TileEntityAdminChatBox> adminChatBoxs = new ArrayList<TileEntityAdminChatBox>();
-    public static ArrayList<TileEntityChatBox> chatBoxes = new ArrayList<TileEntityChatBox>();
+    private static ArrayList<TileEntityAdminChatBox> adminChatBoxs = new ArrayList<TileEntityAdminChatBox>();
+    private static ArrayList<TileEntityChatBox> chatBoxes = new ArrayList<TileEntityChatBox>();
 
     public static void add(TileEntityAdminChatBox tile){
         adminChatBoxs.add(tile);
@@ -22,11 +22,17 @@ public class ChatBoxEventSystem {
     }
 
     public static void remove(TileEntityAdminChatBox tile){
-        adminChatBoxs.remove(tile);
+        for (int i = 0; i < adminChatBoxs.size(); i++){
+            if (adminChatBoxs.get(i) == tile)
+                adminChatBoxs.remove(i);
+        }
     }
 
     public static void remove(TileEntityChatBox tile){
-        chatBoxes.remove(tile);
+        for (int i = 0; i < chatBoxes.size(); i++){
+            if (chatBoxes.get(i) == tile)
+                chatBoxes.remove(i);
+        }
     }
 
     public static boolean eventMessage(EntityPlayer player, String message){
