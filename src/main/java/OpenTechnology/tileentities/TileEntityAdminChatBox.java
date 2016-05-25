@@ -51,11 +51,9 @@ public class TileEntityAdminChatBox extends TileEntityEnvironment implements Sim
 
         System.out.println(String.format("say: x=%d, y=%d, z=%d", xCoord, yCoord, zCoord));
 
-        for (WorldServer world : MinecraftServer.getServer().worldServers){
-            List<EntityPlayer> playerList = world.playerEntities;
-            for (EntityPlayer entityPlayer : playerList){
-                entityPlayer.addChatMessage(new ChatComponentText(String.format("%s", arguments.checkString(0))));
-            }
+        List<EntityPlayer> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+        for (EntityPlayer player : players){
+            player.addChatMessage(new ChatComponentText(String.format("%s", arguments.checkString(0))));
         }
         return new Object[]{};
     }
@@ -67,12 +65,9 @@ public class TileEntityAdminChatBox extends TileEntityEnvironment implements Sim
 
         String message = arguments.checkString(0).replace(Config.prefixChat.charAt(0), (char) 167);
 
-        for (WorldServer world : MinecraftServer.getServer().worldServers){
-            List<EntityPlayer> playerList = world.playerEntities;
-            for (EntityPlayer entityPlayer : playerList){
-                entityPlayer.addChatMessage(new ChatComponentText(message));
-
-            }
+        List<EntityPlayer> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+        for (EntityPlayer player : players){
+            player.addChatMessage(new ChatComponentText(String.format("%s", message)));
         }
         return new Object[]{};
     }
@@ -81,6 +76,12 @@ public class TileEntityAdminChatBox extends TileEntityEnvironment implements Sim
     public Object[] tell(Context context, Arguments arguments) throws Exception{
         String name = arguments.checkString(0);
         String message = arguments.checkString(1);
+
+        List<EntityPlayer> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+        for (EntityPlayer player : players){
+            if (player.getDisplayName().equals(name))
+                player.addChatMessage(new ChatComponentText(message));
+        }
 
         for (WorldServer world : MinecraftServer.getServer().worldServers){
             List<EntityPlayer> playerList = world.playerEntities;
