@@ -1,5 +1,5 @@
 /**
- * CommonEvents dispatched by OpenComputers to allow other mods to hook into some
+ * Events dispatched by OpenComputers to allow other mods to hook into some
  * of its functionality.
  */
 @cpw.mods.fml.common.API(

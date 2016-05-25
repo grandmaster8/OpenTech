@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
  * In OpenComputers an example for this would be servers, in other mods
  * this can be backpacks and the like. Inventory providers are used to
  * allow agents (robots, drones) to interact with such inventories using
- * the inventory controller driver, for example.
+ * the inventory controller upgrade, for example.
  * <p/>
  * Implementations returned by {@link #getInventory} should save changes
  * back to the item stack when {@link IInventory#markDirty()} is called.
@@ -32,7 +32,7 @@ public interface InventoryProvider {
      * <p/>
      * Note that the specified player may be <tt>null</tt>, but will
      * usually be the <em>fake player</em> of the agent using the
-     * inventory controller driver to access the item inventory.
+     * inventory controller upgrade to access the item inventory.
      *
      * @param stack  the item stack to get the inventory for.
      * @param player the player holding the item, may be <tt>null</tt>.

@@ -35,9 +35,9 @@ public interface Database {
     ItemStack getStackInSlot(int slot);
 
     /**
-     * Set the contents of a slot in the database driver.
+     * Set the contents of a slot in the database upgrade.
      * <p/>
-     * Use this to change the configuration of a database driver.
+     * Use this to change the configuration of a database upgrade.
      *
      * @param slot  the slot to configure.
      * @param stack the stack to configure the slot to, <tt>null</tt> to clear.

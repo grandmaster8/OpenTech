@@ -11,3 +11,5 @@
 package li.cil.oc.api.component;
 
 import li.cil.oc.api.API;
+import li.cil.oc.api.API;
+import li.cil.oc.api.API;

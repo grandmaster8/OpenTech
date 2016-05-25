@@ -51,7 +51,7 @@ public interface Item {
      * Keep in mind that the host's location may change if the owner is
      * a robot. This is important if you cache the location somewhere. For
      * example, the wireless network card checks in a robot movement event
-     * handler for position changes to update the index structure used for
+     * handle for position changes to update the index structure used for
      * receiver look-up.
      * <p/>
      * This is expected to return a <em>new instance</em> each time it is

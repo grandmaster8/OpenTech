@@ -16,7 +16,7 @@ public final class Slot {
     public static final String Memory = "memory";
     public static final String RackMountable = "rack_mountable";
     public static final String Tablet = "tablet";
-    public static final String Upgrade = "driver";
+    public static final String Upgrade = "upgrade";
 
     private Slot() {
     }

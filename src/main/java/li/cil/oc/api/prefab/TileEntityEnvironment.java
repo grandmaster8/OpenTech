@@ -105,7 +105,6 @@ public abstract class TileEntityEnvironment extends TileEntity implements Enviro
         if (!addedToNetwork) {
             addedToNetwork = true;
             Network.joinOrCreateNetwork(this);
-            System.out.println(node());
         }
     }
 
@@ -139,26 +138,18 @@ public abstract class TileEntityEnvironment extends TileEntity implements Enviro
             // to continue working without interruption across loads. If the
             // node is a power connector this is also required to restore the
             // internal energy buffer of the node.
-            String address = nbt.getString("address");
-            int visibility = nbt.getInteger("visibility");
-            double buffer = nbt.getDouble("buffer");
-            NBTTagCompound tagCompound = new NBTTagCompound();
-            tagCompound.setString("address", address);
-            tagCompound.setInteger("visibility", visibility);
-            tagCompound.setDouble("buffer", buffer);
-            node.load(tagCompound);
+            node.load(nbt.getCompoundTag("oc:node"));
         }
     }
 
     @Override
     public void writeToNBT(final NBTTagCompound nbt) {
         super.writeToNBT(nbt);
+        // See readFromNBT() regarding host check.
         if (node != null && node.host() == this) {
             final NBTTagCompound nodeNbt = new NBTTagCompound();
             node.save(nodeNbt);
-            nbt.setString("address", nodeNbt.getString("address"));
-            nbt.setInteger("visibility", nodeNbt.getInteger("visibility"));
-            nbt.setDouble("buffer", nodeNbt.getDouble("buffer"));
+            nbt.setTag("oc:node", nodeNbt);
         }
     }
 }

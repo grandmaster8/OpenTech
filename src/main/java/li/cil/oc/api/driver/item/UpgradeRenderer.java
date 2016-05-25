@@ -12,7 +12,7 @@ import java.util.Set;
  * <p/>
  * Upgrades installed in a robot can have an external representation. This is
  * achieved by implementing this interface on an item that serves as a
- * renderable driver. When the robot is rendered, each equipped driver is
+ * renderable upgrade. When the robot is rendered, each equipped upgrade is
  * checked for this interface, and if present, the {@link #render} method
  * is called.
  * <p/>
@@ -21,34 +21,34 @@ import java.util.Set;
 public interface UpgradeRenderer {
     /**
      * Returns which mount point this renderer wants to render the specified
-     * driver in.
+     * upgrade in.
      * <p/>
-     * This method is used to determine which driver is rendered where, and is
-     * called for every installed, renderable driver. The available mount
+     * This method is used to determine which upgrade is rendered where, and is
+     * called for every installed, renderable upgrade. The available mount
      * point names are defined in {@link MountPointName}, with the two special
      * values <tt>None</tt> and <tt>Any</tt>.
      * <p/>
-     * <tt>None</tt> means that the driver should not be rendered at all. This
-     * can be the case when there is no slot remaining that the driver may be
+     * <tt>None</tt> means that the upgrade should not be rendered at all. This
+     * can be the case when there is no slot remaining that the upgrade may be
      * rendered in. Returning <tt>null</tt> is equivalent to returning <tt>None</tt>.
      * <p/>
-     * <tt>Any</tt> means that the driver doesn't really care where it's being
-     * rendered. Mount points not assigned by another driver preferring to be
+     * <tt>Any</tt> means that the upgrade doesn't really care where it's being
+     * rendered. Mount points not assigned by another upgrade preferring to be
      * rendered in it will be assigned to such upgrades in the order they are
      * installed in the robot.
      * <p/>
      * Returning a mount point not in the list of available mount points will
      * be equivalent to returning <tt>None</tt>.
      *
-     * @param stack                the item stack of the driver to render.
-     * @param robot                the robot the driver is rendered on.
+     * @param stack                the item stack of the upgrade to render.
+     * @param robot                the robot the upgrade is rendered on.
      * @param availableMountPoints the mount points available for rendering in.
-     * @return the mount point to reserve for the driver.
+     * @return the mount point to reserve for the upgrade.
      */
     String computePreferredMountPoint(ItemStack stack, Robot robot, Set<String> availableMountPoints);
 
     /**
-     * Render the specified driver on a robot.
+     * Render the specified upgrade on a robot.
      * <p/>
      * The GL state has not been adjusted to the mount points position, so
      * that you can perform rotations without having to revert the translation.
@@ -65,9 +65,9 @@ public interface UpgradeRenderer {
      * need some contextual information, this should provide you with anything
      * you could need.
      *
-     * @param stack      the item stack of the driver to render.
-     * @param mountPoint the mount-point to render the driver at.
-     * @param robot      the robot the driver is rendered on.
+     * @param stack      the item stack of the upgrade to render.
+     * @param mountPoint the mount-point to render the upgrade at.
+     * @param robot      the robot the upgrade is rendered on.
      * @param pt         partial tick time, e.g. for animations.
      */
     void render(ItemStack stack, RobotRenderEvent.MountPoint mountPoint, Robot robot, float pt);

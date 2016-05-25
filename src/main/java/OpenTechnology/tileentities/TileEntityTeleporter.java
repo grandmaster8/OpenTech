@@ -114,22 +114,22 @@ public class TileEntityTeleporter extends TileEntityEnvironment implements Simpl
         }else if( TesseractUpgrade.tesseractList.containsKey( uuid ) ){
             TesseractUpgrade tesseract = TesseractUpgrade.tesseractList.get( uuid );
 
-            if ( tesseract.getRobot(  ) == null )
+            if ( tesseract.getContainer(  ) == null )
                 return new Object[]{false, "tesseract not sync"};
 
             Connector connector = ( Connector ) node;
 
             ItemStack stack = getStackInSlot( slot );
             if ( stack != null && stack.stackSize >= count ) {
-                double dist = getDistanceFrom( tesseract.getRobot(  ).xPosition(  ), tesseract.getRobot(  ).yPosition(  ), tesseract.getRobot(  ).zPosition(  ) );
+                double dist = getDistanceFrom( tesseract.getContainer(  ).xPosition(  ), tesseract.getContainer(  ).yPosition(  ), tesseract.getContainer(  ).zPosition(  ) );
                 double energy = calculateEnergy( dist );
                 if ( tesseract.addToInventory( stack.splitStack( count ) ) ) {
                     if ( connector.tryChangeBuffer( -energy ) ) {
                         if ( stack.stackSize <= 0 )
                             setInventorySlotContents( slot, null );
 
-                        CommonProxy.wrapper.sendToDimension( new PacketTeleporter( ( int )tesseract.getRobot(  ).xPosition(  ), ( int )tesseract.getRobot(  ).yPosition(  ), ( int )tesseract.getRobot(  ).zPosition(  ) ), tesseract.getRobot(  ).world(  ).provider.dimensionId );
-                        tesseract.getRobot(  ).world(  ).playSoundEffect( ( int )tesseract.getRobot(  ).xPosition(  ), ( int )tesseract.getRobot(  ).yPosition(  ), ( int )tesseract.getRobot(  ).zPosition(  ), "mob.endermen.portal", 1.0F, 1.0F );
+                        CommonProxy.wrapper.sendToDimension( new PacketTeleporter( ( int )tesseract.getContainer(  ).xPosition(  ), ( int )tesseract.getContainer(  ).yPosition(  ), ( int )tesseract.getContainer(  ).zPosition(  ) ), tesseract.getContainer(  ).world(  ).provider.dimensionId );
+                        tesseract.getContainer(  ).world(  ).playSoundEffect( ( int )tesseract.getContainer(  ).xPosition(  ), ( int )tesseract.getContainer(  ).yPosition(  ), ( int )tesseract.getContainer(  ).zPosition(  ), "mob.endermen.portal", 1.0F, 1.0F );
                         return new Object[]{true};
                     }else{
                         return new Object[]{false, "not enough energy"};

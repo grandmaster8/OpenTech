@@ -4,7 +4,7 @@ import li.cil.oc.api.internal.Agent;
 
 /**
  * Fired when a robot performed an action that would cause exhaustion for a
- * player. Used for the experience driver, for example.
+ * player. Used for the experience upgrade, for example.
  */
 public class RobotExhaustionEvent extends RobotEvent {
     /**

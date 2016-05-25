@@ -23,6 +23,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import java.util.List;
+
 /**
  * Created by Avaja on 11.05.2016.
  */
@@ -55,14 +57,15 @@ public class TileEntityPlayerInventoryBinder extends TileEntityEnvironment imple
         player_name = player.getDisplayName(  );
     }
 
-    public boolean isConnected(  ){
+    public boolean isConnected(){
         boolean ret = player_name != null && !player_name.isEmpty(  );
-        if ( ret ){
-            WorldServer[] worlds = MinecraftServer.getServer(  ).worldServers;
-            for ( World world : worlds ){
-                player = world.getPlayerEntityByName( player_name );
-                if ( player != null )
+        if ( ret && player == null){
+            List<EntityPlayer> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+            for (EntityPlayer player : players){
+                if(player.getDisplayName().equals(player_name)){
+                    this.player = player;
                     break;
+                }
             }
         }
         return ret && player != null;
@@ -72,16 +75,16 @@ public class TileEntityPlayerInventoryBinder extends TileEntityEnvironment imple
     public void readFromNBT( NBTTagCompound nbt ) {
         super.readFromNBT( nbt );
         if ( nbt.hasKey( "player_name" ) ){
-            player_name = nbt.getString( "player_name" );
+            player_name = nbt.getString("player_name");
             isConnected(  );
         }
     }
 
     @Override
-    public void writeToNBT( NBTTagCompound nbt ) {
+    public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT( nbt );
-        if ( player != null ){
-            nbt.setString( "player_name", player.getDisplayName(  ) );
+        if (isConnected()){
+            nbt.setString("player_name", player.getDisplayName());
         }
     }
 

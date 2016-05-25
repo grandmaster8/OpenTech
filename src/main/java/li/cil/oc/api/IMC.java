@@ -88,7 +88,7 @@ public final class IMC {
      * @param containerTiers the tiers of the container slots provided by the
      *                       template. The length determines the number of
      *                       containers. Maximum number is three.
-     * @param upgradeTiers   the tiers of the driver slots provided by the
+     * @param upgradeTiers   the tiers of the upgrade slots provided by the
      *                       template. The length determines the number of
      *                       upgrades. Maximum number is nine.
      * @param componentSlots the types and tiers of component slots provided by
@@ -172,7 +172,7 @@ public final class IMC {
      * Callbacks must be declared as <tt>packagePath.className.methodName</tt>.
      * For example: <tt>com.example.Integration.callbackMethod</tt>.
      *
-     * @param name        the name of the handler (e.g. name of the item
+     * @param name        the name of the handle (e.g. name of the item
      *                    being handled). Optional, only used in logging.
      * @param select      callback used to determine if the template
      *                    applies to an item.
@@ -232,7 +232,7 @@ public final class IMC {
      * Callbacks must be declared as <tt>packagePath.className.methodName</tt>.
      * For example: <tt>com.example.Integration.callbackMethod</tt>.
      *
-     * @param callback the callback to register as a wrench tool handler.
+     * @param callback the callback to register as a wrench tool handle.
      */
     public static void registerWrenchTool(String callback) {
         FMLInterModComms.sendMessage(MOD_ID, "registerWrenchTool", callback);
@@ -262,7 +262,7 @@ public final class IMC {
     }
 
     /**
-     * Register a handler for items that can be charged.
+     * Register a handle for items that can be charged.
      * <p/>
      * This is used by the charger to determine whether items can be charged
      * by it (<tt>canCharge</tt>) and to actually charge them (<tt>charge</tt>).

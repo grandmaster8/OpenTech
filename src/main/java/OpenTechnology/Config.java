@@ -22,6 +22,8 @@ public class Config {
     public static double teslaDamage;
     public static int teslaTimeReload;
     public static double binderEnergyFactor;
+    public static int radarRange;
+    public static double radarEnergyCost;
 
     public static void init(File file){
         configuration = new Configuration(file);
@@ -38,6 +40,9 @@ public class Config {
         teslaTimeReload = configuration.get("tesla", "teslaTimeReload", 90, "ticks").getInt();
 
         binderEnergyFactor = configuration.get("binder", "binderEnergyFactor", 30, "").getDouble();
+
+        radarRange = configuration.get("radar", "radarRange", 15, "").getInt();
+        radarEnergyCost = configuration.get("radar", "radarEnergyCost", 30).getDouble();
 
         configuration.save();
     }

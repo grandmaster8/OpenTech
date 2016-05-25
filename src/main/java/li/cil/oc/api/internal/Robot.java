@@ -51,10 +51,10 @@ public interface Robot extends Agent, Environment, EnvironmentHost, Tiered, ISid
 
     /**
      * Sends the state of the <em>item</em> in the specified slot to the client
-     * if it is an driver.
+     * if it is an upgrade.
      * <p/>
-     * Use this to update the state of an driver in that slot for rendering
-     * purposes (e.g. this is used by the generator driver to update the
+     * Use this to update the state of an upgrade in that slot for rendering
+     * purposes (e.g. this is used by the generator upgrade to update the
      * active state so the renderer knows which texture to use).
      * <p/>
      * This is necessary because inventories are not synchronized by default,
@@ -71,7 +71,7 @@ public interface Robot extends Agent, Environment, EnvironmentHost, Tiered, ISid
     /**
      * This essentially returns whether the robot is currently running or not.
      * <p/>
-     * This is explicitly meant for client side use, to allow driver renderers
+     * This is explicitly meant for client side use, to allow upgrade renderers
      * to know whether to resume animations or not, based on whether the robot
      * is currently powered on or not.
      */

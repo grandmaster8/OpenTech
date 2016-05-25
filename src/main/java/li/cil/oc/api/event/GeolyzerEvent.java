@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This event is fired by the geolyzer block/driver.
+ * This event is fired by the geolyzer block/upgrade.
  * <p/>
  * When cancelling this event, the respective method will bail and report
  * that the operation failed.
@@ -17,7 +17,7 @@ import java.util.Map;
 public abstract class GeolyzerEvent extends Event {
     /**
      * The container of the geolyzer component. This can either be the
-     * geolyzer block, or something with the geolyzer driver (a robot).
+     * geolyzer block, or something with the geolyzer upgrade (a robot).
      */
     public final EnvironmentHost host;
 

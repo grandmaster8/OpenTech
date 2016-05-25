@@ -2,24 +2,21 @@ package OpenTechnology.tileentities;
 
 import OpenTechnology.Config;
 import OpenTechnology.system.ChatBoxEventSystem;
-import com.mojang.realmsclient.gui.ChatFormatting;
 import li.cil.oc.api.Network;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
-import li.cil.oc.api.network.*;
+import li.cil.oc.api.network.Analyzable;
+import li.cil.oc.api.network.Node;
+import li.cil.oc.api.network.SimpleComponent;
+import li.cil.oc.api.network.Visibility;
 import li.cil.oc.api.prefab.TileEntityEnvironment;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.WorldServer;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by Avaja on 05.05.2016.
@@ -27,18 +24,21 @@ import java.util.Set;
 public class TileEntityAdminChatBox extends TileEntityEnvironment implements SimpleComponent, Analyzable {
 
     public TileEntityAdminChatBox() {
-        node = Network.newNode(this, Visibility.Network).withComponent(getComponentName()).create();
+        try{
+            node = Network.newNode(this, Visibility.Network).withComponent(getComponentName()).create();
+        }catch (Exception e){}
         ChatBoxEventSystem.add(this);
     }
 
     public void eventMessage(EntityPlayer player, String message){
-        if (this.node() != null)
-            this.node().sendToReachable("computer.signal", "chat_message", player.getDisplayName(), message);
+        if(this.node() != null){
+            this.node().sendToVisible("computer.signal", "chat_message", player.getDisplayName(), message);
+        }
     }
 
     public void eventCommand(EntityPlayer player, String message){
         if(this.node() != null)
-            this.node().sendToReachable("computer.signal", "chat_command", player.getDisplayName(), message);
+            this.node().sendToVisible("computer.signal", "chat_command", player.getDisplayName(), message);
     }
 
     @Override

@@ -3,6 +3,7 @@ package OpenTechnology.driver;
 import OpenTechnology.environment.TesseractUpgrade;
 import OpenTechnology.item.Items;
 import li.cil.oc.api.driver.item.HostAware;
+import li.cil.oc.api.driver.item.Slot;
 import li.cil.oc.api.internal.Robot;
 import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.ManagedEnvironment;
@@ -20,12 +21,12 @@ public class DriverTesseractUpgrade extends DriverItem implements HostAware{
 
     @Override
     public ManagedEnvironment createEnvironment(ItemStack stack, EnvironmentHost host) {
-        return new TesseractUpgrade();
+        return new TesseractUpgrade(host);
     }
 
     @Override
     public String slot(ItemStack stack) {
-        return "upgrade";
+        return Slot.Upgrade;
     }
 
     @Override

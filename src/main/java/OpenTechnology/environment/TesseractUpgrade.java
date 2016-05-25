@@ -5,14 +5,17 @@ import OpenTechnology.proxy.CommonProxy;
 import OpenTechnology.tileentities.TileEntityTeleporter;
 import OpenTechnology.utils.Utils;
 import li.cil.oc.api.Network;
+import li.cil.oc.api.internal.Agent;
 import li.cil.oc.api.internal.Robot;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.machine.Machine;
 import li.cil.oc.api.network.Connector;
+import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.Visibility;
 import li.cil.oc.api.prefab.ManagedEnvironment;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
 import java.util.HashMap;
@@ -21,9 +24,10 @@ public class TesseractUpgrade extends ManagedEnvironment{
     public static HashMap<String, TesseractUpgrade> tesseractList = new HashMap<String, TesseractUpgrade>(  );
 
     private boolean connect;
-    private Robot robot;
+    private EnvironmentHost container;
 
-    public TesseractUpgrade(  ) {
+    public TesseractUpgrade( EnvironmentHost container ) {
+        this.container = container;
         setNode( Network.newNode( this, Visibility.Network ).withComponent( "tesseract" ).withConnector(  ).create(  ) );
         connect = false;
     }
@@ -41,13 +45,6 @@ public class TesseractUpgrade extends ManagedEnvironment{
         }
     }
 
-    @Callback( doc="function(  )" )
-    public Object[] sync( Context context, Arguments arguments ) throws Exception{
-        Machine machine = ( Machine ) context.node(  ).host(  );
-        robot = ( Robot ) machine.host(  );
-        return new Object[]{true};
-    }
-
     @Callback( doc="function( uuid:string, slot:number, count:number )" )
     public Object[] transferOfSlot( Context context, Arguments arguments ) throws Exception{
         String uuid = arguments.checkString( 0 );
@@ -62,7 +59,7 @@ public class TesseractUpgrade extends ManagedEnvironment{
 
         if ( tesseractList.containsKey( uuid ) ){
             TesseractUpgrade tesseract = tesseractList.get( uuid );
-            if ( tesseract.robot == null )
+            if ( tesseract.container == null )
                 return new Object[]{false, "tesseract not sync."};
 
             Connector connector = ( Connector ) node(  );
@@ -76,8 +73,8 @@ public class TesseractUpgrade extends ManagedEnvironment{
                         if ( stack.stackSize <= 0 )
                             robot.setInventorySlotContents( slot, null );
 
-                        CommonProxy.wrapper.sendToDimension( new PacketTeleporter( ( int )tesseract.robot.xPosition(  ), ( int )tesseract.robot.yPosition(  ), ( int )tesseract.robot.zPosition(  ) ), tesseract.robot.world(  ).provider.dimensionId );
-                        tesseract.robot.world(  ).playSoundEffect( ( int )tesseract.robot.xPosition(  ), ( int )tesseract.robot.yPosition(  ), ( int )tesseract.robot.zPosition(  ), "mob.endermen.portal", 1.0F, 1.0F );
+                        CommonProxy.wrapper.sendToDimension( new PacketTeleporter( ( int )tesseract.container.xPosition(  ), ( int )tesseract.container.yPosition(  ), ( int )tesseract.container.zPosition(  ) ), tesseract.container.world(  ).provider.dimensionId );
+                        tesseract.container.world(  ).playSoundEffect( ( int )tesseract.container.xPosition(  ), ( int )tesseract.container.yPosition(  ), ( int )tesseract.container.zPosition(  ), "mob.endermen.portal", 1.0F, 1.0F );
                         return new Object[]{true};
                     }else{
                         return new Object[]{false, "not enough energy"};
@@ -115,13 +112,13 @@ public class TesseractUpgrade extends ManagedEnvironment{
     }
 
     public boolean addToInventory( ItemStack stack ){
-        if ( robot != null ){
-            return Utils.addToIInventory( robot, 4, stack );
+        if ( container != null ){
+            return Utils.addToIInventory(((Agent) container).mainInventory(), 4, stack );
         }
         return false;
     }
 
-    public Robot getRobot(  ){
-        return robot;
+    public EnvironmentHost getContainer(  ){
+        return container;
     }
 }

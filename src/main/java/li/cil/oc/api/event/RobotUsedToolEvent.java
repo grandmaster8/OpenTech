@@ -33,7 +33,7 @@ public class RobotUsedToolEvent extends RobotEvent {
      * Fired when a robot used a tool and is about to apply the damage rate to
      * partially undo the durability loss. This step is used to compute the
      * rate at which the tool should lose durability, which is used by the
-     * experience driver, for example.
+     * experience upgrade, for example.
      */
     public static class ComputeDamageRate extends RobotUsedToolEvent {
         public ComputeDamageRate(Agent agent, ItemStack toolBeforeUse, ItemStack toolAfterUse, double damageRate) {

@@ -47,26 +47,26 @@ public interface Connector extends Node {
 
     /**
      * Try to apply the specified delta to the <em>global</em> buffer.
-    * <p/>
-            * This can be used to apply reactionary power changes. For example, a
-    * screen may require a certain amount of energy to refresh its display when
-    * a program tries to display text on it. For running costs just apply the
-    * same delta each tick.
-            * <p/>
-            * If the specified delta cannot be completely applied to the buffer, the
-    * remaining delta will be returned. This means that for negative values
-    * a part of the energy will have been consumed, though.
-    * <p/>
-            * If there is enough energy or no overflow this will return <tt>0</tt>.
-            * <p/>
-            * Keep in mind that this change is applied to the <em>global</em> buffer,
-            * i.e. energy from multiple buffers may be consumed / multiple buffers may
-    * be filled. The buffer for which this method is called (i.e. this node
-            * instance) will be prioritized, though.
-            *
-            * @param delta the amount of energy to consume or store.
-    * @return the remainder of the delta that could not be applied.
-            */
+     * <p/>
+     * This can be used to apply reactionary power changes. For example, a
+     * screen may require a certain amount of energy to refresh its display when
+     * a program tries to display text on it. For running costs just apply the
+     * same delta each tick.
+     * <p/>
+     * If the specified delta cannot be completely applied to the buffer, the
+     * remaining delta will be returned. This means that for negative values
+     * a part of the energy will have been consumed, though.
+     * <p/>
+     * If there is enough energy or no overflow this will return <tt>0</tt>.
+     * <p/>
+     * Keep in mind that this change is applied to the <em>global</em> buffer,
+     * i.e. energy from multiple buffers may be consumed / multiple buffers may
+     * be filled. The buffer for which this method is called (i.e. this node
+     * instance) will be prioritized, though.
+     *
+     * @param delta the amount of energy to consume or store.
+     * @return the remainder of the delta that could not be applied.
+     */
     double changeBuffer(double delta);
 
     /**
