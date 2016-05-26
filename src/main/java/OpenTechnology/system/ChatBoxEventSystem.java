@@ -42,9 +42,7 @@ public class ChatBoxEventSystem {
             return true;
         }else{
             for (TileEntityChatBox box : chatBoxes){
-                if (player.getDistance(box.xCoord, box.yCoord, box.zCoord) <= box.getRadius()){
-                    box.eventMessage(player, message);
-                }
+                box.eventMessage(player, message);
             }
 
             for (TileEntityAdminChatBox box : adminChatBoxs){
@@ -58,9 +56,7 @@ public class ChatBoxEventSystem {
         message = message.substring(1);
 
         for (TileEntityChatBox box : chatBoxes){
-            if (player.getDistance(box.xCoord, box.yCoord, box.zCoord) <= box.getRadius()){
-                box.eventCommand(player, message);
-            }
+            box.eventCommand(player, message);
         }
 
         for (TileEntityAdminChatBox box : adminChatBoxs){

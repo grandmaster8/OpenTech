@@ -41,42 +41,64 @@ public class Utils {
         return Math.abs( Math.sqrt( res ) );
     }
 
-    public static boolean addToIInventory( IInventory Iinventory, ItemStack stack ){
-        int size = Iinventory.getSizeInventory(  );
+    public static boolean addToIInventory( IInventory inventory, ItemStack stack ){
+        stack = stack.copy();
+        int size = inventory.getSizeInventory(  );
+        ItemStack[] tmp = new ItemStack[inventory.getSizeInventory()];
+        for (int i = 0; i < inventory.getSizeInventory(); i++){
+            tmp[i] = inventory.getStackInSlot(i);
+        }
         for ( int i = 0; i < size; i++ ){
-            ItemStack inventoryStack = Iinventory.getStackInSlot( i );
+            ItemStack inventoryStack = tmp[i];
             if ( inventoryStack != null && stack != null && inventoryStack.isItemEqual( stack ) ){
                 int delta = inventoryStack.getMaxStackSize(  ) - inventoryStack.stackSize;
                 if ( delta >= stack.stackSize ) {
                     inventoryStack.stackSize += stack.stackSize;
+                    for (int q = 0; q < tmp.length; q++){
+                        inventory.setInventorySlotContents(q, tmp[q]);
+                    }
                     return true;
                 }else{
                     inventoryStack.stackSize = inventoryStack.getMaxStackSize(  );
                     stack.stackSize -= delta;
                 }
             }else if ( inventoryStack == null ){
-                Iinventory.setInventorySlotContents( i, stack );
+                inventory.setInventorySlotContents( i, stack );
+                for (int q = 0; q < tmp.length; q++){
+                    inventory.setInventorySlotContents(q, tmp[q]);
+                }
                 return true;
             }
         }
         return false;
     }
 
-    public static boolean addToIInventory( IInventory Iinventory, int min, ItemStack stack ){
-        int size = Iinventory.getSizeInventory(  );
+    public static boolean addToIInventory( IInventory inventory, int min, ItemStack stack ){
+        stack = stack.copy();
+        int size = inventory.getSizeInventory(  );
+        ItemStack[] tmp = new ItemStack[inventory.getSizeInventory()];
+        for (int i = 0; i < inventory.getSizeInventory(); i++){
+            tmp[i] = inventory.getStackInSlot(i);
+        }
         for ( int i = min; i < size; i++ ){
-            ItemStack inventoryStack = Iinventory.getStackInSlot( i );
-            if ( inventoryStack != null && inventoryStack.isItemEqual( stack ) ){
+            ItemStack inventoryStack = tmp[i];
+            if ( inventoryStack != null && stack != null && inventoryStack.isItemEqual( stack ) ){
                 int delta = inventoryStack.getMaxStackSize(  ) - inventoryStack.stackSize;
                 if ( delta >= stack.stackSize ) {
                     inventoryStack.stackSize += stack.stackSize;
+                    for (int q = 0; q < tmp.length; q++){
+                        inventory.setInventorySlotContents(q, tmp[q]);
+                    }
                     return true;
                 }else{
                     inventoryStack.stackSize = inventoryStack.getMaxStackSize(  );
                     stack.stackSize -= delta;
                 }
             }else if ( inventoryStack == null ){
-                Iinventory.setInventorySlotContents( i, stack );
+                inventory.setInventorySlotContents( i, stack );
+                for (int q = 0; q < tmp.length; q++){
+                    inventory.setInventorySlotContents(q, tmp[q]);
+                }
                 return true;
             }
         }

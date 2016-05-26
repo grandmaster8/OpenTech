@@ -55,13 +55,13 @@ public class TileEntityChatBox extends TileEntity implements SimpleComponent, An
     }
 
     public void eventMessage( EntityPlayer player, String message ){
-        if ( this.node(  ) != null )
-            this.node(  ).sendToReachable( "computer.signal", "chat_message", player.getDisplayName(  ), message );
+        if ( node != null )
+            node.sendToReachable( "computer.signal", "chat_message", player.getDisplayName(  ), message );
     }
 
     public void eventCommand( EntityPlayer player, String message ){
-        if ( this.node(  ) != null )
-            this.node(  ).sendToReachable( "computer.signal", "chat_command", player.getDisplayName(  ), message );
+        if ( node != null )
+            node.sendToReachable( "computer.signal", "chat_command", player.getDisplayName(  ), message );
     }
 
     @Callback(doc="function(message:string); say some text")

@@ -138,7 +138,12 @@ public class TileEntityPlayerInventoryBinder extends TileEntityEnvironment imple
 
         if ( tileEntity instanceof IInventory ){
             ItemStack stack = player.inventory.getStackInSlot( slot );
-            ItemStack split = stack.splitStack( count );
+            ItemStack split;
+            if(stack.stackSize >= count){
+                split = stack.splitStack( count );
+            }else{
+                split = stack.splitStack(stack.stackSize);
+            }
             Connector connector = ( Connector ) node;
             double dist = getDistanceFrom( player.posX, player.posY, player.posZ );
 
