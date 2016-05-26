@@ -1,17 +1,17 @@
 package OpenTechnology.proxy;
 
 import OpenTechnology.OpenTechnology;
+import OpenTechnology.Recipes;
 import OpenTechnology.blocks.Blocks;
+import OpenTechnology.driver.Drivers;
 import OpenTechnology.events.CommonEvents;
 import OpenTechnology.gui.GuiHandler;
 import OpenTechnology.item.Items;
-import OpenTechnology.item.recipes.Recipes;
 import OpenTechnology.packet.PacketPlayerPosition;
-import OpenTechnology.tileentities.TileEntityChatBox;
 import OpenTechnology.tileentities.TileEntityAdminChatBox;
+import OpenTechnology.tileentities.TileEntityChatBox;
 import OpenTechnology.tileentities.TileEntityPlayerInventoryBinder;
 import OpenTechnology.tileentities.TileEntityTeleporter;
-import OpenTechnology.driver.Drivers;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;

@@ -87,11 +87,6 @@ public class TileEntityAdminChatBox extends BasicTileEnvironment implements Simp
     }
 
     @Override
-    public Node node() {
-        return node;
-    }
-
-    @Override
     public void onConnect(Node node) {
 
     }

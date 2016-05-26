@@ -21,23 +21,13 @@ import java.util.List;
 /**
  * Created by Avaja on 06.05.2016.
  */
-public class TileEntityChatBox extends TileEntity implements SimpleComponent, Analyzable, Environment {
-    private Node node;
-    private boolean addToNetwork = false;
+public class TileEntityChatBox extends BasicTileEnvironment implements SimpleComponent, Analyzable {
 
     private int radius;
 
     public TileEntityChatBox(  ) {
         node = Network.newNode( this, Visibility.Network ).withComponent( getComponentName(  ) ).create(  );
         ChatBoxEventSystem.add(this);
-    }
-
-    @Override
-    public void updateEntity() {
-        if(!addToNetwork){
-            addToNetwork = true;
-            Network.joinOrCreateNetwork(this);
-        }
     }
 
     @Override
@@ -137,22 +127,12 @@ public class TileEntityChatBox extends TileEntity implements SimpleComponent, An
         super.readFromNBT( nbt );
         radius = nbt.getInteger( "radius" );
         if ( radius <= 0 ) radius = Config.chatboxMaxRadius;
-
-        if (node != null && node.host() == this) {
-            node.load(nbt.getCompoundTag("oc:node"));
-        }
     }
 
     @Override
     public void writeToNBT(final NBTTagCompound nbt) {
         super.writeToNBT( nbt );
         nbt.setInteger( "radius", radius );
-
-        if (node != null && node.host() == this) {
-            final NBTTagCompound nodeNbt = new NBTTagCompound();
-            node.save(nodeNbt);
-            nbt.setTag("oc:node", nodeNbt);
-        }
     }
 
     @Override
