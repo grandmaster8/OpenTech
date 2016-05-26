@@ -128,7 +128,7 @@ public class TileEntityPlayerInventoryBinder extends TileEntityEnvironment imple
         if ( !isConnected(  ) )
             return new Object[]{false, "player not connected"};
 
-        if ( slot < 0 || slot > player.inventory.getSizeInventory(  ) )
+        if ( slot < 1 || slot > player.inventory.getSizeInventory(  ) )
             return new Object[]{false, "invalid slot"};
 
         if ( count <= 0 )
@@ -182,9 +182,9 @@ public class TileEntityPlayerInventoryBinder extends TileEntityEnvironment imple
         if ( tileEntity instanceof IInventory ){
             IInventory containerInventory = ( IInventory ) tileEntity;
 
-            if ( outSlot >= 0 && outSlot < containerInventory.getSizeInventory(  ) ){
+            if ( outSlot >= 1 && outSlot < containerInventory.getSizeInventory(  ) ){
 
-                if ( inSlot >= 0 &&  inSlot < player.inventory.getSizeInventory(  ) ){
+                if ( inSlot >= 1 &&  inSlot < player.inventory.getSizeInventory(  ) ){
                     Connector connector = ( Connector ) node;
                     double dist = getDistanceFrom( player.posX, player.posY, player.posZ );
                     ItemStack outStack = containerInventory.getStackInSlot( outSlot );
