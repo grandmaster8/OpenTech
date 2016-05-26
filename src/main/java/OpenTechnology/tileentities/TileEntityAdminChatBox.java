@@ -41,14 +41,15 @@ public class TileEntityAdminChatBox extends TileEntity implements SimpleComponen
     }
 
     public void eventMessage(EntityPlayer player, String message){
-        if(this.node() != null){
-            this.node().sendToVisible("computer.signal", "chat_message", player.getDisplayName(), message);
-        }
+        if(node != null)
+            node.sendToVisible("computer.signal", "chat_message", player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, getDistanceFrom(player.posX, player.posY, player.posZ), player.getDisplayName(), message);
+
     }
 
     public void eventCommand(EntityPlayer player, String message){
-        if(this.node() != null)
-            this.node().sendToVisible("computer.signal", "chat_command", player.getDisplayName(), message);
+        if(node != null)
+            node.sendToVisible("computer.signal", "chat_command", player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, getDistanceFrom(player.posX, player.posY, player.posZ), player.getDisplayName(), message);
+
     }
 
     @Override
