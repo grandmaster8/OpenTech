@@ -63,7 +63,7 @@ public class Utils {
                     stack.stackSize -= delta;
                 }
             }else if ( inventoryStack == null ){
-                inventory.setInventorySlotContents( i, stack );
+                tmp[i] = stack;
                 for (int q = 0; q < tmp.length; q++){
                     inventory.setInventorySlotContents(q, tmp[q]);
                 }
@@ -95,7 +95,7 @@ public class Utils {
                     stack.stackSize -= delta;
                 }
             }else if ( inventoryStack == null ){
-                inventory.setInventorySlotContents( i, stack );
+                tmp[i] = stack;
                 for (int q = 0; q < tmp.length; q++){
                     inventory.setInventorySlotContents(q, tmp[q]);
                 }
