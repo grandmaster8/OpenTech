@@ -18,21 +18,11 @@ import java.util.List;
 /**
  * Created by Avaja on 05.05.2016.
  */
-public class TileEntityAdminChatBox extends TileEntity implements SimpleComponent, Analyzable, Environment {
-    private Node node;
-    private boolean addToNetwork = false;
+public class TileEntityAdminChatBox extends BasicTileEnvironment implements SimpleComponent, Analyzable {
 
     public TileEntityAdminChatBox() {
-        node = li.cil.oc.api.Network.newNode(this, Visibility.Network).withComponent(getComponentName()).create();
+        setNode(li.cil.oc.api.Network.newNode(this, Visibility.Network).withComponent(getComponentName()).create());
         ChatBoxEventSystem.add(this);
-    }
-
-    @Override
-    public void updateEntity() {
-        if (!addToNetwork){
-            addToNetwork = true;
-            li.cil.oc.api.Network.joinOrCreateNetwork(this);
-        }
     }
 
     @Override
@@ -93,14 +83,6 @@ public class TileEntityAdminChatBox extends TileEntity implements SimpleComponen
             if (player.getDisplayName().equals(name))
                 player.addChatMessage(new ChatComponentText(message));
         }
-
-        for (WorldServer world : MinecraftServer.getServer().worldServers){
-            List<EntityPlayer> playerList = world.playerEntities;
-            for (EntityPlayer entityPlayer : playerList){
-                if (entityPlayer.getDisplayName().equals(name))
-                    entityPlayer.addChatMessage(new ChatComponentText(message));
-            }
-        }
         return new Object[]{};
     }
 
@@ -121,7 +103,6 @@ public class TileEntityAdminChatBox extends TileEntity implements SimpleComponen
 
     @Override
     public void onMessage(Message message) {
-
     }
 
     @Override

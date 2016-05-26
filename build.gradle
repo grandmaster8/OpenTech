@@ -17,7 +17,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "0.3.12a"
+version = "0.3.13a"
 group= "OpenTechnology" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "OpenTechnology"
 

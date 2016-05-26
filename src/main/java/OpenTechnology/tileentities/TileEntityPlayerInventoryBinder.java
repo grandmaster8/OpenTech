@@ -120,7 +120,7 @@ public class TileEntityPlayerInventoryBinder extends TileEntityEnvironment imple
     @Callback( doc="function( side:number, slot:number, count:number ); Переместить стек из слота ( slot ) игрока в количестве ( count ), в контейнер находящийся в стороне ( side )" )
     public Object[] dropIntoInventory( Context context, Arguments arguments ) throws Exception{
         int side = arguments.checkInteger( 0 );
-        int slot = arguments.checkInteger( 1 );
+        int slot = arguments.checkInteger( 1 ) - 1;
         int count = arguments.checkInteger( 2 );
 
         ForgeDirection direction = ForgeDirection.getOrientation( side );
@@ -171,8 +171,8 @@ public class TileEntityPlayerInventoryBinder extends TileEntityEnvironment imple
             return new Object[]{false, "player not connected"};
 
         int side = arguments.checkInteger( 0 );
-        int outSlot = arguments.checkInteger( 1 );
-        int inSlot = arguments.checkInteger( 2 );
+        int outSlot = arguments.checkInteger( 1 ) - 1;
+        int inSlot = arguments.checkInteger( 2 ) - 1;
         int count = arguments.checkInteger( 3 );
 
         ForgeDirection direction = ForgeDirection.getOrientation( side );
