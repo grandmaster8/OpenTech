@@ -59,7 +59,7 @@ public class TileEntityPlayerInventoryBinder extends TileEntityEnvironment imple
 
     public boolean isConnected(){
         boolean ret = player_name != null && !player_name.isEmpty(  );
-        if ( ret && player == null){
+        if ( ret && player == null && MinecraftServer.getServer() != null && MinecraftServer.getServer().getConfigurationManager() != null){
             List<EntityPlayer> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
             for (EntityPlayer player : players){
                 if(player.getDisplayName().equals(player_name)){
