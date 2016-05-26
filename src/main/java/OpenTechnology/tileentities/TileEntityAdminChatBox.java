@@ -2,17 +2,14 @@ package OpenTechnology.tileentities;
 
 import OpenTechnology.Config;
 import OpenTechnology.system.ChatBoxEventSystem;
-import li.cil.oc.api.Network;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
-import li.cil.oc.api.network.Analyzable;
-import li.cil.oc.api.network.Node;
-import li.cil.oc.api.network.SimpleComponent;
-import li.cil.oc.api.network.Visibility;
-import li.cil.oc.api.prefab.TileEntityEnvironment;
+import li.cil.oc.api.network.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.WorldServer;
 
@@ -21,13 +18,26 @@ import java.util.List;
 /**
  * Created by Avaja on 05.05.2016.
  */
-public class TileEntityAdminChatBox extends TileEntityEnvironment implements SimpleComponent, Analyzable {
+public class TileEntityAdminChatBox extends TileEntity implements SimpleComponent, Analyzable, Environment {
+    private Node node;
+    private boolean addToNetwork = false;
 
     public TileEntityAdminChatBox() {
-        try{
-            node = Network.newNode(this, Visibility.Network).withComponent(getComponentName()).create();
-        }catch (Exception e){}
+        node = li.cil.oc.api.Network.newNode(this, Visibility.Network).withComponent(getComponentName()).create();
         ChatBoxEventSystem.add(this);
+    }
+
+    @Override
+    public void updateEntity() {
+        if (!addToNetwork){
+            addToNetwork = true;
+            li.cil.oc.api.Network.joinOrCreateNetwork(this);
+        }
+    }
+
+    @Override
+    public String getComponentName() {
+        return "admin_chatbox";
     }
 
     public void eventMessage(EntityPlayer player, String message){
@@ -94,7 +104,46 @@ public class TileEntityAdminChatBox extends TileEntityEnvironment implements Sim
     }
 
     @Override
-    public String getComponentName() {
-        return "admin_chatbox";
+    public Node node() {
+        return node;
+    }
+
+    @Override
+    public void onConnect(Node node) {
+
+    }
+
+    @Override
+    public void onDisconnect(Node node) {
+
+    }
+
+    @Override
+    public void onMessage(Message message) {
+
+    }
+
+    @Override
+    public void invalidate() {
+        super.invalidate();
+        if (node != null) node.remove();
+    }
+
+    @Override
+    public void readFromNBT(final NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+        if (node != null && node.host() == this) {
+            node.load(nbt.getCompoundTag("oc:node"));
+        }
+    }
+
+    @Override
+    public void writeToNBT(final NBTTagCompound nbt) {
+        super.writeToNBT(nbt);
+        if (node != null && node.host() == this) {
+            final NBTTagCompound nodeNbt = new NBTTagCompound();
+            node.save(nodeNbt);
+            nbt.setTag("oc:node", nodeNbt);
+        }
     }
 }

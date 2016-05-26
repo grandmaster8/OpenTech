@@ -6,6 +6,7 @@ import OpenTechnology.tileentities.TileEntityAdminChatBox;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -32,5 +33,12 @@ public class BlockAdminChatBox extends BlockContainer {
         ChatBoxEventSystem.remove(box);
 
         super.breakBlock(world, x, y, z, block, p_149749_6_);
+    }
+
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+        TileEntityAdminChatBox chatBox = (TileEntityAdminChatBox) world.getTileEntity(x, y, z);
+        chatBox.click(player.getDisplayName());
+        return true;
     }
 }
