@@ -7,14 +7,9 @@ import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.*;
-import li.cil.oc.api.prefab.TileEntityEnvironment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 
 import java.util.List;
 
@@ -133,11 +128,6 @@ public class TileEntityChatBox extends BasicTileEnvironment implements SimpleCom
     public void writeToNBT(final NBTTagCompound nbt) {
         super.writeToNBT( nbt );
         nbt.setInteger( "radius", radius );
-    }
-
-    @Override
-    public Node node() {
-        return node;
     }
 
     @Override
