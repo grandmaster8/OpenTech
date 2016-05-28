@@ -7,22 +7,37 @@ import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.*;
+import li.cil.oc.api.prefab.TileEntityEnvironment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 
 import java.util.List;
 
 /**
  * Created by Avaja on 06.05.2016.
  */
-public class TileEntityChatBox extends BasicTileEnvironment implements SimpleComponent, Analyzable {
+public class TileEntityChatBox extends TileEntity implements SimpleComponent, Analyzable, Environment {
+    private Node node;
+    private boolean addToNetwork = false;
 
     private int radius;
 
     public TileEntityChatBox(  ) {
         node = Network.newNode( this, Visibility.Network ).withComponent( getComponentName(  ) ).create(  );
         ChatBoxEventSystem.add(this);
+    }
+
+    @Override
+    public void updateEntity() {
+        if(!addToNetwork){
+            addToNetwork = true;
+            Network.joinOrCreateNetwork(this);
+        }
     }
 
     @Override
@@ -122,12 +137,27 @@ public class TileEntityChatBox extends BasicTileEnvironment implements SimpleCom
         super.readFromNBT( nbt );
         radius = nbt.getInteger( "radius" );
         if ( radius <= 0 ) radius = Config.chatboxMaxRadius;
+
+        if (node != null && node.host() == this) {
+            node.load(nbt.getCompoundTag("oc:node"));
+        }
     }
 
     @Override
     public void writeToNBT(final NBTTagCompound nbt) {
         super.writeToNBT( nbt );
         nbt.setInteger( "radius", radius );
+
+        if (node != null && node.host() == this) {
+            final NBTTagCompound nodeNbt = new NBTTagCompound();
+            node.save(nodeNbt);
+            nbt.setTag("oc:node", nodeNbt);
+        }
+    }
+
+    @Override
+    public Node node() {
+        return node;
     }
 
     @Override
