@@ -22,7 +22,7 @@ import java.util.List;
  * Created by Avaja on 06.05.2016.
  */
 public class TileEntityChatBox extends TileEntity implements SimpleComponent, Analyzable, Environment {
-    private Node node;
+    protected Node node;
     private boolean addToNetwork = false;
 
     private int radius;
@@ -125,6 +125,14 @@ public class TileEntityChatBox extends TileEntity implements SimpleComponent, An
     @Override
     public void invalidate() {
         super.invalidate();
+        // Make sure to remove the node from its network when its environment,
+        // meaning this tile entity, gets unloaded.
+        if (node != null) node.remove();
+    }
+
+    @Override
+    public void onChunkUnload() {
+        super.onChunkUnload();
         // Make sure to remove the node from its network when its environment,
         // meaning this tile entity, gets unloaded.
         if (node != null) node.remove();

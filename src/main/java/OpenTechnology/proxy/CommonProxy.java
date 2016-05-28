@@ -8,10 +8,7 @@ import OpenTechnology.events.CommonEvents;
 import OpenTechnology.gui.GuiHandler;
 import OpenTechnology.item.Items;
 import OpenTechnology.packet.PacketPlayerPosition;
-import OpenTechnology.tileentities.TileEntityAdminChatBox;
-import OpenTechnology.tileentities.TileEntityChatBox;
-import OpenTechnology.tileentities.TileEntityPlayerInventoryBinder;
-import OpenTechnology.tileentities.TileEntityTeleporter;
+import OpenTechnology.tileentities.*;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -42,6 +39,7 @@ public class CommonProxy {
         GameRegistry.registerTileEntity(TileEntityAdminChatBox.class, "TileEntityAdminChatBox");
         GameRegistry.registerTileEntity(TileEntityChatBox.class, "TileEntityChatBox");
         GameRegistry.registerTileEntity(TileEntityPlayerInventoryBinder.class, "TileEntityPlayerInventoryBinder");
+        GameRegistry.registerTileEntity(TileEntityDigitizer.class, "TileEntityDigitizer");
 
         wrapper.registerMessage(PacketPlayerPosition.Handler.class, PacketPlayerPosition.class, 0, Side.CLIENT);
     }

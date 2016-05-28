@@ -19,7 +19,7 @@ import java.util.List;
  * Created by Avaja on 05.05.2016.
  */
 public class TileEntityAdminChatBox extends TileEntity implements SimpleComponent, Analyzable, Environment {
-    private Node node;
+    protected Node node;
     private boolean addToNetwork = false;
 
     public TileEntityAdminChatBox() {
@@ -127,6 +127,14 @@ public class TileEntityAdminChatBox extends TileEntity implements SimpleComponen
     @Override
     public void invalidate() {
         super.invalidate();
+        if (node != null) node.remove();
+    }
+
+    @Override
+    public void onChunkUnload() {
+        super.onChunkUnload();
+        // Make sure to remove the node from its network when its environment,
+        // meaning this tile entity, gets unloaded.
         if (node != null) node.remove();
     }
 

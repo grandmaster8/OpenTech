@@ -1,6 +1,8 @@
 package OpenTechnology.gui;
 
+import OpenTechnology.container.DigitizerContainer;
 import OpenTechnology.container.TeleporterContainer;
+import OpenTechnology.tileentities.TileEntityDigitizer;
 import OpenTechnology.tileentities.TileEntityTeleporter;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +18,9 @@ public class GuiHandler implements IGuiHandler {
             case 1:
                 TileEntityTeleporter teleporter = (TileEntityTeleporter) world.getTileEntity(x, y, z);
                 return new TeleporterContainer(player.inventory, teleporter);
+            case 2:
+                TileEntityDigitizer digitizer = (TileEntityDigitizer) world.getTileEntity(x, y, z);
+                return new DigitizerContainer(player, digitizer);
             default:
                 return null;
         }
@@ -26,7 +31,10 @@ public class GuiHandler implements IGuiHandler {
         switch (ID){
             case 1:
                 TileEntityTeleporter teleporter = (TileEntityTeleporter) world.getTileEntity(x, y, z);
-                return new TeleporterGui(new TeleporterContainer(player.inventory, teleporter));
+                return new GuiTeleporter(new TeleporterContainer(player.inventory, teleporter));
+            case 2:
+                TileEntityDigitizer digitizer = (TileEntityDigitizer) world.getTileEntity(x, y, z);
+                return new GuiDigitizer(new DigitizerContainer(player, digitizer));
             default:
                 return null;
         }

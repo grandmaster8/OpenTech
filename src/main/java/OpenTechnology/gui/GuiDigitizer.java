@@ -7,19 +7,13 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 /**
- * Created by Avaja on 10.05.2016.
+ * Created by Avaja on 28.05.2016.
  */
-public class TeleporterGui extends GuiContainer {
-    private ResourceLocation background = new ResourceLocation(OpenTechnology.MODID+":textures/gui/teleporter.png");
+public class GuiDigitizer extends GuiContainer {
+    private static ResourceLocation background = new ResourceLocation(OpenTechnology.MODID+":textures/gui/digitizer.png");
 
-
-    public TeleporterGui(Container container) {
+    public GuiDigitizer(Container container) {
         super(container);
-    }
-
-    @Override
-    protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
-        super.drawGuiContainerForegroundLayer(p_146979_1_, p_146979_2_);
     }
 
     @Override
