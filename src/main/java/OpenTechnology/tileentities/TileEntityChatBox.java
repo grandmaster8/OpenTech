@@ -109,6 +109,7 @@ public class TileEntityChatBox extends TileEntity implements SimpleComponent, An
     public Object[] setRadius( Context context, Arguments arguments ) throws Exception{
         int tmp = arguments.checkInteger( 0 );
         if ( tmp > Config.chatboxMaxRadius ) tmp = Config.chatboxMaxRadius;
+        if(tmp < 0) tmp = 0;
         radius = tmp;
         return new Object[]{};
     }
