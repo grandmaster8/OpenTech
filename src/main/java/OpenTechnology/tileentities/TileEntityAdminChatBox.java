@@ -93,14 +93,6 @@ public class TileEntityAdminChatBox extends TileEntity implements SimpleComponen
             if (player.getDisplayName().equals(name))
                 player.addChatMessage(new ChatComponentText(message));
         }
-
-        for (WorldServer world : MinecraftServer.getServer().worldServers){
-            List<EntityPlayer> playerList = world.playerEntities;
-            for (EntityPlayer entityPlayer : playerList){
-                if (entityPlayer.getDisplayName().equals(name))
-                    entityPlayer.addChatMessage(new ChatComponentText(message));
-            }
-        }
         return new Object[]{};
     }
 

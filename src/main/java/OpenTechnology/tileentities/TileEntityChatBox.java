@@ -30,6 +30,7 @@ public class TileEntityChatBox extends TileEntity implements SimpleComponent, An
     public TileEntityChatBox(  ) {
         node = Network.newNode( this, Visibility.Network ).withComponent( getComponentName(  ) ).create(  );
         ChatBoxEventSystem.add(this);
+        radius = Config.chatboxMaxRadius;
     }
 
     @Override
