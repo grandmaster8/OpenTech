@@ -13,7 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 /**
  * Created by Avaja on 28.05.2016.
  */
-public class TileEntityDigitizer extends TileEntity implements Environment, SimpleComponent, Analyzable, IInventory {
+public class TileEntityDigitizer extends TileEntity implements Environment, Analyzable, IInventory {
 
     private boolean addToNetwork = false;
 
@@ -56,7 +56,7 @@ public class TileEntityDigitizer extends TileEntity implements Environment, Simp
         return new Object[]{};
     }
 
-    @Override
+
     public String getComponentName() {
         return "digitizer";
     }

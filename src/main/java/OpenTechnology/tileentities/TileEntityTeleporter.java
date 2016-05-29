@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Created by Avaja on 10.05.2016.
  */
-public class TileEntityTeleporter extends TileEntityEnvironment implements SimpleComponent, Analyzable, SidedEnvironment, IInventory {
+public class TileEntityTeleporter extends TileEntityEnvironment implements Analyzable, SidedEnvironment, IInventory {
     public static HashMap<String, TileEntityTeleporter> teleporterList = new HashMap<String, TileEntityTeleporter>();
 
     //Fields
@@ -74,7 +74,6 @@ public class TileEntityTeleporter extends TileEntityEnvironment implements Simpl
         }
     }
 
-    @Override
     public String getComponentName() {
         return "teleporter";
     }

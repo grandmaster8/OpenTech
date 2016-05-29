@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Avaja on 05.05.2016.
  */
-public class TileEntityAdminChatBox extends TileEntity implements SimpleComponent, Analyzable, Environment {
+public class TileEntityAdminChatBox extends TileEntity implements Analyzable, Environment {
     protected Node node;
     private boolean addToNetwork = false;
 
@@ -35,7 +35,7 @@ public class TileEntityAdminChatBox extends TileEntity implements SimpleComponen
         }
     }
 
-    @Override
+
     public String getComponentName() {
         return "admin_chatbox";
     }

@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Created by Avaja on 11.05.2016.
  */
-public class TileEntityPlayerInventoryBinder extends TileEntityEnvironment implements SimpleComponent, Analyzable {
+public class TileEntityPlayerInventoryBinder extends TileEntityEnvironment implements Analyzable {
 
     private String player_name;
     private EntityPlayer player;
@@ -47,7 +47,6 @@ public class TileEntityPlayerInventoryBinder extends TileEntityEnvironment imple
         return new Node[]{node};
     }
 
-    @Override
     public String getComponentName() {
         return "inventory_binder";
     }

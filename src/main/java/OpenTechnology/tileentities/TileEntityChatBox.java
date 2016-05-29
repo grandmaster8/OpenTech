@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by Avaja on 06.05.2016.
  */
-public class TileEntityChatBox extends TileEntity implements SimpleComponent, Analyzable, Environment {
+public class TileEntityChatBox extends TileEntity implements Analyzable, Environment {
     protected Node node;
     private boolean addToNetwork = false;
 
@@ -50,7 +50,6 @@ public class TileEntityChatBox extends TileEntity implements SimpleComponent, An
         return radius;
     }
 
-    @Override
     public String getComponentName(  ) {
         return "chatbox";
     }
