@@ -19,6 +19,8 @@ public class BlockChatBox extends BlockContainer{
         setBlockName("OpenTechnology_chatbox");
         setBlockTextureName(OpenTechnology.MODID+":chatbox");
         setCreativeTab(OpenTechnology.tab);
+        setHarvestLevel("pickaxe", 0);
+        setHardness(5);
     }
 
     @Override

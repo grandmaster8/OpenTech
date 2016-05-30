@@ -19,6 +19,8 @@ public class BlockTeleporter extends Block implements ITileEntityProvider{
 		super.setHardness(10);
 		super.setBlockName("OpenTechnology_teleporter");
 		this.setCreativeTab(OpenTechnology.tab);
+		setHarvestLevel("pickaxe", 0);
+		setHardness(5);
 	}
 
 	@Override

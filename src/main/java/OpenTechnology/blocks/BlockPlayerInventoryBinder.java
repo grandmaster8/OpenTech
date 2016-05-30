@@ -19,6 +19,8 @@ public class BlockPlayerInventoryBinder extends BlockContainer {
         setBlockName("OpenTechnology_player_inventory_binder");
         setBlockTextureName(OpenTechnology.MODID+":binder");
         setCreativeTab(OpenTechnology.tab);
+        setHarvestLevel("pickaxe", 0);
+        setHardness(5);
     }
 
     @Override

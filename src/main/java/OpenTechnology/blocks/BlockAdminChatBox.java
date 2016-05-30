@@ -20,6 +20,8 @@ public class BlockAdminChatBox extends BlockContainer {
         this.setBlockName("OpenTechnology_adminchatbox");
         this.setBlockTextureName(OpenTechnology.MODID+":adminchatbox");
         this.setCreativeTab(OpenTechnology.tab);
+        setHarvestLevel("pickaxe", 0);
+        setHardness(5);
     }
 
     @Override

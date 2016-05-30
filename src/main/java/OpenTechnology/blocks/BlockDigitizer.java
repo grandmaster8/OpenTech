@@ -17,6 +17,8 @@ public class BlockDigitizer extends BlockContainer{
         super(Material.anvil);
         setBlockName("OpenTechnology_Digitizer");
         setCreativeTab(OpenTechnology.tab);
+        setHarvestLevel("pickaxe", 0);
+        setHardness(5);
     }
 
     @Override
