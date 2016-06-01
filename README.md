@@ -11,9 +11,9 @@ Addon for OpenComputers and Minecraft<br>
      2) Название - chat_command, возращает данные те же что chat_message, но его отличие в том что бы его вызвать первый символ в сообщении<br> должен быть #, еще особенность такие сообщения не попадают в чат, только в чатбоксы.<br>
   <br>
 ##Описание функции:<br>
-####say(message:string) отправляет всем игрокам сообщение message.<br>
-####sayColored(message:string) форматирующая функция, заменяет символ параграфа на @, работает как say.<br>
-####tell(name:string, message:string) отправляет сообщение message игроку с ником name.<br>
+######say(message:string) отправляет всем игрокам сообщение message.<br>
+######sayColored(message:string) форматирующая функция, заменяет символ параграфа на @, работает как say.<br>
+######tell(name:string, message:string) отправляет сообщение message игроку с ником name.<br>
 <br>
 #Чатбокс:<br>
 ##Описание:
