@@ -5,7 +5,6 @@ Addon for OpenComputers and Minecraft<br>
 Аддон содержит 5 блоков и 3 предмета.<br>
 <br>
 Админский чатбокс:<br>
-  <br>
   Описание:<br>
     Админский чатбокс генерирует 2 события.<br>
      1) Название - chat_message, с такими данными - id изменения, playerPosX, playerPosY, playerPosZ, дистанция до игрока, имя игрока, сообщение.<br>
