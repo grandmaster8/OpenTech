@@ -17,6 +17,6 @@ Addon for OpenComputers and Minecraft<br>
 <br>
 #Чатбокс<br>
 ##Описание
-####Чатбокс имеет радиус своей работы.<br>
-####say(message:string) отправляет всем игрокам сообщение message.<br>
-####sayColored(message:string) форматирующая функция, заменяет символ параграфа на @, работает как say.<br>
+######Чатбокс имеет радиус своей работы.<br>
+######say(message:string) отправляет всем игрокам сообщение message.<br>
+######sayColored(message:string) форматирующая функция, заменяет символ параграфа на @, работает как say.<br>
