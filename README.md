@@ -4,7 +4,7 @@ Addon for OpenComputers and Minecraft<br>
 <br>
 Аддон содержит 5 блоков и 3 предмета.<br>
 <br>
-Админский чатбокс:<br>
+#Админский чатбокс:<br>
   Описание:<br>
     Админский чатбокс генерирует 2 события.<br>
      1) Название - chat_message, с такими данными - id изменения, playerPosX, playerPosY, playerPosZ, дистанция до игрока, имя игрока, сообщение.<br>
@@ -15,7 +15,7 @@ Addon for OpenComputers and Minecraft<br>
   sayColored(message:string) форматирующая функция, заменяет символ параграфа на @, работает как say.<br>
   tell(name:string, message:string) отправляет сообщение message игроку с ником name.<br>
 <br>
-Чатбокс:<br>
+#Чатбокс:<br>
   Чатбокс имеет радиус своей работы.<br>
   say(message:string) отправляет всем игрокам сообщение message.<br>
   sayColored(message:string) форматирующая функция, заменяет символ параграфа на @, работает как say.<br>
