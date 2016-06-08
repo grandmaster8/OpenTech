@@ -48,13 +48,16 @@ public class TesseractUpgrade extends ManagedEnvironment{
     @Callback( doc="function( uuid:string, slot:number, count:number )" )
     public Object[] transferOfSlot( Context context, Arguments arguments ) throws Exception{
         String uuid = arguments.checkString( 0 );
-        int slot = arguments.checkInteger( 1 ) + 4;
+        int slot = arguments.checkInteger( 1 ) + 3;
         int count = arguments.checkInteger( 2 );
 
         Machine machine = ( Machine ) context.node(  ).host(  );
         Robot robot = ( Robot ) machine.host(  );
 
-        if ( slot < 0 || slot > robot.getSizeInventory(  ) )
+        if (count <= 0)
+            return new Object[]{false, "invalid count"};
+
+        if ( slot < 4 || slot > robot.getSizeInventory(  ) )
             return new Object[]{false, "invalid slot"};
 
         if ( tesseractList.containsKey( uuid ) ){
