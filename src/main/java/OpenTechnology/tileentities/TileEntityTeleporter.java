@@ -74,6 +74,12 @@ public class TileEntityTeleporter extends TileEntityEnvironment implements Analy
         }
     }
 
+    @Override
+    public void onDisconnect(Node node) {
+        super.onDisconnect(node);
+        teleporterList.remove(node.address());
+    }
+
     public String getComponentName() {
         return "teleporter";
     }
@@ -81,8 +87,11 @@ public class TileEntityTeleporter extends TileEntityEnvironment implements Analy
     @Callback(doc="function(uuid:string, slot:number, count:number)")
     public Object[] transferOfSlot(Context context, Arguments arguments) throws Exception {
         String uuid = arguments.checkString(0);
-        int slot = arguments.checkInteger(1);
+        int slot = arguments.checkInteger(1) - 1;
         int count = arguments.checkInteger(2);
+
+        if (count <= 0)
+            return new Object[]{false, "invalid count"};
 
         if (slot < 0 || slot > getSizeInventory())
             return new Object[]{false, "invalid slot"};
@@ -100,7 +109,7 @@ public class TileEntityTeleporter extends TileEntityEnvironment implements Analy
                         if (stack.stackSize <= 0)
                             setInventorySlotContents(slot, null);
 
-                        CommonProxy.wrapper.sendToDimension(new PacketTeleporter(teleporter.xCoord, teleporter.yCoord, teleporter.zCoord - 1), teleporter.worldObj.provider.dimensionId);
+                        CommonProxy.wrapper.sendToDimension(new PacketTeleporter(teleporter.xCoord, teleporter.yCoord, teleporter.zCoord), teleporter.worldObj.provider.dimensionId);
                         teleporter.worldObj.playSoundEffect(teleporter.xCoord, teleporter.yCoord, teleporter.zCoord, "mob.endermen.portal", 1.0F, 1.0F);
                         return new Object[]{true};
                     }else{
@@ -149,7 +158,7 @@ public class TileEntityTeleporter extends TileEntityEnvironment implements Analy
         if (teleporterList.containsKey(uuid)) {
 
             TileEntityTeleporter teleporter = teleporterList.get(uuid);
-            List<Entity> entityList = worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(xCoord - 1, yCoord, zCoord - 1, xCoord + 1, yCoord + 2, zCoord + 1));
+            List<Entity> entityList = worldObj.getEntitiesWithinAABB(Entity.class, AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 1, yCoord + 2, zCoord + 1));
             if (entityList.size() > 0) {
 
                 Connector connector = (Connector) node;
@@ -157,15 +166,23 @@ public class TileEntityTeleporter extends TileEntityEnvironment implements Analy
                 for (Entity entity : entityList) {
                     double dist = entity.getDistance(teleporter.xCoord, teleporter.yCoord, teleporter.zCoord);
                     if (connector.tryChangeBuffer(-calculateEnergy(dist))) {
+                        double dx, dy, dz;
+                        dx = entity.posX - xCoord;
+                        dy = entity.posY - yCoord;
+                        dz = entity.posZ - zCoord;
                         if (entity instanceof EntityPlayer) {
                             EntityPlayer player = (EntityPlayer) entity;
+                            double px, py, pz;
+                            px = teleporter.xCoord + dx;
+                            py = teleporter.yCoord + dy;
+                            pz = teleporter.zCoord + dz;
                             player.setWorld(teleporter.worldObj);
-                            player.setPosition(teleporter.xCoord - 0.5, teleporter.yCoord + 1.3, teleporter.zCoord - 0.5);
-                            CommonProxy.wrapper.sendTo(new PacketPlayerPosition(teleporter.worldObj.provider.dimensionId, teleporter.xCoord + 0.5, teleporter.yCoord + 1, teleporter.zCoord + 0.5), (EntityPlayerMP) player);
+                            player.setPosition(px, py, pz);
+                            CommonProxy.wrapper.sendTo(new PacketPlayerPosition(teleporter.worldObj.provider.dimensionId, px, py, pz), (EntityPlayerMP) player);
                             CommonProxy.wrapper.sendToDimension(new PacketTeleporter(teleporter.xCoord, teleporter.yCoord + 1, teleporter.zCoord), teleporter.worldObj.provider.dimensionId);
                         } else {
                             entity.setWorld(teleporter.worldObj);
-                            entity.setPosition(teleporter.xCoord + 0.5, teleporter.yCoord + 1.3, teleporter.zCoord + 0.5);
+                            entity.setPosition(teleporter.xCoord + dx, teleporter.yCoord + dy, teleporter.zCoord + dz);
                             CommonProxy.wrapper.sendToDimension(new PacketTeleporter(teleporter.xCoord, teleporter.yCoord + 1, teleporter.zCoord), teleporter.worldObj.provider.dimensionId);
                         }
                     } else {
