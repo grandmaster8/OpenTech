@@ -35,13 +35,13 @@ public class TeslaUpgrade extends ManagedEnvironment {
     }
 
     @Override
-    public boolean canUpdate(  ) {
+    public boolean canUpdate() {
         return true;
     }
 
     @Override
-    public void update(  ) {
-        if ( isHeat ){
+    public void update() {
+        if (isHeat){
             heat--;
             if ( heat == 0 ){
                 isHeat = false;
@@ -52,7 +52,7 @@ public class TeslaUpgrade extends ManagedEnvironment {
     @Callback( doc="Attack in radius." )
     public Object[] attack( Context context, Arguments arguments ) throws Exception{
 
-        if ( isHeat )
+        if (isHeat)
             return new Object[]{false, "overheated"};
 
         Machine machine = ( Machine ) context.node(  ).host(  );
@@ -96,7 +96,7 @@ public class TeslaUpgrade extends ManagedEnvironment {
     @Callback(doc="set radius.")
     public Object[] setRadius( Context context, Arguments arguments ) throws Exception{
         int tmp = arguments.checkInteger( 0 );
-        if ( tmp > Config.maxTeslaRadius )
+        if ( tmp > Config.maxTeslaRadius || tmp < 0)
             radius = Config.maxTeslaRadius;
         else
             radius = tmp;
