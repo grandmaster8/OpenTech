@@ -17,6 +17,7 @@ public class Items {
 
         GameRegistry.registerItem(tesla, "ot_teslaUpgrade");
         GameRegistry.registerItem(tesseract, "ot_teleportUpgrade");
-        GameRegistry.registerItem(radar, "ot_radarUpgrade");
+
+        //GameRegistry.registerItem(radar, "ot_radarUpgrade");
     }
 }

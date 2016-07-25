@@ -14,6 +14,7 @@ import li.cil.oc.api.prefab.ManagedEnvironment;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 
 import java.util.ArrayList;

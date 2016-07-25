@@ -121,9 +121,19 @@ public class TeslaUpgrade extends ManagedEnvironment {
     @Override
     public void load( NBTTagCompound nbt ) {
         super.load( nbt );
-        radius = nbt.getInteger( "radius" );
-        heat = nbt.getInteger( "heat" );
-        isHeat = nbt.getBoolean( "isHeat" );
+
+        if (nbt.hasKey("radius")){
+            radius = nbt.getInteger("radius");
+        }else{
+            radius = Config.maxTeslaRadius;
+        }
+        if(nbt.hasKey("heat")){
+            heat = nbt.getInteger("heat");
+        }else{
+            heat = 0;
+        }
+
+        isHeat = heat > 0;
     }
 
     @Override
@@ -131,6 +141,5 @@ public class TeslaUpgrade extends ManagedEnvironment {
         super.save( nbt );
         nbt.setInteger( "radius", radius );
         nbt.setInteger( "heat", heat );
-        nbt.setBoolean( "isHeat", isHeat );
     }
 }

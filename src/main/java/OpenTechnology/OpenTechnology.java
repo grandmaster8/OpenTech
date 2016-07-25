@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid= OpenTechnology.MODID, name= OpenTechnology.MODID, version= OpenTechnology.VERSION)
 public class OpenTechnology {
 	public final static String MODID = "OpenTechnology";
-	public final static String VERSION = "0.3.18a";
+	public final static String VERSION = "0.3.20a";
 
 	public static Logger logger;
 	public static CreativeTab tab = new CreativeTab();

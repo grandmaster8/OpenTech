@@ -1,8 +1,9 @@
 package OpenTechnology;
 
+import OpenTechnology.blocks.Blocks;
 import cpw.mods.fml.common.registry.GameRegistry;
-import li.cil.oc.api.Items;
-import li.cil.oc.api.driver.Item;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -11,7 +12,7 @@ import net.minecraft.item.ItemStack;
 public class Recipes {
 
     public static void init(){
-        Items.get("");
+        addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.chatbox)), "www", "pcp", "www", 'c', new ItemStack(Item.getItemFromBlock(net.minecraft.init.Blocks.gold_block)), 'p', new ItemStack(Items.ender_pearl), 'w', new ItemStack(Items.iron_ingot));
     }
 
     public static void addRecipe(ItemStack out, Object... stacks){

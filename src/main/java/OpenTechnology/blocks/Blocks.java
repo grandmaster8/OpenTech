@@ -20,6 +20,6 @@ public class Blocks {
         GameRegistry.registerBlock(chatboxadmin, "OT_ChatBoxAdmin");
         GameRegistry.registerBlock(chatbox, "OT_ChatBox");
         GameRegistry.registerBlock(inventorybinder, "OT_PlayerInventoryBinder");
-        GameRegistry.registerBlock(digitizer, "OT_Digitizer");
+        //GameRegistry.registerBlock(digitizer, "OT_Digitizer");
     }
 }
