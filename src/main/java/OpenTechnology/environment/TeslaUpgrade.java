@@ -93,6 +93,7 @@ public class TeslaUpgrade extends ManagedEnvironment {
         return new Object[]{};
     }
 
+    @Callback(doc="set radius.")
     public Object[] setRadius( Context context, Arguments arguments ) throws Exception{
         int tmp = arguments.checkInteger( 0 );
         if ( tmp > Config.maxTeslaRadius )
