@@ -52,6 +52,18 @@ public class TileEntityAdminChatBox extends TileEntity implements Analyzable, En
 
     }
 
+    public void eventDeath(EntityPlayer player){
+        if(node != null)
+            node.sendToReachable("computer.signal", "player_death", player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, getDistanceFrom(player.posX, player.posY, player.posZ), player.getDisplayName());
+
+    }
+
+    public void eventLogging(EntityPlayer player){
+        if(node != null)
+            node.sendToReachable("computer.signal", "player_logging", player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, getDistanceFrom(player.posX, player.posY, player.posZ), player.getDisplayName());
+
+    }
+
     @Override
     public Node[] onAnalyze(EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
         return new Node[]{node};

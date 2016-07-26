@@ -63,4 +63,16 @@ public class ChatBoxEventSystem {
             box.eventCommand(player, message);
         }
     }
+
+    public static void eventDeath(EntityPlayer player){
+        for (TileEntityAdminChatBox box : adminChatBoxs){
+            box.eventDeath(player);
+        }
+    }
+
+    public static void eventLogging(EntityPlayer player) {
+        for (TileEntityAdminChatBox box : adminChatBoxs){
+            box.eventLogging(player);
+        }
+    }
 }
