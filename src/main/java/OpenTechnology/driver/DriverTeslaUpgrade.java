@@ -33,7 +33,7 @@ public class DriverTeslaUpgrade implements Item, HostAware, EnvironmentAware {
 
     @Override
     public ManagedEnvironment createEnvironment(ItemStack stack, EnvironmentHost host) {
-        return new TeslaUpgrade();
+        return new TeslaUpgrade(host);
     }
 
     @Override
