@@ -6,3 +6,4 @@ tile.OpenTechnology_player_inventory_binder.name=Inventory Binder
 
 item.OpenTechnology_teslaUpgrade.name=Tesla Upgrade
 item.OpenTechnology_tesseractUpgrade.name=Tesseract Upgrade
+item.OpenTechnology_RadarUpgrade.name=Radar Upgrade
