@@ -2,6 +2,7 @@ package OpenTechnology.environment;
 
 import OpenTechnology.Config;
 import OpenTechnology.OpenTechnology;
+import OpenTechnology.utils.TeslaDamage;
 import OpenTechnology.utils.Utils;
 import li.cil.oc.api.Network;
 import li.cil.oc.api.internal.Robot;
@@ -41,7 +42,7 @@ public class TeslaUpgrade extends ManagedEnvironment {
     private boolean run;
 
     public TeslaUpgrade(EnvironmentHost host) {
-        this.setNode( Network.newNode( this, Visibility.Network ).withComponent( "tesla" ).withConnector(  ).create(  ) );
+        this.setNode(Network.newNode(this, Visibility.Network).withComponent("tesla").withConnector().create());
         this.host = host;
         radius = Config.maxTeslaRadius;
         isHeat = false;
@@ -107,7 +108,7 @@ public class TeslaUpgrade extends ManagedEnvironment {
     }
 
     @Callback( doc="Attack in radius." )
-    public Object[] attack( Context context, Arguments arguments ) throws Exception{
+    public Object[] attack(Context context, Arguments arguments) throws Exception{
 
         if (!run) return new Object[]{false, "tesla disable"};
 
@@ -121,6 +122,9 @@ public class TeslaUpgrade extends ManagedEnvironment {
 
         List<Entity> entities = Utils.getEntitiesInBound( Entity.class, robot.world (  ), ( int )robot.xPosition(  ) - tmp, ( int )robot.yPosition(  ) - tmp, ( int )robot.zPosition(  ) - tmp, ( int )robot.xPosition(  ) + tmp, ( int )robot.yPosition(  ) + tmp, ( int )robot.zPosition(  ) + tmp );
 
+        for(Entity entity : entities)
+            System.out.println(entity.toString());
+
         if ( entities.size() > 0 ){
 
             isHeat = true;
@@ -129,19 +133,17 @@ public class TeslaUpgrade extends ManagedEnvironment {
             charge -= heat;
 
             double damage = charge / entities.size();
-            for ( Entity entity : entities ) {
+            for (Entity entity : entities) {
                 if (entity instanceof EntityLivingBase){
-                    double v = entity.width * entity.height;
                     double dist = entity.getDistance(host.xPosition(), host.yPosition(), host.zPosition());
-                    double v2 = (1.0 / 2.0) * Math.pow(dist, 2) * 19.0;
-                    double out_damage = (damage / v2) / v / 10;
-                    entity.attackEntityFrom(DamageSource.magic, (float) out_damage);
+                    damage /= dist * 100;
+                    entity.attackEntityFrom(TeslaDamage.teslaDamage, (float) damage);
                 }
             }
 
-            if ( entities.size(  ) > 0 ){
-                World world = robot.world(  );
-                world.playSoundEffect( robot.xPosition(  ), robot.yPosition(  ), robot.zPosition(  ), OpenTechnology.MODID+":tesla_attack", 10000.0F, 0.8F + world.rand.nextFloat(  ) * 0.2F );
+            if (entities.size() > 0){
+                World world = robot.world();
+                world.playSoundEffect(robot.xPosition(), robot.yPosition(), robot.zPosition(), OpenTechnology.MODID+":tesla_attack", 10000.0F, 0.8F + world.rand.nextFloat() * 0.2F);
             }
         }
 
@@ -175,7 +177,7 @@ public class TeslaUpgrade extends ManagedEnvironment {
         return new Object[]{};
     }
 
-    @Callback( doc="get radius." )
+    @Callback
     public Object[] getRadius( Context context, Arguments arguments )  throws Exception{
         return new Object[]{radius};
     }

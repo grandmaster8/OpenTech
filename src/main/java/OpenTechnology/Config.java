@@ -10,7 +10,6 @@ import java.io.File;
 public class Config {
     public static Configuration configuration;
 
-    public static int teleportFactor;
     public static boolean logging;
     public static int timeLimit;
     public static int entityTeleportationLimit;
@@ -32,7 +31,7 @@ public class Config {
     public static int radarRange;
     public static double radarEnergyCost;
 
-    public static boolean registerAdminChatBox, registerChatBox, registerPlayerInventoryBinder, registerTeleporter, registerRadarUpgrade, registerTeslaUpgrade, registerTesseractUpgrade;
+    public static boolean registerAdminChatBox, registerChatBox, registerPlayerInventoryBinder, registerTeleporter, registerRadarUpgrade, registerTeslaUpgrade, registerTesseractUpgrade, registerRadar;
 
 
     public static void init(File file){
@@ -46,13 +45,13 @@ public class Config {
 
         maxTeslaRadius = configuration.get("tesla", "maxTeslaRadius", 10).getInt();
         speedTeslaCharge = configuration.get("tesla", "speedTeslaCharge", 200.0).getDouble();
-        maxTeslaCharge = configuration.get("tesla", "maxTeslaCharge", 30000.0).getDouble();
+        maxTeslaCharge = configuration.get("tesla", "maxTeslaCharge", 3000.0).getDouble();
         teslaTimeReload = configuration.get("tesla", "teslaTimeReload", 90, "ticks").getInt();
         teslaCooling = configuration.get("tesla", "teslaCooling", 100, "ticks").getInt();
         teslaHeatPercent = configuration.get("tesla", "teslaHeatPercent", 10, "ticks").getInt();
-        teslaCoolingWaterFactor = configuration.get("tesla", "teslaCoolingWaterFactor", 20, "").getInt();
-        teslaCoolingIceFactor = configuration.get("tesla", "teslaCoolingIceFactor", 40, "").getInt();
-        teslaCoolingAirFactor = configuration.get("tesla", "teslaCoolingAirFactor", 10, "").getInt();
+        teslaCoolingWaterFactor = configuration.get("tesla", "teslaCoolingWaterFactor", 2, "").getInt();
+        teslaCoolingIceFactor = configuration.get("tesla", "teslaCoolingIceFactor", 4, "").getInt();
+        teslaCoolingAirFactor = configuration.get("tesla", "teslaCoolingAirFactor", 1, "").getInt();
 
         binderEnergyFactor = configuration.get("binder", "binderEnergyFactor", 30, "").getDouble();
 
@@ -66,6 +65,7 @@ public class Config {
         registerRadarUpgrade = configuration.getBoolean("registerRadarUpgrade", "register", true, "");
         registerTeslaUpgrade = configuration.getBoolean("registerTeslaUpgrade", "register", true, "");
         registerTesseractUpgrade = configuration.getBoolean("registerTesseractUpgrade", "register", true, "");
+        registerRadar = configuration.getBoolean("registerRadar", "register", true, "");
 
         configuration.save();
     }

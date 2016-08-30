@@ -40,8 +40,10 @@ public class CommonProxy {
         GameRegistry.registerTileEntity(TileEntityChatBox.class, "TileEntityChatBox");
         GameRegistry.registerTileEntity(TileEntityPlayerInventoryBinder.class, "TileEntityPlayerInventoryBinder");
         GameRegistry.registerTileEntity(TileEntityDigitizer.class, "TileEntityDigitizer");
+        GameRegistry.registerTileEntity(TileEntityRadar.class, "TileEntityRadar");
 
         wrapper.registerMessage(PacketPlayerPosition.Handler.class, PacketPlayerPosition.class, 0, Side.CLIENT);
+
     }
 
     public void postInit(FMLPostInitializationEvent e) {

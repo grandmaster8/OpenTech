@@ -8,7 +8,7 @@ import net.minecraft.block.Block;
  * Created by Avaja on 05.05.2016.
  */
 public class Blocks {
-    public static Block teleporter, adminchatbox, chatbox, inventorybinder, digitizer;
+    public static Block teleporter, adminchatbox, chatbox, inventorybinder, digitizer, radar;
 
     public static void init(){
         teleporter = new BlockTeleporter();
@@ -16,6 +16,7 @@ public class Blocks {
         chatbox = new BlockChatBox();
         inventorybinder = new BlockPlayerInventoryBinder();
         digitizer = new BlockDigitizer();
+        radar = new BlockRadar();
 
         if (Config.registerTeleporter){
             GameRegistry.registerBlock(teleporter, "OT_Teleporter");
@@ -38,7 +39,13 @@ public class Blocks {
         if (Config.registerPlayerInventoryBinder){
             GameRegistry.registerBlock(inventorybinder, "OT_PlayerInventoryBinder");
         }else{
-            System.out.println("PlayerInventoryBinder");
+            System.out.println("PlayerInventoryBinder off.");
+        }
+
+        if (Config.registerRadar){
+            GameRegistry.registerBlock(radar, "OT_Radar");
+        }else{
+            System.out.println("Radar off.");
         }
         //GameRegistry.registerBlock(digitizer, "OT_Digitizer");
     }

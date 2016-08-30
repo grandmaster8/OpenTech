@@ -15,7 +15,6 @@ import li.cil.oc.api.network.Connector;
 import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.Visibility;
 import li.cil.oc.api.prefab.ManagedEnvironment;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
 import java.util.HashMap;
