@@ -8,7 +8,7 @@ Custom blocks for OpenComputers and Minecraft.
 ## Админский чатбокс  
 Админский чатбокс генерирует 2 события.
 #### `chat_message`
-Аргументы: `id` изменения, `playerPosX`, `playerPosY`, `playerPosZ`, дистанция до игрока, имя игрока, сообщение.
+Аргументы: `id` измерения, `playerPosX`, `playerPosY`, `playerPosZ`, дистанция до игрока, имя игрока, сообщение.
 #### `chat_command`
 Возращает данные те же что `chat_message`.
 Однако вызывается только в том случае, если первый символ в сообщении был `#`.
