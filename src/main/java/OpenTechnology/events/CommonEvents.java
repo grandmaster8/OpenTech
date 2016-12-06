@@ -1,9 +1,11 @@
 package OpenTechnology.events;
 
+import OpenTechnology.render.WorldRender;
 import OpenTechnology.system.ChatBoxEventSystem;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
@@ -28,6 +30,11 @@ public class CommonEvents {
     @SubscribeEvent
     public void playerLogging(PlayerEvent.PlayerLoggedInEvent loggedInEvent){
         ChatBoxEventSystem.eventLogging(loggedInEvent.player);
+    }
+
+    @SubscribeEvent
+    public void postWorldRender(RenderWorldLastEvent worldLastEvent){
+        WorldRender.render(worldLastEvent);
     }
 
 }

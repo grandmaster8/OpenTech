@@ -101,7 +101,7 @@ public interface Environment {
     void onDisconnect(Node node);
 
     /**
-     * This is the generic message handle.
+     * This is the generic message handler.
      * <p/>
      * It is called whenever this environments {@link Node} receives a message
      * that was sent via one of the <tt>send</tt> methods in the {@link Network}

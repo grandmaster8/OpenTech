@@ -17,7 +17,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  * </p>
  * When this event is fired, the GL state is set up such that the origin is
  * the top left corner of the mountable the event was fired for. It's the
- * event handle's responsibility to not render outside the are of the
+ * event handler's responsibility to not render outside the are of the
  * mountable (unless that's explicitly what they're going for, of course).
  */
 public abstract class RackMountableRenderEvent extends Event {
