@@ -37,9 +37,9 @@ public class Config {
 
         maxTeslaRadius = configuration.get("tesla", "maxTeslaRadius", 10).getInt();
         teslaCooling = configuration.get("tesla", "teslaCooling", 100, "ticks").getInt();
-        teslaMaxHeat = configuration.get("tesla", "teslaMaxHeat", 100, "ticks").getInt();
+        teslaMaxHeat = configuration.get("tesla", "teslaMaxHeat", 10000, "ticks").getInt();
         teslaEnergy = configuration.get("tesla", "teslaEnergy", 1000, "ticks").getInt();
-        teslaAllDamage = (float) configuration.get("tesla", "teslaAllDamage", 1000, "ticks").getDouble();
+        teslaAllDamage = (float) configuration.get("tesla", "teslaAllDamage", 10, "ticks").getDouble();
 
         radarRange = configuration.get("radar", "radarRange", 15, "").getInt();
         radarEnergyCost = configuration.get("radar", "radarEnergyCost", 30).getDouble();
