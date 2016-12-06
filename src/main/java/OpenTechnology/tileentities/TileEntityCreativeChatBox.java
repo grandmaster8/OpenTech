@@ -11,18 +11,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.world.WorldServer;
 
 import java.util.List;
 
 /**
  * Created by Avaja on 05.05.2016.
  */
-public class TileEntityAdminChatBox extends TileEntity implements Analyzable, Environment {
+public class TileEntityCreativeChatBox extends TileEntity implements Analyzable, Environment {
     protected Node node;
     private boolean addToNetwork = false;
 
-    public TileEntityAdminChatBox() {
+    public TileEntityCreativeChatBox() {
         node = li.cil.oc.api.Network.newNode(this, Visibility.Network).withComponent(getComponentName()).create();
         ChatBoxEventSystem.add(this);
     }

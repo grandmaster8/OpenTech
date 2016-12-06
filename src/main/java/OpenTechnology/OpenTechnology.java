@@ -1,22 +1,25 @@
 package OpenTechnology;
 
 import OpenTechnology.proxy.CommonProxy;
-import OpenTechnology.utils.PointerList;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraft.util.DamageSource;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid= OpenTechnology.MODID, name= OpenTechnology.MODID, version= OpenTechnology.VERSION)
 public class OpenTechnology {
 	public final static String MODID = "OpenTechnology";
-	public final static String VERSION = "0.3.23a";
+	public final static String VERSION = "0.3.24a_dev";
 
 	public static Logger logger;
 	public static CreativeTab tab = new CreativeTab();
+
+
+	public static DamageSource electricDamage = new DamageSource("electricDamage");
 
 	@Mod.Instance
 	public static OpenTechnology instance;
@@ -34,7 +37,6 @@ public class OpenTechnology {
 	@EventHandler
 	public void init(FMLInitializationEvent e) {
 	    proxy.init(e);
-		PointerList.timer.schedule(PointerList.task, 1000, 1000);
 	}
 
 	@EventHandler

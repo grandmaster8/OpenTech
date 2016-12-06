@@ -1,10 +1,8 @@
 package OpenTechnology.proxy;
 
-import OpenTechnology.packet.PacketTeleporter;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.relauncher.Side;
 
 public class ServerProxy extends CommonProxy{
 
@@ -16,8 +14,6 @@ public class ServerProxy extends CommonProxy{
 	@Override
 	public void init(FMLInitializationEvent e) {
 		super.init(e);
-
-		wrapper.registerMessage(PacketTeleporter.HandlerServer.class, PacketTeleporter.class, 1, Side.CLIENT);
 	}
 
 	@Override

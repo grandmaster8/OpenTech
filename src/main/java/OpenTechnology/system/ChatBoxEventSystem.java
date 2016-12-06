@@ -1,6 +1,6 @@
 package OpenTechnology.system;
 
-import OpenTechnology.tileentities.TileEntityAdminChatBox;
+import OpenTechnology.tileentities.TileEntityCreativeChatBox;
 import OpenTechnology.tileentities.TileEntityChatBox;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -10,10 +10,10 @@ import java.util.ArrayList;
  * Created by Avaja on 05.05.2016.
  */
 public class ChatBoxEventSystem {
-    private static ArrayList<TileEntityAdminChatBox> adminChatBoxs = new ArrayList<TileEntityAdminChatBox>();
+    private static ArrayList<TileEntityCreativeChatBox> adminChatBoxs = new ArrayList<TileEntityCreativeChatBox>();
     private static ArrayList<TileEntityChatBox> chatBoxes = new ArrayList<TileEntityChatBox>();
 
-    public static void add(TileEntityAdminChatBox tile){
+    public static void add(TileEntityCreativeChatBox tile){
         adminChatBoxs.add(tile);
     }
 
@@ -21,7 +21,7 @@ public class ChatBoxEventSystem {
         chatBoxes.add(tile);
     }
 
-    public static void remove(TileEntityAdminChatBox tile){
+    public static void remove(TileEntityCreativeChatBox tile){
         for (int i = 0; i < adminChatBoxs.size(); i++){
             if (adminChatBoxs.get(i) == tile)
                 adminChatBoxs.remove(i);
@@ -45,7 +45,7 @@ public class ChatBoxEventSystem {
                 box.eventMessage(player, message);
             }
 
-            for (TileEntityAdminChatBox box : adminChatBoxs){
+            for (TileEntityCreativeChatBox box : adminChatBoxs){
                 box.eventMessage(player, message);
             }
         }
@@ -59,19 +59,19 @@ public class ChatBoxEventSystem {
             box.eventCommand(player, message);
         }
 
-        for (TileEntityAdminChatBox box : adminChatBoxs){
+        for (TileEntityCreativeChatBox box : adminChatBoxs){
             box.eventCommand(player, message);
         }
     }
 
     public static void eventDeath(EntityPlayer player){
-        for (TileEntityAdminChatBox box : adminChatBoxs){
+        for (TileEntityCreativeChatBox box : adminChatBoxs){
             box.eventDeath(player);
         }
     }
 
     public static void eventLogging(EntityPlayer player) {
-        for (TileEntityAdminChatBox box : adminChatBoxs){
+        for (TileEntityCreativeChatBox box : adminChatBoxs){
             box.eventLogging(player);
         }
     }

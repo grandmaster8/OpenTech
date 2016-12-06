@@ -3,9 +3,7 @@ package OpenTechnology.driver;
 import OpenTechnology.environment.TeslaUpgrade;
 import OpenTechnology.item.Items;
 import li.cil.oc.api.driver.EnvironmentAware;
-import li.cil.oc.api.driver.EnvironmentProvider;
 import li.cil.oc.api.driver.Item;
-import li.cil.oc.api.driver.item.Container;
 import li.cil.oc.api.driver.item.HostAware;
 import li.cil.oc.api.driver.item.Slot;
 import li.cil.oc.api.internal.Drone;
@@ -13,7 +11,6 @@ import li.cil.oc.api.internal.Robot;
 import li.cil.oc.api.network.Environment;
 import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.ManagedEnvironment;
-import li.cil.oc.api.prefab.DriverItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -43,7 +40,7 @@ public class DriverTeslaUpgrade implements Item, HostAware, EnvironmentAware {
 
     @Override
     public int tier(ItemStack stack) {
-        return 1;
+        return 3;
     }
 
     @Override

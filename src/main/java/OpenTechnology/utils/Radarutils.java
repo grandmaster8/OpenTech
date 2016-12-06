@@ -19,14 +19,14 @@ import java.util.Set;
  * Created by Avaja on 21.05.2016.
  */
 public class RadarUtils {
-    public static Set<Map<String, Object>> getEntities(World world, int xCoord, int yCoord, int zCoord, AxisAlignedBB bounds, Class<? extends EntityLivingBase> eClass) {
+    public static Set<Map<String, Object>> getEntities(World world, int xCoord, int yCoord, int zCoord, AxisAlignedBB bounds, Class<? extends EntityLivingBase> eClass, float range) {
         Set<Map<String, Object>> entities = new HashSet<Map<String, Object>>();
         for(Object obj : world.getEntitiesWithinAABB(eClass, bounds)) {
             EntityLivingBase entity = (EntityLivingBase) obj;
             double dx = entity.posX - (xCoord + 0.5);
             double dy = entity.posY - (yCoord + 0.5);
             double dz = entity.posZ - (zCoord + 0.5);
-            if(Math.sqrt(dx * dx + dy * dy + dz * dz) < Config.radarRange) {
+            if(Math.sqrt(dx * dx + dy * dy + dz * dz) < range) {
                 // Maps are converted to tables on the Lua side.
                 Map<String, Object> entry = new HashMap<String, Object>();
                 if(entity instanceof EntityPlayer) {

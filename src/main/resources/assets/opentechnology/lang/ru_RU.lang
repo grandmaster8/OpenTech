@@ -1,9 +1,9 @@
 itemGroup.OpenTechnology=OpenTechnology
-tile.OpenTechnology_teleporter.name=Универсальный Телепортер
 tile.OpenTechnology_chatbox.name=Чатбокс
-tile.OpenTechnology_adminchatbox.name=Админский чатбокс
-tile.OpenTechnology_player_inventory_binder.name=Связыватель инвентаря
+tile.OpenTechnology_adminchatbox.name=Креативный чатбокс
+tile.OpenTechnology_radar.name=Радар
 
 item.OpenTechnology_teslaUpgrade.name=Тесла Апгрейд
-item.OpenTechnology_tesseractUpgrade.name=Тессеракт Апгрейд
 item.OpenTechnology_RadarUpgrade.name=Радар Апгрейд
+
+death.attack.electric=Электричество

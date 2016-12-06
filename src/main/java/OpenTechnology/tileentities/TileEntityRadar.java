@@ -24,6 +24,9 @@ public class TileEntityRadar extends TileEntity implements Analyzable, Environme
 
     private Node node;
 
+    public TileEntityRadar() {
+        node = li.cil.oc.api.Network.newNode(this, Visibility.Network).withComponent("radar").create();
+    }
 
     private int getDistance(Arguments args) {
         if(args.isInteger(0)) {
@@ -53,8 +56,8 @@ public class TileEntityRadar extends TileEntity implements Analyzable, Environme
         int distance = getDistance(args);
         if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyCost * distance * 1.75))) {
             AxisAlignedBB bounds = getBounds(distance);
-            entities.addAll(RadarUtils.getEntities(worldObj, xCoord, yCoord, zCoord, bounds, EntityPlayer.class));
-            entities.addAll(RadarUtils.getEntities(worldObj, xCoord, yCoord, zCoord, bounds, EntityLiving.class));
+            entities.addAll(RadarUtils.getEntities(worldObj, xCoord, yCoord, zCoord, bounds, EntityPlayer.class, Config.radarRange));
+            entities.addAll(RadarUtils.getEntities(worldObj, xCoord, yCoord, zCoord, bounds, EntityLiving.class, Config.radarRange));
             context.pause(0.5);
         }
         // The returned array is treated as a tuple, meaning if we return the
@@ -72,7 +75,7 @@ public class TileEntityRadar extends TileEntity implements Analyzable, Environme
         int distance = getDistance(args);
         if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyCost * distance * 1.0))) {
             AxisAlignedBB bounds = getBounds(distance);
-            entities.addAll(RadarUtils.getEntities(worldObj, xCoord, yCoord, zCoord, bounds, EntityPlayer.class));
+            entities.addAll(RadarUtils.getEntities(worldObj, xCoord, yCoord, zCoord, bounds, EntityPlayer.class, Config.radarRange));
             context.pause(0.5);
         }
         return new Object[] { entities.toArray() };
@@ -84,7 +87,7 @@ public class TileEntityRadar extends TileEntity implements Analyzable, Environme
         int distance = getDistance(args);
         if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyCost * distance * 1.0))) {
             AxisAlignedBB bounds = getBounds(distance);
-            entities.addAll(RadarUtils.getEntities(worldObj, xCoord, yCoord, zCoord, bounds, EntityLiving.class));
+            entities.addAll(RadarUtils.getEntities(worldObj, xCoord, yCoord, zCoord, bounds, EntityLiving.class, Config.radarRange));
             context.pause(0.5);
         }
         return new Object[] { entities.toArray() };
@@ -158,6 +161,4 @@ public class TileEntityRadar extends TileEntity implements Analyzable, Environme
             nbt.setTag("oc:node", nodeNbt);
         }
     }
-
-
 }

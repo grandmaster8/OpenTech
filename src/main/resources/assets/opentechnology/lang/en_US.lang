@@ -1,9 +1,9 @@
 itemGroup.OpenTechnology=OpenTechnology
-tile.OpenTechnology_teleporter.name=Universal Teleporter
 tile.OpenTechnology_chatbox.name=Chatbox
-tile.OpenTechnology_adminchatbox.name=Admin Chatbox
-tile.OpenTechnology_player_inventory_binder.name=Inventory Binder
+tile.OpenTechnology_adminchatbox.name=Creative Chatbox
+tile.OpenTechnology_radar.name=Radar
 
 item.OpenTechnology_teslaUpgrade.name=Tesla Upgrade
-item.OpenTechnology_tesseractUpgrade.name=Tesseract Upgrade
 item.OpenTechnology_RadarUpgrade.name=Radar Upgrade
+
+death.attack.electric=Electricity

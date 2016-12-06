@@ -15,6 +15,9 @@ public class BlockRadar extends BlockContainer {
     public BlockRadar() {
         super(Material.iron);
         setCreativeTab(OpenTechnology.tab);
+        setBlockName("OpenTechnology_radar");
+        setHarvestLevel("pickaxe", 0);
+        setHardness(5);
     }
 
 /*    @Override
