@@ -76,8 +76,10 @@ public class TeslaUpgrade extends ManagedEnvironment {
 
             heat = Config.teslaMaxHeat;
             isHeat = true;
+            return new Object[]{true};
+        }else{
+            return new Object[]{false, "not enough energy."};
         }
-        return new Object[]{true};
     }
 
     @Callback(doc="check overheated.")
