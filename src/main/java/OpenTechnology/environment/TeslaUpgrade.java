@@ -2,6 +2,7 @@ package OpenTechnology.environment;
 
 import OpenTechnology.Config;
 import OpenTechnology.OpenTechnology;
+import li.cil.oc.api.API;
 import li.cil.oc.api.Network;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
@@ -50,9 +51,12 @@ public class TeslaUpgrade extends ManagedEnvironment {
 
     @Callback( doc="Attack" )
     public Object[] attack(Context context, Arguments arguments) throws Exception{
+        if(isHeat)
+            return new Object[]{false, "tesla overheated."};
+
         Connector connector = (Connector) node();
 
-        if(connector.tryChangeBuffer(Config.teslaEnergy)){
+        if(connector.tryChangeBuffer(Config.teslaEnergy) || !API.isPowerEnabled){
             int x = (int)host.xPosition(), y = (int)host.yPosition(), z = (int)host.zPosition();
             int minX = x - Config.maxTeslaRadius;
             int minY = y - Config.maxTeslaRadius;
@@ -69,8 +73,16 @@ public class TeslaUpgrade extends ManagedEnvironment {
                     livingBase.attackEntityFrom(OpenTechnology.electricDamage, damage);
                 }
             }
+
+            heat = Config.teslaMaxHeat;
+            isHeat = true;
         }
         return new Object[]{};
+    }
+
+    @Callback(doc="check overheated.")
+    public Object[] checkOverHeated(Context context, Arguments arguments) throws Exception{
+        return new Object[]{isHeat};
     }
 
     @Override

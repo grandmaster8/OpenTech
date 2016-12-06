@@ -40,7 +40,7 @@ public class DriverTeslaUpgrade implements Item, HostAware, EnvironmentAware {
 
     @Override
     public int tier(ItemStack stack) {
-        return 3;
+        return 2;
     }
 
     @Override
