@@ -2,6 +2,9 @@ package OpenTechnology.environment;
 
 import OpenTechnology.Config;
 import OpenTechnology.OpenTechnology;
+import OpenTechnology.network.SparkPacket;
+import OpenTechnology.proxy.CommonProxy;
+import OpenTechnology.utils.Utils;
 import li.cil.oc.api.API;
 import li.cil.oc.api.Network;
 import li.cil.oc.api.machine.Arguments;
@@ -12,6 +15,8 @@ import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.Visibility;
 import li.cil.oc.api.prefab.ManagedEnvironment;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 
@@ -49,7 +54,7 @@ public class TeslaUpgrade extends ManagedEnvironment {
         }
     }
 
-    @Callback( doc="Attack" )
+    @Callback( doc="Attack entities." )
     public Object[] attack(Context context, Arguments arguments) throws Exception{
         if(isHeat)
             return new Object[]{false, "tesla overheated."};
@@ -68,9 +73,14 @@ public class TeslaUpgrade extends ManagedEnvironment {
             List entities = host.world().getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ));
             if(entities.size() > 0) {
                 float damage = Config.teslaAllDamage / entities.size();
+
+                List<EntityPlayer> players = Utils.getEntitiesInBound(EntityPlayer.class, host.world(), (int)host.xPosition() - 200, (int)host.yPosition() - 200, (int)host.zPosition() - 200, (int)host.xPosition() + 200, (int)host.yPosition() + 200, (int)host.zPosition() + 200);
                 for(Object o : entities){
                     EntityLivingBase livingBase = (EntityLivingBase) o;
                     livingBase.attackEntityFrom(OpenTechnology.electricDamage, damage);
+
+                    for(EntityPlayer player : players)
+                        CommonProxy.wrapper.sendTo(new SparkPacket(livingBase.getEntityId()), (EntityPlayerMP) player);
                 }
             }
 
