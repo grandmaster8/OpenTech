@@ -5,7 +5,7 @@ Custom blocks for OpenComputers and Minecraft.
 (Содержит 5 блоков и 3 предмета.)
 
 
-## Админский чатбокс  
+## Админский чатбокс
 Админский чатбокс генерирует 2 события.
 #### `chat_message`
 Аргументы: `id` измерения, `playerPosX`, `playerPosY`, `playerPosZ`, дистанция до игрока, имя игрока, сообщение.
