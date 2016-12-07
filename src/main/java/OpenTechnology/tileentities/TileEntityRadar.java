@@ -23,9 +23,12 @@ import java.util.Map;
 public class TileEntityRadar extends TileEntity implements Analyzable, Environment {
 
     private Node node;
+    private float rotation;
+    private static float rotationSpeed = 3.0f;
 
     public TileEntityRadar() {
         node = li.cil.oc.api.Network.newNode(this, Visibility.Network).withComponent("radar").create();
+        rotation = 0;
     }
 
     private int getDistance(Arguments args) {
@@ -34,6 +37,15 @@ public class TileEntityRadar extends TileEntity implements Analyzable, Environme
         } else {
             return Config.radarRange;
         }
+    }
+
+    @Override
+    public void updateEntity() {
+        rotation = (rotation + rotationSpeed) % 360;
+    }
+
+    public int getFacing() {
+        return (worldObj == null) ? 0 : this.getBlockMetadata();
     }
 
     private void setNode(Node node){
@@ -103,6 +115,10 @@ public class TileEntityRadar extends TileEntity implements Analyzable, Environme
             context.pause(0.5);
         }
         return new Object[] { entities.toArray() };
+    }
+
+    public float getRotation() {
+        return rotation;
     }
 
     @Override

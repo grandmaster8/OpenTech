@@ -16,8 +16,8 @@ public class BlockCreativeChatBox extends BlockContainer {
 
     public BlockCreativeChatBox() {
         super(Material.iron);
-        this.setBlockName("OpenTechnology_adminchatbox");
-        this.setBlockTextureName(OpenTechnology.MODID+":adminchatbox");
+        this.setBlockName("OpenTechnology_creativeChatbox");
+        this.setBlockTextureName(OpenTechnology.MODID+":creativeChatbox");
         this.setCreativeTab(OpenTechnology.tab);
         setHarvestLevel("pickaxe", 0);
         setHardness(5);

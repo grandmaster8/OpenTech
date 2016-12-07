@@ -15,6 +15,6 @@ public class CreativeTab extends CreativeTabs{
 
     @Override
     public Item getTabIconItem() {
-        return Item.getItemFromBlock(Blocks.adminchatbox);
+        return Item.getItemFromBlock(Blocks.creativeChatbox);
     }
 }

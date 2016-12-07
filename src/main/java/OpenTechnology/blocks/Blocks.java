@@ -8,17 +8,18 @@ import net.minecraft.block.Block;
  * Created by Avaja on 05.05.2016.
  */
 public class Blocks {
-    public static Block adminchatbox, chatbox, radar;
+    public static Block creativeChatbox, chatbox, radar, lda;
 
     public static void init(){
-        adminchatbox = new BlockCreativeChatBox();
+        creativeChatbox = new BlockCreativeChatBox();
         chatbox = new BlockChatBox();
         radar = new BlockRadar();
+        lda = new BlockLDA();
 
-        if (Config.registerAdminChatBox){
-            GameRegistry.registerBlock(adminchatbox, "OT_AdminChatBox");
+        if (Config.registerCreativeChatBox){
+            GameRegistry.registerBlock(creativeChatbox, "OT_AdminChatBox");
         }else {
-            System.out.println("AdminChatBox off.");
+            System.out.println("CreativeChatBox off.");
         }
 
         if (Config.registerChatBox){
@@ -32,6 +33,11 @@ public class Blocks {
         }else{
             System.out.println("Radar off.");
         }
-        //GameRegistry.registerBlock(digitizer, "OT_Digitizer");
+
+        if(Config.registerLDA){
+            GameRegistry.registerBlock(lda, "OT_LDA");
+        }else{
+            System.out.println("LDA off.");
+        }
     }
 }

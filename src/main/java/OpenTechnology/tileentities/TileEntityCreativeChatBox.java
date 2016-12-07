@@ -136,9 +136,8 @@ public class TileEntityCreativeChatBox extends TileEntity implements Analyzable,
     @Override
     public void onChunkUnload() {
         super.onChunkUnload();
-        // Make sure to remove the node from its network when its environment,
-        // meaning this tile entity, gets unloaded.
         if (node != null) node.remove();
+        ChatBoxEventSystem.remove(this);
     }
 
     @Override

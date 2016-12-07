@@ -98,12 +98,16 @@ public class TeslaUpgrade extends ManagedEnvironment {
     }
 
     @Override
-    public void load( NBTTagCompound nbt ) {
-        super.load( nbt );
+    public void load(NBTTagCompound nbt) {
+        super.load(nbt);
+        isHeat = nbt.getBoolean("isHeat");
+        heat = nbt.getInteger("heat");
     }
 
     @Override
-    public void save( NBTTagCompound nbt ) {
-        super.save( nbt );
+    public void save(NBTTagCompound nbt) {
+        super.save(nbt);
+        nbt.setBoolean("isHeat", isHeat);
+        nbt.setInteger("heat", heat);
     }
 }

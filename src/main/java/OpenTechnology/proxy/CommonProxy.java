@@ -11,6 +11,7 @@ import OpenTechnology.network.SparkPacket;
 import OpenTechnology.network.SparkPacketHandler;
 import OpenTechnology.tileentities.TileEntityChatBox;
 import OpenTechnology.tileentities.TileEntityCreativeChatBox;
+import OpenTechnology.tileentities.TileEntityLDA;
 import OpenTechnology.tileentities.TileEntityRadar;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -43,6 +44,7 @@ public class CommonProxy {
         GameRegistry.registerTileEntity(TileEntityCreativeChatBox.class, "TileEntityCreativeChatBox");
         GameRegistry.registerTileEntity(TileEntityChatBox.class, "TileEntityChatBox");
         GameRegistry.registerTileEntity(TileEntityRadar.class, "TileEntityRadar");
+        GameRegistry.registerTileEntity(TileEntityLDA.class, "TileEntityLDA");
 
 
     }

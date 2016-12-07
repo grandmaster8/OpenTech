@@ -11,25 +11,27 @@ public class Config {
     public static Configuration configuration;
 
     public static boolean logging;
-    public static int entityTeleportationLimit;
     public static int chatboxMaxRadius;
     public static String prefixChat;
     public static int maxMessageLength;
+
     public static int maxTeslaRadius;
     public static double teslaCooling;
     public static int teslaMaxHeat;
     public static int teslaEnergy;
     public static float teslaAllDamage;
+
     public static int radarRange;
     public static double radarEnergyCost;
 
-    public static boolean registerAdminChatBox, registerChatBox, registerPlayerInventoryBinder, registerTeleporter, registerRadarUpgrade, registerTeslaUpgrade, registerTesseractUpgrade, registerRadar;
+    public static int ldaMaxDistance;
+
+    public static boolean registerCreativeChatBox, registerChatBox, registerRadarUpgrade, registerTeslaUpgrade, registerRadar, registerLDA;
 
 
     public static void init(File file){
         configuration = new Configuration(file);
         configuration.load();
-        entityTeleportationLimit = configuration.get("game", "entityTeleportationLimit", 5, "Limit the number of things to tesseract.").getInt();
 
         chatboxMaxRadius = configuration.get("chatbox", "chatboxMaxRadius", 128, "").getInt();
         prefixChat = configuration.get("chatbox", "prefixChat", "@", "").getString();
@@ -44,12 +46,14 @@ public class Config {
         radarRange = configuration.get("radar", "radarRange", 15, "").getInt();
         radarEnergyCost = configuration.get("radar", "radarEnergyCost", 30).getDouble();
 
-        registerAdminChatBox = configuration.getBoolean("registerCreativeChatBox", "register", true, "");
+        registerCreativeChatBox = configuration.getBoolean("registerCreativeChatBox", "register", true, "");
         registerChatBox = configuration.getBoolean("registerChatBox", "register", true, "");
-        registerPlayerInventoryBinder = configuration.getBoolean("registerPlayerInventoryBinder", "register", true, "");
         registerRadarUpgrade = configuration.getBoolean("registerRadarUpgrade", "register", true, "");
         registerTeslaUpgrade = configuration.getBoolean("registerTeslaUpgrade", "register", true, "");
         registerRadar = configuration.getBoolean("registerRadar", "register", true, "");
+        registerLDA = configuration.getBoolean("registerLDA", "register", true, "");
+
+        ldaMaxDistance = configuration.getInt("lda", "ldaMaxDistance", 2000, 0, 4000000, "");
 
         configuration.save();
     }
