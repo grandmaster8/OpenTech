@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +21,18 @@ import java.util.Map;
 /**
  * Created by Avaja on 04.08.2016.
  */
-public class TileEntityRadar extends TileEntity implements Analyzable, Environment {
+public class TileEntityRadar extends TileEntity implements Analyzable, Environment, SidedComponent {
 
     private Node node;
+    private boolean addToNetwork;
+
     private float rotation;
     private static float rotationSpeed = 3.0f;
 
     public TileEntityRadar() {
         node = li.cil.oc.api.Network.newNode(this, Visibility.Network).withComponent("radar").create();
         rotation = 0;
+        addToNetwork = false;
     }
 
     private int getDistance(Arguments args) {
@@ -41,6 +45,10 @@ public class TileEntityRadar extends TileEntity implements Analyzable, Environme
 
     @Override
     public void updateEntity() {
+        if(!addToNetwork){
+            addToNetwork = true;
+            li.cil.oc.api.Network.joinOrCreateNetwork(this);
+        }
         rotation = (rotation + rotationSpeed) % 360;
     }
 
@@ -164,5 +172,10 @@ public class TileEntityRadar extends TileEntity implements Analyzable, Environme
             node.save(nodeNbt);
             nbt.setTag("oc:node", nodeNbt);
         }
+    }
+
+    @Override
+    public boolean canConnectNode(ForgeDirection side) {
+        return side == ForgeDirection.DOWN;
     }
 }

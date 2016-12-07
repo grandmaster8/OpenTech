@@ -38,10 +38,10 @@ public class Config {
         maxMessageLength = configuration.get("chatbox", "maxMessageLength", 100).getInt();
 
         maxTeslaRadius = configuration.get("tesla", "maxTeslaRadius", 10).getInt();
-        teslaCooling = configuration.get("tesla", "teslaCooling", 100, "ticks").getInt();
-        teslaMaxHeat = configuration.get("tesla", "teslaMaxHeat", 10000, "ticks").getInt();
-        teslaEnergy = configuration.get("tesla", "teslaEnergy", 1000, "ticks").getInt();
-        teslaAllDamage = (float) configuration.get("tesla", "teslaAllDamage", 10, "ticks").getDouble();
+        teslaCooling = configuration.get("tesla", "teslaCooling", 100, "").getInt();
+        teslaMaxHeat = configuration.get("tesla", "teslaMaxHeat", 10000, "").getInt();
+        teslaEnergy = configuration.get("tesla", "teslaEnergy", 1000, "").getInt();
+        teslaAllDamage = (float) configuration.get("tesla", "teslaAllDamage", 10, "").getDouble();
 
         radarRange = configuration.get("radar", "radarRange", 15, "").getInt();
         radarEnergyCost = configuration.get("radar", "radarEnergyCost", 30).getDouble();

@@ -61,7 +61,7 @@ public class TeslaUpgrade extends ManagedEnvironment {
 
         Connector connector = (Connector) node();
 
-        if(connector.tryChangeBuffer(Config.teslaEnergy) || !API.isPowerEnabled){
+        if(connector.tryChangeBuffer(-Config.teslaEnergy) || !API.isPowerEnabled){
             int x = (int)host.xPosition(), y = (int)host.yPosition(), z = (int)host.zPosition();
             int minX = x - Config.maxTeslaRadius;
             int minY = y - Config.maxTeslaRadius;

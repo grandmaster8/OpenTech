@@ -15,6 +15,7 @@ import net.minecraft.tileentity.TileEntity;
  * Created by Avaja on 07.12.2016.
  */
 public class TileEntityLDA extends TileEntity  implements Analyzable, Environment {
+
     protected Node node;
     private boolean addToNetwork = false;
 
