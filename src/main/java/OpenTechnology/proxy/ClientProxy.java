@@ -18,7 +18,6 @@ public class ClientProxy extends CommonProxy{
 		super.preInit(e);
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRadar.class, new RadarRender());
-		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(Blocks.radar), );
 		RenderingRegistry.registerBlockHandler(renderingId, new RenderingHandler());
 	}
 

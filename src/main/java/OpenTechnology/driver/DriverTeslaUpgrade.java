@@ -2,13 +2,12 @@ package OpenTechnology.driver;
 
 import OpenTechnology.environment.TeslaUpgrade;
 import OpenTechnology.item.Items;
-import li.cil.oc.api.driver.EnvironmentAware;
+import li.cil.oc.api.driver.EnvironmentProvider;
 import li.cil.oc.api.driver.Item;
 import li.cil.oc.api.driver.item.HostAware;
 import li.cil.oc.api.driver.item.Slot;
 import li.cil.oc.api.internal.Drone;
 import li.cil.oc.api.internal.Robot;
-import li.cil.oc.api.network.Environment;
 import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.ManagedEnvironment;
 import net.minecraft.item.ItemStack;
@@ -17,7 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 /**
  * Created by Avaja on 07.05.2016.
  */
-public class DriverTeslaUpgrade implements Item, HostAware, EnvironmentAware {
+public class DriverTeslaUpgrade implements Item, HostAware, EnvironmentProvider {
 
     public DriverTeslaUpgrade() {
     }
@@ -59,11 +58,13 @@ public class DriverTeslaUpgrade implements Item, HostAware, EnvironmentAware {
 
     @Override
     public boolean worksWith(ItemStack stack, Class<? extends EnvironmentHost> host) {
-        return worksWith(stack) && host == Robot.class || host == Drone.class;
+        return worksWith(stack) && Robot.class.isAssignableFrom(host) || Drone.class.isAssignableFrom(host);
     }
 
     @Override
-    public Class<? extends Environment> providedEnvironment(ItemStack stack) {
-        return Robot.class;
+    public Class<?> getEnvironment(ItemStack stack) {
+        if(stack.getItem() == Items.tesla)
+            return TeslaUpgrade.class;
+        return null;
     }
 }
