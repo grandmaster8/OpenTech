@@ -48,7 +48,7 @@ public class TeslaUpgrade extends ManagedEnvironment {
     @Override
     public void update() {
         if(isHeat){
-            heat -= Config.teslaCooling;
+            heat--;
             if(heat <= 0)
                 isHeat = false;
         }
@@ -82,6 +82,7 @@ public class TeslaUpgrade extends ManagedEnvironment {
                     for(EntityPlayer player : players)
                         CommonProxy.wrapper.sendTo(new SparkPacket(livingBase.getEntityId()), (EntityPlayerMP) player);
                 }
+                host.world().playSoundEffect(host.xPosition(), host.yPosition(), host.zPosition(), OpenTechnology.MODID+":tesla_attack", 1, 1);
             }
 
             heat = Config.maxTeslaHeat;

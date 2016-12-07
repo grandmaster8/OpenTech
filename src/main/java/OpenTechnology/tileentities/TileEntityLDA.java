@@ -10,6 +10,7 @@ import li.cil.oc.api.network.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 
 /**
  * Created by Avaja on 07.12.2016.
@@ -20,10 +21,12 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
     private boolean addToNetwork = false;
 
     private int distance, channel;
+    private boolean isStructure;
 
     public TileEntityLDA() {
         node = Network.newNode(this, Visibility.Network).withComponent(getComponentName()).create();
         distance = Config.ldaMaxDistance;
+        isStructure = false;
     }
 
     @Override
@@ -70,6 +73,11 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
         return new Object[]{false};
     }
 
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() {
+        return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 2, yCoord + 16, zCoord + 2);
+    }
+
     @Callback(doc="broadcast data.")
     public Object[] broadcast(Context context, Arguments arguments) throws Exception{
         if(distance > 0){
@@ -92,8 +100,16 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
         return channel;
     }
 
+    public boolean isStructure() {
+        return isStructure;
+    }
+
     private String getComponentName() {
         return "lda";
+    }
+
+    public int getFacing() {
+        return (worldObj == null) ? 0 : this.getBlockMetadata();
     }
 
     @Override

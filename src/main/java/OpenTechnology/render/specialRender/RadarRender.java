@@ -4,7 +4,6 @@ import OpenTechnology.OpenTechnology;
 import OpenTechnology.render.model.RadarModel;
 import OpenTechnology.tileentities.TileEntityRadar;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -21,8 +20,7 @@ public class RadarRender extends TileEntitySpecialRenderer {
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y,
-                                   double z, float partialTick) {
+    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float partialTick) {
 
         TileEntityRadar radar = (TileEntityRadar) tileEntity;
         GL11.glPushMatrix();

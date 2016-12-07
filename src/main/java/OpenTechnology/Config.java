@@ -16,7 +16,6 @@ public class Config {
     public static int maxMessageLength;
 
     public static int maxTeslaRadius;
-    public static double teslaCooling;
     public static int maxTeslaHeat;
     public static int teslaEnergy;
     public static float teslaAllDamage;
@@ -38,7 +37,6 @@ public class Config {
         maxMessageLength = configuration.get("chatbox", "maxMessageLength", 100).getInt();
 
         maxTeslaRadius = configuration.get("tesla", "maxTeslaRadius", 10).getInt();
-        teslaCooling = configuration.get("tesla", "teslaCooling", 100, "").getInt();
         maxTeslaHeat = configuration.get("tesla", "maxTeslaHeat", 10000, "").getInt();
         teslaEnergy = configuration.get("tesla", "teslaEnergy", 1000, "").getInt();
         teslaAllDamage = (float) configuration.get("tesla", "teslaAllDamage", 10, "").getDouble();

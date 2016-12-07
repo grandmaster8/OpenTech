@@ -1,7 +1,10 @@
 package OpenTechnology.proxy;
 
-import OpenTechnology.render.RenderingHandler;
+import OpenTechnology.render.RenderingLDAHandler;
+import OpenTechnology.render.RenderingRadarHandler;
 import OpenTechnology.render.specialRender.RadarRender;
+import OpenTechnology.render.specialRender.TileAntennaRender;
+import OpenTechnology.tileentities.TileEntityLDA;
 import OpenTechnology.tileentities.TileEntityRadar;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -11,14 +14,19 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxy extends CommonProxy{
 
-	public static int renderingId = RenderingRegistry.getNextAvailableRenderId();
+	public static int radarRenderingId = RenderingRegistry.getNextAvailableRenderId();
+	public static int LDARenderingId = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
 	public void preInit(FMLPreInitializationEvent e) {
 		super.preInit(e);
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRadar.class, new RadarRender());
-		RenderingRegistry.registerBlockHandler(renderingId, new RenderingHandler());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLDA.class, new TileAntennaRender());
+
+
+		RenderingRegistry.registerBlockHandler(radarRenderingId, new RenderingRadarHandler());
+		RenderingRegistry.registerBlockHandler(LDARenderingId, new RenderingLDAHandler());
 	}
 
 	@Override

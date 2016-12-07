@@ -2,6 +2,9 @@ itemGroup.OpenTechnology=OpenTechnology
 tile.OpenTechnology_chatbox.name=Chatbox
 tile.OpenTechnology_adminchatbox.name=Creative Chatbox
 tile.OpenTechnology_radar.name=Radar
+tile.OpenTechnology_lda.name=Controller LD
+tile.OpenTechnology_Antenna.name=Part Antenna
+tile.OpenTechnology_Cell.name=Cell Antenna
 
 item.OpenTechnology_teslaUpgrade.name=Tesla Upgrade
 item.OpenTechnology_RadarUpgrade.name=Radar Upgrade

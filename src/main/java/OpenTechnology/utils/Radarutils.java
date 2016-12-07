@@ -42,6 +42,10 @@ public class RadarUtils {
                 entry.put("z", (int) dz);
 
                 entry.put("distance", Math.sqrt(dx * dx + dy * dy + dz * dz));
+                entry.put("health", entity.getHealth());
+                entry.put("maxHealth", entity.getMaxHealth());
+                entry.put("armor", entity.getTotalArmorValue());
+
                 entities.add(entry);
             }
         }

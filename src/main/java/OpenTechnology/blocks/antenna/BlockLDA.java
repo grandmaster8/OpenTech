@@ -1,11 +1,11 @@
-package OpenTechnology.blocks;
+package OpenTechnology.blocks.antenna;
 
 import OpenTechnology.OpenTechnology;
 import OpenTechnology.proxy.ClientProxy;
-import OpenTechnology.tileentities.TileEntityRadar;
+import OpenTechnology.system.LDAS;
+import OpenTechnology.tileentities.TileEntityLDA;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -14,20 +14,17 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**
- * Created by Avaja on 04.08.2016.
+ * Created by Avaja on 07.12.2016.
  */
-public class BlockRadar extends BlockContainer {
+public class BlockLDA extends BlockContainer {
 
-    public BlockRadar() {
+    public BlockLDA() {
         super(Material.iron);
+        setBlockName("OpenTechnology_lda");
+        setBlockTextureName(OpenTechnology.MODID+":antennaController");
         setCreativeTab(OpenTechnology.tab);
-        setBlockName("OpenTechnology_radar");
         setHarvestLevel("pickaxe", 0);
         setHardness(5);
-    }
-
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
     }
 
     @Override
@@ -59,11 +56,13 @@ public class BlockRadar extends BlockContainer {
 
     @Override
     public int getRenderType() {
-        return ClientProxy.radarRenderingId;
+        return ClientProxy.LDARenderingId;
     }
 
     @Override
     public TileEntity createNewTileEntity(World world, int i) {
-        return new TileEntityRadar();
+        TileEntityLDA lda = new TileEntityLDA();
+        LDAS.addLDA(lda);
+        return lda;
     }
 }

@@ -17,7 +17,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "0.4.0a-dev"
+version = "0.4.2a-dev"
 group= "net.avaja"
 archivesBaseName = "OpenTechnology"
 

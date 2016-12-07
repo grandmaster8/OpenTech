@@ -14,11 +14,11 @@ import org.lwjgl.opengl.GL12;
 /**
  * Created by Avaja on 07.12.2016.
  */
-public class RenderingHandler implements ISimpleBlockRenderingHandler {
+public class RenderingRadarHandler implements ISimpleBlockRenderingHandler {
 
     @Override
     public int getRenderId() {
-        return ClientProxy.renderingId;
+        return ClientProxy.radarRenderingId;
     }
 
     @Override
