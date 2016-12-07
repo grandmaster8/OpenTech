@@ -13,22 +13,25 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * Created by Avaja on 07.12.2016.
  */
-public class TileEntityLDA extends TileEntity  implements Analyzable, Environment {
+public class TileEntityLDA extends TileEntity  implements Analyzable, Environment, SidedComponent {
 
     protected Node node;
     private boolean addToNetwork = false;
 
     private int distance, channel;
-    private boolean isStructure;
+    private boolean isStructure, isTransmit;
 
     public TileEntityLDA() {
         node = Network.newNode(this, Visibility.Network).withComponent(getComponentName()).create();
         distance = Config.ldaMaxDistance;
         isStructure = false;
+
+        LDAS.addLDA(this);
     }
 
     @Override
@@ -65,21 +68,31 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
 
     @Callback(doc="get max distance for data transmission.")
     public Object[] getMaxDistance(Context context, Arguments arguments) throws Exception{
+        if(!isStructure) return new Object[]{false};
         return new Object[]{Config.ldaMaxDistance};
     }
 
     @Callback(doc="get current distance.")
     public Object[] getDistance(Context context, Arguments arguments) throws Exception{
+        if(!isStructure) return new Object[]{false};
         return new Object[]{distance};
     }
 
     @Callback(doc="get real antenna distance considering height.")
     public Object[] getRealDistance(Context context, Arguments arguments) throws Exception{
-        return new Object[]{distance * yCoord / 256};
+        if(!isStructure) return new Object[]{false};
+        return new Object[]{distance * (yCoord + 16) / 256f};
+    }
+
+    @Callback(doc="")
+    public Object[] getChannel(Context context, Arguments arguments) throws Exception{
+        if(!isStructure) return new Object[]{false};
+        return new Object[]{channel};
     }
 
     @Callback(doc="open channel.")
     public Object[] open(Context context, Arguments arguments) throws Exception{
+        if(!isStructure) return new Object[]{false};
         int channel = arguments.checkInteger(0);
         if(channel >= 0 && channel <= Math.pow(2, 16)){
             context.pause(3);
@@ -91,6 +104,7 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
 
     @Callback(doc="set current distance.")
     public Object[] setDistance(Context context, Arguments arguments) throws Exception{
+        if(!isStructure) return new Object[]{false};
         int dist = arguments.checkInteger(0);
         if(dist >= 0 && dist < Config.ldaMaxDistance){
             distance = dist;
@@ -106,7 +120,7 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
 
     @Callback(doc="broadcast data.")
     public Object[] broadcast(Context context, Arguments arguments) throws Exception{
-        if(distance > 0){
+        if(distance > 0 && isStructure){
             String data = arguments.checkString(0);
             LDAS.sendMessage(this, data);
             return new Object[]{true};
@@ -200,5 +214,10 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
             node.save(nodeNbt);
             nbt.setTag("oc:node", nodeNbt);
         }
+    }
+
+    @Override
+    public boolean canConnectNode(ForgeDirection side) {
+        return ForgeDirection.DOWN == side;
     }
 }

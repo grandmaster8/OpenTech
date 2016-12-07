@@ -22,7 +22,7 @@ public class LDAS {
 
     public static boolean sendMessage(TileEntityLDA sender, String message){
         for(TileEntityLDA tileEntityLDA : ldas){
-            float k = sender.yCoord / 256;
+            float k = (sender.yCoord + 16) / 256f;
             double dist = sender.getDistanceFrom(tileEntityLDA.xCoord, tileEntityLDA.yCoord, tileEntityLDA.zCoord);
             if(dist <= (sender.getDistance() * k) && sender.getChannel() == tileEntityLDA.getChannel()){
                 tileEntityLDA.receiveMessage(sender, (int)dist, message);

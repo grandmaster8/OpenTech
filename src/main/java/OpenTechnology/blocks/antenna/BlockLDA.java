@@ -1,13 +1,13 @@
 package OpenTechnology.blocks.antenna;
 
 import OpenTechnology.OpenTechnology;
+import OpenTechnology.blocks.Blocks;
 import OpenTechnology.proxy.ClientProxy;
 import OpenTechnology.system.LDAS;
 import OpenTechnology.tileentities.TileEntityLDA;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -26,7 +26,18 @@ public class BlockLDA extends BlockContainer {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack itemStack) {
+    public void breakBlock(World world, int x, int y, int z, Block block, int tileProvider) {
+        TileEntityLDA tileEntityLDA = (TileEntityLDA) world.getTileEntity(x, y, z);
+        if(tileEntityLDA.isStructure()){
+            for(int i = 1; i <= 15; i++){
+                Block b = world.getBlock(x, y + i, z);
+                if(b == Blocks.antenna || b == Blocks.antennaCell)
+                    world.setBlockMetadataWithNotify(x, y + i, z, 0, 3);
+            }
+        }
+
+        LDAS.removeLDA(tileEntityLDA);
+        super.breakBlock(world, x, y, z, block, tileProvider);
     }
 
     @Override
@@ -56,8 +67,6 @@ public class BlockLDA extends BlockContainer {
 
     @Override
     public TileEntity createNewTileEntity(World world, int i) {
-        TileEntityLDA lda = new TileEntityLDA();
-        LDAS.addLDA(lda);
-        return lda;
+        return new TileEntityLDA();
     }
 }
