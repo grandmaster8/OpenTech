@@ -1,10 +1,13 @@
 package OpenTechnology.utils;
 
 import li.cil.oc.api.network.Node;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 import java.util.HashMap;
@@ -31,6 +34,14 @@ public class Utils {
             return Math.abs(  Math.sqrt(  res  ) );
         }
         return 0;
+    }
+
+    public static MovingObjectPosition getLookAt(EntityPlayer entityPlayer){
+        World world = entityPlayer.worldObj;
+        Vec3 origin = Vec3.createVectorHelper(entityPlayer.posX, entityPlayer.posY + entityPlayer.getEyeHeight(), entityPlayer.posZ);
+        Vec3 direction = entityPlayer.getLookVec();
+        Vec3 lookAt = origin.addVector(direction.xCoord * 20, direction.yCoord * 20, direction.zCoord * 20);
+        return world.rayTraceBlocks(origin, lookAt);
     }
 
     public static double distance( double x1,double y1,double z1, double x2,double y2,double z2 ){

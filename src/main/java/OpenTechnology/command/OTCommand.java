@@ -1,10 +1,12 @@
 package OpenTechnology.command;
 
 import OpenTechnology.blocks.Blocks;
+import OpenTechnology.utils.Utils;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.Vec3;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 /**
@@ -27,9 +29,10 @@ public class OTCommand extends CommandBase {
         if(strings != null && strings.length > 0 && commandSender instanceof EntityPlayer){
             if(strings.length == 1){
                 if(strings[0].equals("antenna")){
-                    EntityPlayer player = (EntityPlayer) commandSender;
-                    Vec3 lookVec = player.getLookVec();
-                    spawnAntenna(player.worldObj, (int)lookVec.xCoord, (int)lookVec.yCoord, (int)lookVec.zCoord);
+                    EntityPlayerMP player = (EntityPlayerMP) commandSender;
+                    MovingObjectPosition movingObjectPosition = Utils.getLookAt(player);
+
+                    spawnAntenna(player.worldObj, movingObjectPosition.blockX, movingObjectPosition.blockY + 1, movingObjectPosition.blockZ);
                 }
             }
         }
