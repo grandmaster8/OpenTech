@@ -28,6 +28,7 @@ public class TileAntennaRender extends TileEntitySpecialRenderer {
                 bindTexture(texture);
                 model.render(null, 0F, 0F, 0f, 0f, 0f, 0.0625f);
                 GL11.glPopMatrix();
+                GL11.glPopMatrix();
             }
         }
 }

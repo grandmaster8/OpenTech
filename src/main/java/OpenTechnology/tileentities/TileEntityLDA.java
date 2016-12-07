@@ -23,19 +23,25 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
     protected Node node;
     private boolean addToNetwork = false;
 
-    private int distance, channel;
+    private int distance, channel, transmitTime;
     private boolean isStructure, isTransmit;
 
     public TileEntityLDA() {
         node = Network.newNode(this, Visibility.Network).withComponent(getComponentName()).create();
         distance = Config.ldaMaxDistance;
         isStructure = false;
+        isTransmit = false;
 
         LDAS.addLDA(this);
     }
 
     @Override
     public void updateEntity() {
+        if(isTransmit){
+            transmitTime--;
+            if(transmitTime <= 0)
+                isTransmit = false;
+        }
         if(!addToNetwork){
             addToNetwork = true;
             Network.joinOrCreateNetwork(this);
@@ -84,10 +90,16 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
         return new Object[]{distance * (yCoord + 16) / 256f};
     }
 
-    @Callback(doc="")
+    @Callback(doc="get current working channel.")
     public Object[] getChannel(Context context, Arguments arguments) throws Exception{
         if(!isStructure) return new Object[]{false};
         return new Object[]{channel};
+    }
+
+    @Callback(doc="check transmit.")
+    public Object[] isTransmit(Context context, Arguments arguments) throws Exception{
+        if(!isStructure) return new Object[]{false};
+        return new Object[]{isTransmit};
     }
 
     @Callback(doc="open channel.")
@@ -121,8 +133,13 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
     @Callback(doc="broadcast data.")
     public Object[] broadcast(Context context, Arguments arguments) throws Exception{
         if(distance > 0 && isStructure){
+            if(isTransmit)
+                return new Object[]{false};
+
             String data = arguments.checkString(0);
             LDAS.sendMessage(this, data);
+            isTransmit = true;
+            transmitTime = 60;
             return new Object[]{true};
         }
         return new Object[]{false};
@@ -146,10 +163,6 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
 
     private String getComponentName() {
         return "lda";
-    }
-
-    public int getFacing() {
-        return (worldObj == null) ? 0 : this.getBlockMetadata();
     }
 
     @Override

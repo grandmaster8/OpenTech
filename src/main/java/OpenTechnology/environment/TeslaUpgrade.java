@@ -7,6 +7,7 @@ import OpenTechnology.proxy.CommonProxy;
 import OpenTechnology.utils.Utils;
 import li.cil.oc.api.API;
 import li.cil.oc.api.Network;
+import li.cil.oc.api.driver.DeviceInfo;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
@@ -20,12 +21,14 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Avaja on 07.05.2016.
  */
-public class TeslaUpgrade extends ManagedEnvironment {
+public class TeslaUpgrade extends ManagedEnvironment implements DeviceInfo {
 
     private EnvironmentHost host;
 
@@ -126,5 +129,11 @@ public class TeslaUpgrade extends ManagedEnvironment {
         super.save(nbt);
         nbt.setBoolean("isHeat", isHeat);
         nbt.setInteger("heat", heat);
+    }
+
+    @Override
+    public Map<String, String> getDeviceInfo() {
+        Map<String, String> info = new HashMap<String, String>();
+        return info;
     }
 }

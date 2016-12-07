@@ -3,6 +3,7 @@ package OpenTechnology.environment;
 import OpenTechnology.Config;
 import OpenTechnology.utils.RadarUtils;
 import li.cil.oc.api.Network;
+import li.cil.oc.api.driver.DeviceInfo;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
@@ -16,13 +17,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Avaja on 21.05.2016.
  */
-public class RadarUpgrade extends ManagedEnvironment {
+public class RadarUpgrade extends ManagedEnvironment implements DeviceInfo {
     private EnvironmentHost container;
 
     public RadarUpgrade(EnvironmentHost host) {
@@ -95,5 +97,11 @@ public class RadarUpgrade extends ManagedEnvironment {
             context.pause(0.5);
         }
         return new Object[] { entities.toArray() };
+    }
+
+    @Override
+    public Map<String, String> getDeviceInfo() {
+        Map<String, String> info = new HashMap<String, String>();
+        return info;
     }
 }
