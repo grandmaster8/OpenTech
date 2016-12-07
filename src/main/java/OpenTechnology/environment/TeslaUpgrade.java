@@ -84,7 +84,7 @@ public class TeslaUpgrade extends ManagedEnvironment {
                 }
             }
 
-            heat = Config.teslaMaxHeat;
+            heat = Config.maxTeslaHeat;
             isHeat = true;
             return new Object[]{true};
         }else{
@@ -95,6 +95,22 @@ public class TeslaUpgrade extends ManagedEnvironment {
     @Callback(doc="check overheated.")
     public Object[] checkOverHeated(Context context, Arguments arguments) throws Exception{
         return new Object[]{isHeat};
+    }
+
+    @Callback(doc="get max radius.")
+    public Object[] getMaxRadius(Context context, Arguments arguments) throws Exception{
+        return new Object[]{Config.maxTeslaRadius};
+    }
+
+
+    @Callback(doc="get damage. Damage is distributed among all entities within a radius.")
+    public Object[] getDamage(Context context, Arguments arguments) throws Exception{
+        return new Object[]{Config.teslaAllDamage};
+    }
+
+    @Callback(doc="how many ticks need for cooling.")
+    public Object[] getCoolingTicks(Context context, Arguments arguments) throws Exception{
+        return new Object[]{Config.maxTeslaHeat};
     }
 
     @Override
