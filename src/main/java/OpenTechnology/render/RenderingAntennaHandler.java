@@ -1,6 +1,5 @@
 package OpenTechnology.render;
 
-import OpenTechnology.blocks.Blocks;
 import OpenTechnology.proxy.ClientProxy;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import net.minecraft.block.Block;
@@ -11,7 +10,7 @@ import net.minecraft.world.IBlockAccess;
 /**
  * Created by Avaja on 07.12.2016.
  */
-public class RenderingLDAHandler implements ISimpleBlockRenderingHandler {
+public class RenderingAntennaHandler implements ISimpleBlockRenderingHandler {
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
@@ -51,7 +50,8 @@ public class RenderingLDAHandler implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-        renderer.renderStandardBlock(Blocks.lda, x, y, z);
+        if(world.getBlockMetadata(x, y, z) == 0)
+            renderer.renderStandardBlock(block, x, y, z);
         return true;
     }
 

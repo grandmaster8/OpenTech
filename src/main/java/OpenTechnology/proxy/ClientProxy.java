@@ -1,6 +1,6 @@
 package OpenTechnology.proxy;
 
-import OpenTechnology.render.RenderingLDAHandler;
+import OpenTechnology.render.RenderingAntennaHandler;
 import OpenTechnology.render.RenderingRadarHandler;
 import OpenTechnology.render.specialRender.RadarRender;
 import OpenTechnology.render.specialRender.TileAntennaRender;
@@ -26,7 +26,7 @@ public class ClientProxy extends CommonProxy{
 
 
 		RenderingRegistry.registerBlockHandler(radarRenderingId, new RenderingRadarHandler());
-		RenderingRegistry.registerBlockHandler(LDARenderingId, new RenderingLDAHandler());
+		RenderingRegistry.registerBlockHandler(LDARenderingId, new RenderingAntennaHandler());
 	}
 
 	@Override

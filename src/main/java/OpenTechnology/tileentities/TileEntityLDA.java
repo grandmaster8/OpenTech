@@ -1,12 +1,14 @@
 package OpenTechnology.tileentities;
 
 import OpenTechnology.Config;
+import OpenTechnology.blocks.Blocks;
 import OpenTechnology.system.LDAS;
 import li.cil.oc.api.Network;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.*;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -35,6 +37,30 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
             addToNetwork = true;
             Network.joinOrCreateNetwork(this);
         }
+        if(!isStructure){
+            checkStructure();
+        }
+    }
+
+
+
+    private void checkStructure(){
+        for(int i = 1; i <= 14; i++){
+            Block block = worldObj.getBlock(xCoord, yCoord + i, zCoord);
+            if(block != Blocks.antenna)
+                return;
+        }
+        if(worldObj.getBlock(xCoord, yCoord + 15, zCoord) == Blocks.antennaCell){
+            isStructure = true;
+            for(int i = 0; i <= 15; i++)
+                worldObj.setBlockMetadataWithNotify(xCoord, yCoord + i, zCoord, 1, 3);
+        }
+    }
+
+    public void destroyStructure(){
+        for(int i = 0; i <= 15; i++)
+            worldObj.setBlockMetadataWithNotify(xCoord, yCoord + i, zCoord, 0, 3);
+        isStructure = false;
     }
 
     @Callback(doc="get max distance for data transmission.")

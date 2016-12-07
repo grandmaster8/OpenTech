@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 public class TileAntennaRender extends TileEntitySpecialRenderer {
 
        private ModelAntenna model = new ModelAntenna();
-       private ResourceLocation texture = new ResourceLocation(OpenTechnology.MODID + ":textures/models/antennaController.png");
+       private ResourceLocation texture = new ResourceLocation(OpenTechnology.MODID + ":textures/models/antenna.png");
 
         @Override
         public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float t) {
