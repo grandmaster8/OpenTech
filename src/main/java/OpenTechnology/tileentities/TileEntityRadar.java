@@ -48,10 +48,6 @@ public class TileEntityRadar extends TileEntity implements Analyzable, Environme
         return (worldObj == null) ? 0 : this.getBlockMetadata();
     }
 
-    private void setNode(Node node){
-        this.node = node;
-    }
-
     private AxisAlignedBB getBounds(int d) {
         int distance = Math.min(d, Config.radarRange);
         if(distance < 1) {
@@ -72,12 +68,6 @@ public class TileEntityRadar extends TileEntity implements Analyzable, Environme
             entities.addAll(RadarUtils.getEntities(worldObj, xCoord, yCoord, zCoord, bounds, EntityLiving.class, Config.radarRange));
             context.pause(0.5);
         }
-        // The returned array is treated as a tuple, meaning if we return the
-        // entities as an array directly, we'd end up with each entity as an
-        // individual result value (i.e. in Lua we'd have to write
-        //   result = {radar.getEntities()}
-        // and we'd be limited in the number of entities, due to the limit of
-        // return values. So we wrap it in an array to return it as a list.
         return new Object[] { entities.toArray() };
     }
 
@@ -155,8 +145,6 @@ public class TileEntityRadar extends TileEntity implements Analyzable, Environme
     @Override
     public void onChunkUnload() {
         super.onChunkUnload();
-        // Make sure to remove the node from its network when its environment,
-        // meaning this tile entity, gets unloaded.
         if (node != null) node.remove();
     }
 

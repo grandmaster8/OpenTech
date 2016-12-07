@@ -48,8 +48,6 @@ public class DriverTeslaUpgrade implements Item, HostAware, EnvironmentProvider 
             stack.setTagCompound(new NBTTagCompound());
         }
         final NBTTagCompound nbt = stack.getTagCompound();
-        // This is the suggested key under which to store item component data.
-        // You are free to change this as you please.
         if (!nbt.hasKey("oc:data")) {
             nbt.setTag("oc:data", new NBTTagCompound());
         }

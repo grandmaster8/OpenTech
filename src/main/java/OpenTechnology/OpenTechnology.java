@@ -7,15 +7,13 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.handshake.NetworkDispatcher;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Timer;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid= OpenTechnology.MODID, name= OpenTechnology.MODID, version= OpenTechnology.VERSION)
 public class OpenTechnology {
 	public final static String MODID = "OpenTechnology";
-	public final static String VERSION = "0.4.0a-dev";
+	public final static String VERSION = "0.4.1a-dev";
 
 	public static Logger logger;
 	public static CreativeTab tab = new CreativeTab();
