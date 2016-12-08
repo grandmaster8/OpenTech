@@ -20,12 +20,26 @@ public class LDAS {
         ldas.remove(lda);
     }
 
-    public static boolean sendMessage(TileEntityLDA sender, String message){
+    public static boolean broadcastMessage(TileEntityLDA sender, String message){
         for(TileEntityLDA tileEntityLDA : ldas){
             float k = (sender.yCoord + 16) / 256f;
             double dist = sender.getDistanceFrom(tileEntityLDA.xCoord, tileEntityLDA.yCoord, tileEntityLDA.zCoord);
             if(dist <= (sender.getDistance() * k) && sender.getChannel() == tileEntityLDA.getChannel()){
                 tileEntityLDA.receiveMessage(sender, (int)dist, message);
+            }
+        }
+        return false;
+    }
+
+    public static boolean sendMessage(TileEntityLDA sender, String receiveAddress, String message){
+        for(TileEntityLDA tileEntityLDA : ldas){
+            if(tileEntityLDA.node().address().equals(receiveAddress)){
+                float k = (sender.yCoord + 16) / 256f;
+                double dist = sender.getDistanceFrom(tileEntityLDA.xCoord, tileEntityLDA.yCoord, tileEntityLDA.zCoord);
+                if(dist <= (sender.getDistance() * k) && sender.getChannel() == tileEntityLDA.getChannel()){
+                    tileEntityLDA.receiveMessage(sender, (int)dist, message);
+                    return true;
+                }
             }
         }
         return false;

@@ -1,5 +1,7 @@
 package OpenTechnology.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import li.cil.oc.api.API;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -12,10 +14,10 @@ import java.util.List;
  * Created by Avaja on 07.12.2016.
  */
 public abstract class ItemNodeInformation extends Item {
+
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean b) {
-
-        list.add("zzz....");
         list.add("Tier: " + (API.driver.driverFor(stack).tier(stack) + 1));
         if(stack.hasTagCompound()){
             NBTTagCompound tagCompound = stack.getTagCompound();

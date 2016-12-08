@@ -102,7 +102,7 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
         return new Object[]{isTransmit};
     }
 
-    @Callback(doc="open channel.")
+    @Callback(doc="function(channel:int), open channel.")
     public Object[] open(Context context, Arguments arguments) throws Exception{
         if(!isStructure) return new Object[]{false};
         int channel = arguments.checkInteger(0);
@@ -114,15 +114,21 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
         return new Object[]{false};
     }
 
-    @Callback(doc="set current distance.")
+    @Callback(doc="function(distance:int), set current distance.")
     public Object[] setDistance(Context context, Arguments arguments) throws Exception{
         if(!isStructure) return new Object[]{false};
         int dist = arguments.checkInteger(0);
         if(dist >= 0 && dist < Config.ldaMaxDistance){
             distance = dist;
+            context.pause(3);
             return new Object[]{true};
         }
         return new Object[]{false};
+    }
+
+    @Callback(doc="get max packet length.")
+    public Object[] maxPacketSize(){
+        return new Object[]{Config.ldaMaxPacketSize};
     }
 
     @Override
@@ -130,18 +136,41 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
         return AxisAlignedBB.getBoundingBox(xCoord, yCoord, zCoord, xCoord + 2, yCoord + 16, zCoord + 2);
     }
 
-    @Callback(doc="broadcast data.")
+    @Callback(doc="function(data:string), broadcast data.")
     public Object[] broadcast(Context context, Arguments arguments) throws Exception{
         if(distance > 0 && isStructure){
             if(isTransmit)
                 return new Object[]{false};
 
             String data = arguments.checkString(0);
-            LDAS.sendMessage(this, data);
+            if(data.length() > Config.ldaMaxPacketSize)
+                return new Object[]{false};
+
+            LDAS.broadcastMessage(this, data);
             isTransmit = true;
             transmitTime = 60;
             return new Object[]{true};
         }
+        return new Object[]{false};
+    }
+
+    @Callback(doc="function(address:string, data:string), sending data to a specific address.")
+    public Object[] send(Context context, Arguments arguments) throws Exception{
+        if(distance > 0 && isStructure){
+            if(isTransmit)
+                return new Object[]{false};
+
+            String address = arguments.checkString(0);
+            String data = arguments.checkString(1);
+            if(data.length() > Config.ldaMaxPacketSize)
+                return new Object[]{false};
+
+            LDAS.sendMessage(this, address, data);
+            isTransmit = true;
+            transmitTime = 60;
+            return new Object[]{true};
+        }
+
         return new Object[]{false};
     }
 

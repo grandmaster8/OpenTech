@@ -24,6 +24,7 @@ public class Config {
     public static double radarEnergyCost;
 
     public static int ldaMaxDistance;
+    public static int ldaMaxPacketSize;
 
     public static boolean registerCreativeChatBox, registerChatBox, registerRadarUpgrade, registerTeslaUpgrade, registerRadar, registerLDA;
 
@@ -52,6 +53,7 @@ public class Config {
         registerLDA = configuration.getBoolean("registerLDA", "register", true, "");
 
         ldaMaxDistance = configuration.getInt("lda", "ldaMaxDistance", 2000, 0, 4000000, "");
+        ldaMaxPacketSize = configuration.getInt("lda", "ldaMaxPacketSize", 1024 * 8, 0, 4000000, "");
 
         configuration.save();
     }
