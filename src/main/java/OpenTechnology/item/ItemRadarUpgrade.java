@@ -7,7 +7,8 @@ import OpenTechnology.OpenTechnology;
  */
 public class ItemRadarUpgrade extends ItemNodeInformation {
     public ItemRadarUpgrade() {
-        setUnlocalizedName("OpenTechnology_RadarUpgrade");
         setCreativeTab(OpenTechnology.tab);
+        setUnlocalizedName("OpenTechnology_RadarUpgrade");
+        setTextureName(OpenTechnology.MODID+":UpgradeRadar");
     }
 }
