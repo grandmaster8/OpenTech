@@ -1,6 +1,6 @@
 itemGroup.OpenTechnology=OpenTechnology
 tile.OpenTechnology_chatbox.name=Чатбокс
-tile.OpenTechnology_adminchatbox.name=Креативный чатбокс
+tile.OpenTechnology_creativeChatbox.name=Креативный чатбокс
 tile.OpenTechnology_radar.name=Радар
 tile.OpenTechnology_lda.name=Контроллер АДД
 tile.OpenTechnology_Antenna.name=Часть Антенны
