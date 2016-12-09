@@ -1,6 +1,7 @@
 package OpenTechnology.blocks;
 
 import OpenTechnology.OpenTechnology;
+import OpenTechnology.events.FMLEvents;
 import OpenTechnology.proxy.ClientProxy;
 import OpenTechnology.tileentities.TileEntityCableDecor;
 import li.cil.oc.common.tileentity.Cable;
@@ -38,7 +39,18 @@ public class BlockCableDecor extends li.cil.oc.common.block.Cable {
     }
 
     @Override
-    public void doSetBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {}
+    public void doSetBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
+        if(FMLEvents.isWrench){
+            super.doSetBlockBoundsBasedOnState(world, x, y, z);
+        }else{
+            setBlockBounds(0, 0, 0, 1, 1, 1);
+        }
+    }
+
+    @Override
+    public int getLightOpacity() {
+        return lightOpacity;
+    }
 
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
@@ -48,39 +60,69 @@ public class BlockCableDecor extends li.cil.oc.common.block.Cable {
     }
 
     @Override
-    public IIcon getIcon(IBlockAccess world, int x, int y, int z, ForgeDirection globalSide, ForgeDirection localSide) {
-        Block block = Block.getBlockById(world.getTileEntity(x, y, z).blockMetadata);
-        return block.getIcon(globalSide.ordinal(), 0);
+    public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ) {
+        super.onNeighborChange(world, x, y, z, tileX, tileY, tileZ);
     }
 
     @Override
+    public IIcon getIcon(IBlockAccess world, int x, int y, int z, ForgeDirection globalSide, ForgeDirection localSide) {
+        if(!FMLEvents.isWrench){
+            Block block = Block.getBlockById(world.getTileEntity(x, y, z).blockMetadata);
+            return block.getIcon(globalSide.ordinal(), 0);
+        }
+        return super.getIcon(world, x, y, z, globalSide, localSide);
+    }
+
+
+
+    @Override
     public boolean isOpaqueCube() {
-        return true;
+       if(FMLEvents.isWrench){
+           return super.isOpaqueCube();
+       }else{
+           return true;
+       }
     }
 
 
     @Override
     public int getRenderType() {
-        return ClientProxy.CableDecorRenderingId;
+        if(!FMLEvents.isWrench){
+            return ClientProxy.CableDecorRenderingId;
+        }
+        return super.getRenderType();
     }
 
     @Override
     public boolean isNormalCube() {
+        if(FMLEvents.isWrench){
+            return super.isNormalCube();
+        }
         return true;
     }
 
+
     @Override
     public synchronized AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-        return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
+        if(!FMLEvents.isWrench){
+            return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
+        }
+        return super.getCollisionBoundingBoxFromPool(world, x, y, z);
     }
 
     @Override
     public int colorMultiplier(IBlockAccess world, int x, int y, int z) {
-        return 16777215;
+        if(!FMLEvents.isWrench){
+            return 16777215;
+        }
+        return super.colorMultiplier(world, x, y, z);
     }
 
     @Override
     public int getRenderColor(int metadata) {
-        return 16777215;
+        if(!FMLEvents.isWrench){
+            return 16777215;
+        }
+        return super.getRenderColor(metadata);
     }
 }

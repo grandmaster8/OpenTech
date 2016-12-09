@@ -12,7 +12,8 @@ import net.minecraft.block.Block;
  * Created by Avaja on 05.05.2016.
  */
 public class Blocks {
-    public static Block creativeChatbox, chatbox, radar, lda, antennaCell, antenna, cableDecor;
+    public static Block creativeChatbox, chatbox, radar, lda, antennaCell, antenna;
+    public static BlockCableDecor cableDecor;
 
     public static void init(){
         creativeChatbox = new BlockCreativeChatBox();

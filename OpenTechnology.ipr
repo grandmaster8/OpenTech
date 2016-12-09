@@ -188,11 +188,11 @@
   <component name="libraryTable">
     <library name="industrialcraft-2-2.2.827-experimental-api">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/../../industrialcraft-2-2.2.827-experimental-api.jar!/" />
+        <root url="jar://$PROJECT_DIR$/libs/industrialcraft-2-2.2.827-experimental-api.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/../../industrialcraft-2-2.2.827-experimental-api.jar!/" />
+        <root url="jar://$PROJECT_DIR$/libs/industrialcraft-2-2.2.827-experimental-api.jar!/" />
       </SOURCES>
     </library>
     <library name="OpenComputers-MC1.7.10-1.6.0.901-dev-dev">
