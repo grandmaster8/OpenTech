@@ -5,6 +5,7 @@ tile.OpenTechnology_radar.name=Радар
 tile.OpenTechnology_lda.name=Контроллер АДД
 tile.OpenTechnology_Antenna.name=Часть Антенны
 tile.OpenTechnology_Cell.name=Ячейка Антенны
+tile.OpenTechnology_CableDecor.name=Кабель
 
 item.OpenTechnology_teslaUpgrade.name=Тесла Апгрейд
 item.OpenTechnology_RadarUpgrade.name=Радар Апгрейд

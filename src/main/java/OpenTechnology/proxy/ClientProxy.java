@@ -1,5 +1,6 @@
 package OpenTechnology.proxy;
 
+import OpenTechnology.render.RenderCableDecorHandler;
 import OpenTechnology.render.RenderingAntennaHandler;
 import OpenTechnology.render.RenderingRadarHandler;
 import OpenTechnology.render.specialRender.RadarRender;
@@ -16,6 +17,7 @@ public class ClientProxy extends CommonProxy{
 
 	public static int radarRenderingId = RenderingRegistry.getNextAvailableRenderId();
 	public static int LDARenderingId = RenderingRegistry.getNextAvailableRenderId();
+	public static int CableDecorRenderingId = RenderingRegistry.getNextAvailableRenderId();
 
 	@Override
 	public void preInit(FMLPreInitializationEvent e) {
@@ -27,6 +29,7 @@ public class ClientProxy extends CommonProxy{
 
 		RenderingRegistry.registerBlockHandler(radarRenderingId, new RenderingRadarHandler());
 		RenderingRegistry.registerBlockHandler(LDARenderingId, new RenderingAntennaHandler());
+		RenderingRegistry.registerBlockHandler(CableDecorRenderingId, new RenderCableDecorHandler());
 	}
 
 	@Override

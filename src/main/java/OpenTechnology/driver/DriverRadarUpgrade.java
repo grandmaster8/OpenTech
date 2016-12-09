@@ -22,7 +22,7 @@ public class DriverRadarUpgrade extends DriverItem implements HostAware {
 
     @Override
     public boolean worksWith(ItemStack stack, Class<? extends EnvironmentHost> host) {
-        return worksWith(stack) && host == Robot.class  || host == Drone.class;
+        return worksWith(stack) && Robot.class.isAssignableFrom(host) || Drone.class.isAssignableFrom(host);
     }
 
     @Override

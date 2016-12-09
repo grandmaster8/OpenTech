@@ -4,6 +4,7 @@ import OpenTechnology.Config;
 import OpenTechnology.blocks.antenna.BlockAntenna;
 import OpenTechnology.blocks.antenna.BlockCell;
 import OpenTechnology.blocks.antenna.BlockLDA;
+import OpenTechnology.item.ItemBlockCableDecor;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 
@@ -11,7 +12,7 @@ import net.minecraft.block.Block;
  * Created by Avaja on 05.05.2016.
  */
 public class Blocks {
-    public static Block creativeChatbox, chatbox, radar, lda, antennaCell, antenna;
+    public static Block creativeChatbox, chatbox, radar, lda, antennaCell, antenna, cableDecor;
 
     public static void init(){
         creativeChatbox = new BlockCreativeChatBox();
@@ -20,6 +21,7 @@ public class Blocks {
         lda = new BlockLDA();
         antennaCell = new BlockCell();
         antenna = new BlockAntenna();
+        cableDecor = new BlockCableDecor();
 
         if (Config.registerCreativeChatBox){
             GameRegistry.registerBlock(creativeChatbox, "OT_AdminChatBox");
@@ -46,5 +48,7 @@ public class Blocks {
         }else{
             System.out.println("LDA off.");
         }
+
+        GameRegistry.registerBlock(cableDecor, ItemBlockCableDecor.class, "OT_CableDecor");
     }
 }

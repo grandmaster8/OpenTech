@@ -9,10 +9,7 @@ import OpenTechnology.events.FMLEvents;
 import OpenTechnology.item.Items;
 import OpenTechnology.network.SparkPacket;
 import OpenTechnology.network.SparkPacketHandler;
-import OpenTechnology.tileentities.TileEntityChatBox;
-import OpenTechnology.tileentities.TileEntityCreativeChatBox;
-import OpenTechnology.tileentities.TileEntityLDA;
-import OpenTechnology.tileentities.TileEntityRadar;
+import OpenTechnology.tileentities.*;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -21,6 +18,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.common.MinecraftForge;
 
 public class CommonProxy {
@@ -36,6 +34,8 @@ public class CommonProxy {
         wrapper = NetworkRegistry.INSTANCE.newSimpleChannel(OpenTechnology.MODID);
         wrapper.registerMessage(new SparkPacketHandler(), SparkPacket.class, 0, Side.CLIENT);
 
+        System.out.println(Launch.blackboard.get("fml.deobfuscatedEnvironment"));
+
         Blocks.init();
         Items.init();
         Drivers.init();
@@ -45,6 +45,7 @@ public class CommonProxy {
         GameRegistry.registerTileEntity(TileEntityChatBox.class, "TileEntityChatBox");
         GameRegistry.registerTileEntity(TileEntityRadar.class, "TileEntityRadar");
         GameRegistry.registerTileEntity(TileEntityLDA.class, "TileEntityLDA");
+        GameRegistry.registerTileEntity(TileEntityCableDecor.class, "TileEntityCableDecor");
 
 
     }

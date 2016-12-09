@@ -665,5 +665,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="industrialcraft-2-2.2.827-experimental-api" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="OpenComputers-MC1.7.10-1.6.0.901-dev-dev" level="project" />
   </component>
 </module>
