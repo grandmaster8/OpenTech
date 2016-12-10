@@ -1,7 +1,7 @@
 package OpenTechnology.blocks;
 
 import OpenTechnology.OpenTechnology;
-import OpenTechnology.events.FMLEvents;
+import OpenTechnology.events.ClientFMLEvents;
 import OpenTechnology.proxy.ClientProxy;
 import OpenTechnology.tileentities.TileEntityCableDecor;
 import li.cil.oc.common.tileentity.Cable;
@@ -40,7 +40,7 @@ public class BlockCableDecor extends li.cil.oc.common.block.Cable {
 
     @Override
     public void doSetBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-        if(FMLEvents.isWrench){
+        if(ClientFMLEvents.isWrench){
             super.doSetBlockBoundsBasedOnState(world, x, y, z);
         }else{
             setBlockBounds(0, 0, 0, 1, 1, 1);
@@ -66,7 +66,7 @@ public class BlockCableDecor extends li.cil.oc.common.block.Cable {
 
     @Override
     public IIcon getIcon(IBlockAccess world, int x, int y, int z, ForgeDirection globalSide, ForgeDirection localSide) {
-        if(!FMLEvents.isWrench){
+        if(!ClientFMLEvents.isWrench){
             Block block = Block.getBlockById(world.getTileEntity(x, y, z).blockMetadata);
             return block.getIcon(globalSide.ordinal(), 0);
         }
@@ -77,7 +77,7 @@ public class BlockCableDecor extends li.cil.oc.common.block.Cable {
 
     @Override
     public boolean isOpaqueCube() {
-       if(FMLEvents.isWrench){
+       if(ClientFMLEvents.isWrench){
            return super.isOpaqueCube();
        }else{
            return true;
@@ -87,7 +87,7 @@ public class BlockCableDecor extends li.cil.oc.common.block.Cable {
 
     @Override
     public int getRenderType() {
-        if(!FMLEvents.isWrench){
+        if(!ClientFMLEvents.isWrench){
             return ClientProxy.CableDecorRenderingId;
         }
         return super.getRenderType();
@@ -95,7 +95,7 @@ public class BlockCableDecor extends li.cil.oc.common.block.Cable {
 
     @Override
     public boolean isNormalCube() {
-        if(FMLEvents.isWrench){
+        if(ClientFMLEvents.isWrench){
             return super.isNormalCube();
         }
         return true;
@@ -104,7 +104,7 @@ public class BlockCableDecor extends li.cil.oc.common.block.Cable {
 
     @Override
     public synchronized AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-        if(!FMLEvents.isWrench){
+        if(!ClientFMLEvents.isWrench){
             return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
         }
         return super.getCollisionBoundingBoxFromPool(world, x, y, z);
@@ -112,7 +112,7 @@ public class BlockCableDecor extends li.cil.oc.common.block.Cable {
 
     @Override
     public int colorMultiplier(IBlockAccess world, int x, int y, int z) {
-        if(!FMLEvents.isWrench){
+        if(!ClientFMLEvents.isWrench){
             return 16777215;
         }
         return super.colorMultiplier(world, x, y, z);
@@ -120,7 +120,7 @@ public class BlockCableDecor extends li.cil.oc.common.block.Cable {
 
     @Override
     public int getRenderColor(int metadata) {
-        if(!FMLEvents.isWrench){
+        if(!ClientFMLEvents.isWrench){
             return 16777215;
         }
         return super.getRenderColor(metadata);
