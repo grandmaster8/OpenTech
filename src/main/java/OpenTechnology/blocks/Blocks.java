@@ -50,6 +50,10 @@ public class Blocks {
             System.out.println("LDA off.");
         }
 
-        GameRegistry.registerBlock(cableDecor, ItemBlockCableDecor.class, "OT_CableDecor");
+        if(Config.registerDecorativeCable){
+            GameRegistry.registerBlock(cableDecor, ItemBlockCableDecor.class, "OT_CableDecor");
+        }else{
+            System.out.println("Decorative Cable off.");
+        }
     }
 }

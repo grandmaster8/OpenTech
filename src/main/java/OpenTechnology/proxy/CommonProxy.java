@@ -9,14 +9,13 @@ import OpenTechnology.events.FMLEvents;
 import OpenTechnology.item.Items;
 import OpenTechnology.network.SparkPacket;
 import OpenTechnology.network.SparkPacketHandler;
-import OpenTechnology.tileentities.*;
+import OpenTechnology.tileentities.TileEntities;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraftforge.common.MinecraftForge;
@@ -40,14 +39,7 @@ public class CommonProxy {
         Items.init();
         Drivers.init();
         Recipes.init();
-
-        GameRegistry.registerTileEntity(TileEntityCreativeChatBox.class, "TileEntityCreativeChatBox");
-        GameRegistry.registerTileEntity(TileEntityChatBox.class, "TileEntityChatBox");
-        GameRegistry.registerTileEntity(TileEntityRadar.class, "TileEntityRadar");
-        GameRegistry.registerTileEntity(TileEntityLDA.class, "TileEntityLDA");
-        GameRegistry.registerTileEntity(TileEntityCableDecor.class, "TileEntityCableDecor");
-
-
+        TileEntities.init();
     }
 
     public void postInit(FMLPostInitializationEvent e) {

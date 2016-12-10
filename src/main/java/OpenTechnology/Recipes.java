@@ -24,39 +24,46 @@ public class Recipes {
     }
 
     public static void ic2(){
-        addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.antenna)),
-                "ici",
-                "ici",
-                "ici",
-                'i', IC2Items.getItem("denseplateadviron"),
-                'c', li.cil.oc.api.Items.get("cable").createItemStack(1)
-        );
+        if(Config.registerLDA){
+            addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.antenna)),
+                    "ici",
+                    "ici",
+                    "ici",
+                    'i', IC2Items.getItem("denseplateadviron"),
+                    'c', li.cil.oc.api.Items.get("cable").createItemStack(1)
+            );
+        }
     }
 
     public static void vanilla(){
-        addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.antenna)),
-                "ici",
-                "ici",
-                "ici",
-                'i', new ItemStack(Item.getItemFromBlock(net.minecraft.init.Blocks.iron_block)),
-                'c', li.cil.oc.api.Items.get("cable").createItemStack(1)
-                );
+        if(Config.registerLDA){
+            addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.antenna)),
+                    "ici",
+                    "ici",
+                    "ici",
+                    'i', new ItemStack(Item.getItemFromBlock(net.minecraft.init.Blocks.iron_block)),
+                    'c', li.cil.oc.api.Items.get("cable").createItemStack(1)
+            );
+        }
     }
 
     public static void common(){
-        addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.chatbox)), "www", "pcp", "www", 'c', new ItemStack(Item.getItemFromBlock(net.minecraft.init.Blocks.gold_block)), 'p', new ItemStack(Items.ender_pearl), 'w', new ItemStack(Items.iron_ingot));
+        if(Config.registerChatBox)
+            addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.chatbox)), "www", "pcp", "www", 'c', new ItemStack(Item.getItemFromBlock(net.minecraft.init.Blocks.gold_block)), 'p', new ItemStack(Items.ender_pearl), 'w', new ItemStack(Items.iron_ingot));
 
-        addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.lda)),
-                "ici",
-                "mbm",
-                "ipi",
+        if(Config.registerLDA){
+            addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.lda)),
+                    "ici",
+                    "mbm",
+                    "ipi",
 
-                'i', new ItemStack(Item.getItemFromBlock(net.minecraft.init.Blocks.iron_block)),
-                'c', li.cil.oc.api.Items.get("cable").createItemStack(1) ,
-                'b', li.cil.oc.api.Items.get("componentBus3").createItemStack(1),
-                'm', li.cil.oc.api.Items.get("ram6").createItemStack(1),
-                'p', li.cil.oc.api.Items.get("cpu3").createItemStack(1)
-                );
+                    'i', new ItemStack(Item.getItemFromBlock(net.minecraft.init.Blocks.iron_block)),
+                    'c', li.cil.oc.api.Items.get("cable").createItemStack(1) ,
+                    'b', li.cil.oc.api.Items.get("componentBus3").createItemStack(1),
+                    'm', li.cil.oc.api.Items.get("ram6").createItemStack(1),
+                    'p', li.cil.oc.api.Items.get("cpu3").createItemStack(1)
+            );
+        }
 
         /*addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.antennaCell)),
                     "",
@@ -64,7 +71,9 @@ public class Recipes {
                 "",
                  );*/
 
-        GameRegistry.addRecipe(new RecipeItemCableDecor());
+       if(Config.registerDecorativeCable){
+           GameRegistry.addRecipe(new RecipeItemCableDecor());
+       }
 
     }
 

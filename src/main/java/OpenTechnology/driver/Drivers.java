@@ -1,5 +1,6 @@
 package OpenTechnology.driver;
 
+import OpenTechnology.Config;
 import li.cil.oc.api.API;
 import li.cil.oc.api.driver.Item;
 
@@ -13,7 +14,10 @@ public class Drivers {
         driverTeslaUpgrade = new DriverTeslaUpgrade();
         driverRadarUpgrade = new DriverRadarUpgrade();
 
-        API.driver.add(driverTeslaUpgrade);
-        API.driver.add(driverRadarUpgrade);
+        if(Config.registerTeslaUpgrade)
+            API.driver.add(driverTeslaUpgrade);
+
+        if(Config.registerRadarUpgrade)
+            API.driver.add(driverRadarUpgrade);
     }
 }

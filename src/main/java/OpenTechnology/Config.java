@@ -26,7 +26,7 @@ public class Config {
     public static int ldaMaxDistance;
     public static int ldaMaxPacketSize;
 
-    public static boolean registerCreativeChatBox, registerChatBox, registerRadarUpgrade, registerTeslaUpgrade, registerRadar, registerLDA;
+    public static boolean registerCreativeChatBox, registerChatBox, registerRadarUpgrade, registerTeslaUpgrade, registerRadar, registerLDA, registerDecorativeCable;
 
 
     public static void init(File file){
@@ -51,6 +51,7 @@ public class Config {
         registerTeslaUpgrade = configuration.getBoolean("registerTeslaUpgrade", "register", true, "");
         registerRadar = configuration.getBoolean("registerRadar", "register", true, "");
         registerLDA = configuration.getBoolean("registerLDA", "register", true, "");
+        registerDecorativeCable = configuration.getBoolean("registerDecorativeCable", "register", true, "");
 
         ldaMaxDistance = configuration.getInt("lda", "ldaMaxDistance", 2000, 0, 4000000, "");
         ldaMaxPacketSize = configuration.getInt("lda", "ldaMaxPacketSize", 1024 * 8, 0, 4000000, "");
