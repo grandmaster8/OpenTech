@@ -17,13 +17,14 @@ public class Config {
 
     public static int maxTeslaRadius;
     public static int maxTeslaHeat;
-    public static int teslaEnergy;
-    public static float teslaAllDamage;
+    public static int teslaEnergyUsage;
+    public static float teslaDamage;
 
     public static int radarRange;
-    public static double radarEnergyCost;
+    public static double radarEnergyUsage;
 
     public static int ldaMaxDistance;
+    public static int ldaEnergyUsage;
     public static int ldaMaxPacketSize;
 
     public static boolean registerCreativeChatBox, registerChatBox, registerRadarUpgrade, registerTeslaUpgrade, registerRadar, registerLDA, registerDecorativeCable;
@@ -39,11 +40,11 @@ public class Config {
 
         maxTeslaRadius = configuration.get("tesla", "maxTeslaRadius", 10).getInt();
         maxTeslaHeat = configuration.get("tesla", "maxTeslaHeat", 100, "").getInt();
-        teslaEnergy = configuration.get("tesla", "teslaEnergy", 1000, "").getInt();
-        teslaAllDamage = (float) configuration.get("tesla", "teslaAllDamage", 10, "").getDouble();
+        teslaEnergyUsage = configuration.get("tesla", "teslaEnergyUsage", 1000, "").getInt();
+        teslaDamage = (float) configuration.get("tesla", "teslaDamage", 10, "").getDouble();
 
         radarRange = configuration.get("radar", "radarRange", 15, "").getInt();
-        radarEnergyCost = configuration.get("radar", "radarEnergyCost", 30).getDouble();
+        radarEnergyUsage = configuration.get("radar", "radarEnergyUsage", 30).getDouble();
 
         registerCreativeChatBox = configuration.getBoolean("registerCreativeChatBox", "register", true, "");
         registerChatBox = configuration.getBoolean("registerChatBox", "register", true, "");
@@ -55,6 +56,7 @@ public class Config {
 
         ldaMaxDistance = configuration.getInt("lda", "ldaMaxDistance", 2000, 0, 4000000, "");
         ldaMaxPacketSize = configuration.getInt("lda", "ldaMaxPacketSize", 1024 * 8, 0, 4000000, "");
+        ldaEnergyUsage = configuration.getInt("lda", "ldaEnergyUsage", 1000, 0, 4000000, "");
 
         configuration.save();
     }

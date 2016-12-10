@@ -70,7 +70,7 @@ public class TileEntityRadar extends TileEntity implements Analyzable, Environme
     public Object[] getEntities(Context context, Arguments args) {
         List<Map> entities = new ArrayList<Map>();
         int distance = getDistance(args);
-        if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyCost * distance * 1.75))) {
+        if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyUsage * distance * 1.75))) {
             AxisAlignedBB bounds = getBounds(distance);
             entities.addAll(RadarUtils.getEntities(worldObj, xCoord, yCoord, zCoord, bounds, EntityPlayer.class, Config.radarRange));
             entities.addAll(RadarUtils.getEntities(worldObj, xCoord, yCoord, zCoord, bounds, EntityLiving.class, Config.radarRange));
@@ -83,7 +83,7 @@ public class TileEntityRadar extends TileEntity implements Analyzable, Environme
     public Object[] getPlayers(Context context, Arguments args) {
         List<Map> entities = new ArrayList<Map>();
         int distance = getDistance(args);
-        if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyCost * distance * 1.0))) {
+        if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyUsage * distance * 1.0))) {
             AxisAlignedBB bounds = getBounds(distance);
             entities.addAll(RadarUtils.getEntities(worldObj, xCoord, yCoord, zCoord, bounds, EntityPlayer.class, Config.radarRange));
             context.pause(0.5);
@@ -95,7 +95,7 @@ public class TileEntityRadar extends TileEntity implements Analyzable, Environme
     public Object[] getMobs(Context context, Arguments args) {
         List<Map> entities = new ArrayList<Map>();
         int distance = getDistance(args);
-        if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyCost * distance * 1.0))) {
+        if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyUsage * distance * 1.0))) {
             AxisAlignedBB bounds = getBounds(distance);
             entities.addAll(RadarUtils.getEntities(worldObj, xCoord, yCoord, zCoord, bounds, EntityLiving.class, Config.radarRange));
             context.pause(0.5);
@@ -107,7 +107,7 @@ public class TileEntityRadar extends TileEntity implements Analyzable, Environme
     public Object[] getItems(Context context, Arguments args) {
         List<Map> entities = new ArrayList<Map>();
         int distance = getDistance(args);
-        if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyCost * distance * 2.0))) {
+        if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyUsage * distance * 2.0))) {
             AxisAlignedBB bounds = getBounds(distance);
             entities.addAll(RadarUtils.getItems(worldObj, xCoord, yCoord, zCoord, bounds, EntityItem.class));
             context.pause(0.5);

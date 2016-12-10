@@ -54,7 +54,7 @@ public class RadarUpgrade extends ManagedEnvironment implements DeviceInfo {
     public Object[] getEntities(Context context, Arguments args) {
         List<Map> entities = new ArrayList<Map>();
         int distance = getDistance(args);
-        if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyCost * distance * 1.75))) {
+        if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyUsage * distance * 1.75))) {
             AxisAlignedBB bounds = getBounds(distance);
             entities.addAll(RadarUtils.getEntities(container.world(), (int) container.xPosition(), (int) container.yPosition(), (int) container.zPosition(), bounds, EntityPlayer.class, Config.radarRange));
             entities.addAll(RadarUtils.getEntities(container.world(), (int) container.xPosition(), (int) container.yPosition(), (int) container.zPosition(), bounds, EntityLiving.class, Config.radarRange));
@@ -67,7 +67,7 @@ public class RadarUpgrade extends ManagedEnvironment implements DeviceInfo {
     public Object[] getPlayers(Context context, Arguments args) {
         List<Map> entities = new ArrayList<Map>();
         int distance = getDistance(args);
-        if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyCost * distance * 1.0))) {
+        if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyUsage * distance * 1.0))) {
             AxisAlignedBB bounds = getBounds(distance);
             entities.addAll(RadarUtils.getEntities(container.world(), (int) container.xPosition(), (int) container.yPosition(), (int) container.zPosition(), bounds, EntityPlayer.class, Config.radarRange));
             context.pause(0.5);
@@ -79,7 +79,7 @@ public class RadarUpgrade extends ManagedEnvironment implements DeviceInfo {
     public Object[] getMobs(Context context, Arguments args) {
         List<Map> entities = new ArrayList<Map>();
         int distance = getDistance(args);
-        if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyCost * distance * 1.0))) {
+        if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyUsage * distance * 1.0))) {
             AxisAlignedBB bounds = getBounds(distance);
             entities.addAll(RadarUtils.getEntities(container.world(), (int) container.xPosition(), (int) container.yPosition(), (int) container.zPosition(), bounds, EntityLiving.class, Config.radarRange));
             context.pause(0.5);
@@ -91,7 +91,7 @@ public class RadarUpgrade extends ManagedEnvironment implements DeviceInfo {
     public Object[] getItems(Context context, Arguments args) {
         List<Map> entities = new ArrayList<Map>();
         int distance = getDistance(args);
-        if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyCost * distance * 2.0))) {
+        if(((Connector) this.node()).tryChangeBuffer(0 - (Config.radarEnergyUsage * distance * 2.0))) {
             AxisAlignedBB bounds = getBounds(distance);
             entities.addAll(RadarUtils.getItems(container.world(), (int) container.xPosition(), (int) container.yPosition(), (int) container.zPosition(), bounds, EntityItem.class));
             context.pause(0.5);

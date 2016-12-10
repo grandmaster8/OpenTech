@@ -3,6 +3,7 @@ package OpenTechnology.tileentities;
 import OpenTechnology.Config;
 import OpenTechnology.blocks.Blocks;
 import OpenTechnology.system.LDAS;
+import li.cil.oc.api.API;
 import li.cil.oc.api.Network;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
@@ -27,7 +28,7 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
     private boolean isStructure, isTransmit;
 
     public TileEntityLDA() {
-        node = Network.newNode(this, Visibility.Network).withComponent(getComponentName()).create();
+        node = Network.newNode(this, Visibility.Network).withComponent(getComponentName()).withConnector().create();
         distance = Config.ldaMaxDistance;
         isStructure = false;
         isTransmit = false;
@@ -138,7 +139,8 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
 
     @Callback(doc="function(data:string), broadcast data.")
     public Object[] broadcast(Context context, Arguments arguments) throws Exception{
-        if(distance > 0 && isStructure){
+        Connector connector = (Connector) node;
+        if(distance > 0 && isStructure && (connector.tryChangeBuffer(Config.ldaEnergyUsage) || !API.isPowerEnabled)){
             if(isTransmit)
                 return new Object[]{false};
 
@@ -156,7 +158,8 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
 
     @Callback(doc="function(address:string, data:string), sending data to a specific address.")
     public Object[] send(Context context, Arguments arguments) throws Exception{
-        if(distance > 0 && isStructure){
+        Connector connector = (Connector) node;
+        if(distance > 0 && isStructure && (connector.tryChangeBuffer(Config.ldaEnergyUsage) || !API.isPowerEnabled)){
             if(isTransmit)
                 return new Object[]{false};
 
