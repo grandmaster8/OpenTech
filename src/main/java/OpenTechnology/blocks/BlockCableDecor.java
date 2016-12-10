@@ -77,11 +77,11 @@ public class BlockCableDecor extends li.cil.oc.common.block.Cable {
 
     @Override
     public boolean isOpaqueCube() {
-       if(ClientFMLEvents.isWrench){
-           return super.isOpaqueCube();
-       }else{
-           return true;
-       }
+        return super.isOpaqueCube();
+        /*if(ClientFMLEvents.isWrench){
+        }else{
+            return true;
+        }*/
     }
 
 
@@ -104,10 +104,7 @@ public class BlockCableDecor extends li.cil.oc.common.block.Cable {
 
     @Override
     public synchronized AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-        if(!ClientFMLEvents.isWrench){
-            return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
-        }
-        return super.getCollisionBoundingBoxFromPool(world, x, y, z);
+        return AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
     }
 
     @Override
