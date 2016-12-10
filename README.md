@@ -82,7 +82,7 @@ Custom blocks for OpenComputers and Minecraft.
 #### `broadcast(data:string)`.
 Рассылает сообщение по каналу.
 
-#### 'send(address:string, data:string)'.
+#### `send(address:string, data:string)`.
 Отправляет сообщение конкретному адресату. Обое должны работать на одном канале.
 
 *Описание дополняется...*
