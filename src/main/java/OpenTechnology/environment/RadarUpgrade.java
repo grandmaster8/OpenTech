@@ -29,7 +29,7 @@ public class RadarUpgrade extends ManagedEnvironment implements DeviceInfo {
 
     public RadarUpgrade(EnvironmentHost host) {
         this.container = host;
-        setNode(Network.newNode(this, Visibility.Network).withComponent("radar").create());
+        setNode(Network.newNode(this, Visibility.Network).withComponent("radar").withConnector().create());
     }
 
     private int getDistance(Arguments args) {
