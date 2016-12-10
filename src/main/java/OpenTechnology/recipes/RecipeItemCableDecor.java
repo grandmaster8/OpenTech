@@ -43,7 +43,7 @@ public class RecipeItemCableDecor implements IRecipe {
 
                 if(b1 && !b2 && item instanceof ItemBlock){
                     ItemBlock itemBlock = (ItemBlock) item;
-                    return itemBlock.field_150939_a.isBlockNormalCube();
+                    return itemBlock.field_150939_a.isOpaqueCube();
                 }
             }
         }
@@ -66,7 +66,7 @@ public class RecipeItemCableDecor implements IRecipe {
 
                 if(b1 && !b2 && item instanceof ItemBlock && !isBlackList(item)){
                     ItemBlock itemBlock = (ItemBlock) item;
-                    if(itemBlock.field_150939_a.isBlockNormalCube())
+                    if(itemBlock.field_150939_a.isOpaqueCube())
                         return new ItemStack(Blocks.cableDecor, chameliumSize, Block.getIdFromBlock(itemBlock.field_150939_a));
                 }
             }
