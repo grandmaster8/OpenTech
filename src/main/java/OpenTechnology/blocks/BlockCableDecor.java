@@ -4,9 +4,11 @@ import OpenTechnology.OpenTechnology;
 import OpenTechnology.events.ClientFMLEvents;
 import OpenTechnology.proxy.ClientProxy;
 import OpenTechnology.tileentities.TileEntityCableDecor;
+import li.cil.oc.api.Items;
 import li.cil.oc.common.tileentity.Cable;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -15,6 +17,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import scala.reflect.ClassTag$;
+
+import java.util.Random;
 
 /**
  * Created by Avaja on 08.12.2016.
@@ -74,6 +78,10 @@ public class BlockCableDecor extends li.cil.oc.common.block.Cable {
     }
 
 
+    @Override
+    public Item getItemDropped(int i, Random random, int i1) {
+        return Item.getItemFromBlock(Items.get("cable").block());
+    }
 
     @Override
     public boolean isOpaqueCube() {
