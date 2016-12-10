@@ -76,7 +76,7 @@ Custom blocks for OpenComputers and Minecraft.
 #### `setDistance(distance:int)`.
 Устанавливает максимальное расстояние для передачи.
 
-#### 'maxPacketSize()'.
+#### `maxPacketSize()`.
 Возвращает максимальный размер пакета.
 
 #### `broadcast(data:string)`.
