@@ -1,4 +1,4 @@
-itemGroup.OpenTechnology=OpenTechnology
+itemGroup.ot=ot
 tile.OpenTechnology_chatbox.name=Chatbox
 tile.OpenTechnology_creativeChatbox.name=Creative Chatbox
 tile.OpenTechnology_radar.name=Radar

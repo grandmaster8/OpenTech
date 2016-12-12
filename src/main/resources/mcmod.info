@@ -1,15 +1,15 @@
 [
 {
-  "modid": "OpenTechnology",
-  "name": "OpenTechnology",
-  "description": "OpenTechnology this addon for OpenComputers adding technology.",
+  "modid": "ot",
+  "name": "ot",
+  "description": "OpenTechnology this diverse addon for OpenComputers adding technology.",
   "version": "0.4.2a-dev",
   "mcversion": "1.7.10",
   "url": "",
   "updateUrl": "",
   "authorList": ["NEO"],
-  "credits": "",
-  "logoFile": "",
+  "credits": "Alex",
+  "logoFile": "textures/items/UpgradeTesla.png",
   "screenshots": [],
   "dependencies": []
 }

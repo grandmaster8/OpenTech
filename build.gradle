@@ -19,7 +19,7 @@ apply plugin: 'forge'
 
 version = "0.4.2a-dev"
 group= "net.avaja"
-archivesBaseName = "OpenTechnology"
+archivesBaseName = "ot"
 
 minecraft {
     version = "1.7.10-10.13.4.1558-1.7.10"
