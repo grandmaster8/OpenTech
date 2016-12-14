@@ -29,6 +29,9 @@ public class Config {
 
     public static String pibUsingEnergy;
     public static int pibUsingEnergyDimension;
+    public static int scannerUsageCount;
+
+    public static int scannerWidth, scannerHeight;
 
     public static boolean registerCreativeChatBox,
             registerChatBox,
@@ -37,7 +40,8 @@ public class Config {
             registerRadar,
             registerLDA,
             registerDecorativeCable,
-            registerPIB
+            registerPIB,
+            registerScanner
     ;
 
 
@@ -65,6 +69,7 @@ public class Config {
         registerLDA = configuration.getBoolean("registerLDA", "register", true, "");
         registerDecorativeCable = configuration.getBoolean("registerDecorativeCable", "register", true, "");
         registerPIB = configuration.getBoolean("registerPIB", "register", true, "");
+        registerScanner = configuration.getBoolean("registerScanner", "register", true, "");
 
         ldaMaxDistance = configuration.getInt("lda", "ldaMaxDistance", 2000, 0, 1000000, "");
         ldaMaxPacketSize = configuration.getInt("lda", "ldaMaxPacketSize", 1024 * 8, 0, 1000000, "");
@@ -72,6 +77,10 @@ public class Config {
 
         pibUsingEnergy = configuration.getString("pib", "pibUsingEnergy", "distance * (distance / 16) * itemCount", "");
         pibUsingEnergyDimension = configuration.getInt("pib", "pibUsingEnergyDimension", 1000, 0, 100000000, "");
+
+        scannerWidth = configuration.getInt("scanner", "scannerWidth", 40, 0, 1000000, "");
+        scannerHeight = configuration.getInt("scanner", "scannerHeight", 40, 0, 1000000, "");
+        scannerUsageCount = configuration.getInt("scanner", "scannerUsageCount", 256, 0, 10000000, "");
 
         configuration.save();
     }

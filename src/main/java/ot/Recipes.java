@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import ot.blocks.Blocks;
 import ot.recipes.RecipeItemCableDecor;
+import ot.recipes.RecipeRepairScanner;
 
 /**
  * Created by Avaja on 26.05.2016.
@@ -111,6 +112,9 @@ public class Recipes {
                    'i', new ItemStack(Items.iron_ingot)
            );
        }
+
+       if(Config.registerScanner)
+           GameRegistry.addRecipe(new RecipeRepairScanner());
     }
 
     private  static void addRecipe(ItemStack out, Object... stacks){

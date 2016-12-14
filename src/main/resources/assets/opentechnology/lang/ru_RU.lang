@@ -9,5 +9,9 @@ tile.OpenTechnology_CableDecor.name=Кабель
 
 item.OpenTechnology_teslaUpgrade.name=Тесла Апгрейд
 item.OpenTechnology_RadarUpgrade.name=Радар Апгрейд
+item.OpenTechnology_scanner.name=Сканер
 
 death.attack.electric=Электричество
+
+chat.scannner="Обнаружен робот: %d %d %d"
+lore.scanner.damage=Осталось попыток:
