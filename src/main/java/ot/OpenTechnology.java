@@ -15,7 +15,7 @@ import ot.proxy.CommonProxy;
 @Mod(modid= OpenTechnology.MODID, name= OpenTechnology.MODID, version= OpenTechnology.VERSION)
 public class OpenTechnology {
 	public final static String MODID = "OpenTechnology";
-	public final static String VERSION = "0.4.5a-dev";
+	public final static String VERSION = "0.5.7a-dev";
 
 	public static Logger logger;
 	public static CreativeTab tab = new CreativeTab();
