@@ -70,7 +70,7 @@ public class Config {
         ldaMaxPacketSize = configuration.getInt("lda", "ldaMaxPacketSize", 1024 * 8, 0, 1000000, "");
         ldaEnergyUsage = configuration.getInt("lda", "ldaEnergyUsage", 1000, 0, 1000000, "");
 
-        pibUsingEnergy = configuration.getString("pib", "pibUsingEnergy", "(distance * (distance / 16)) * itemCount", "");
+        pibUsingEnergy = configuration.getString("pib", "pibUsingEnergy", "distance * (distance / 16) * itemCount", "");
         pibUsingEnergyDimension = configuration.getInt("pib", "pibUsingEnergyDimension", 1000, 0, 100000000, "");
 
         configuration.save();
