@@ -27,6 +27,9 @@ public class Config {
     public static int ldaEnergyUsage;
     public static int ldaMaxPacketSize;
 
+    public static String pibUsingEnergy;
+    public static int pibUsingEnergyDimension;
+
     public static boolean registerCreativeChatBox,
             registerChatBox,
             registerRadarUpgrade,
@@ -63,9 +66,12 @@ public class Config {
         registerDecorativeCable = configuration.getBoolean("registerDecorativeCable", "register", true, "");
         registerPIB = configuration.getBoolean("registerPIB", "register", true, "");
 
-        ldaMaxDistance = configuration.getInt("lda", "ldaMaxDistance", 2000, 0, 4000000, "");
-        ldaMaxPacketSize = configuration.getInt("lda", "ldaMaxPacketSize", 1024 * 8, 0, 4000000, "");
-        ldaEnergyUsage = configuration.getInt("lda", "ldaEnergyUsage", 1000, 0, 4000000, "");
+        ldaMaxDistance = configuration.getInt("lda", "ldaMaxDistance", 2000, 0, 1000000, "");
+        ldaMaxPacketSize = configuration.getInt("lda", "ldaMaxPacketSize", 1024 * 8, 0, 1000000, "");
+        ldaEnergyUsage = configuration.getInt("lda", "ldaEnergyUsage", 1000, 0, 1000000, "");
+
+        pibUsingEnergy = configuration.getString("pib", "pibUsingEnergy", "(distance * (distance / 16)) * itemCount", "");
+        pibUsingEnergyDimension = configuration.getInt("pib", "pibUsingEnergyDimension", 1000, 0, 100000000, "");
 
         configuration.save();
     }

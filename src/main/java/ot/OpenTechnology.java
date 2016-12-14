@@ -12,10 +12,14 @@ import org.apache.logging.log4j.Logger;
 import ot.command.OTCommand;
 import ot.proxy.CommonProxy;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+
 @Mod(modid= OpenTechnology.MODID, name= OpenTechnology.MODID, version= OpenTechnology.VERSION)
 public class OpenTechnology {
 	public final static String MODID = "OpenTechnology";
 	public final static String VERSION = "0.5.7a-dev";
+	public final static ScriptEngine SCRIPT_ENGINE = (new ScriptEngineManager()).getEngineByName("js");
 
 	public static Logger logger;
 	public static CreativeTab tab = new CreativeTab();

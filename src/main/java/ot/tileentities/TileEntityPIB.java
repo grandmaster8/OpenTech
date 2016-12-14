@@ -13,7 +13,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import ot.Config;
+import ot.OpenTechnology;
 
+import javax.script.ScriptException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -109,22 +112,22 @@ public class TileEntityPIB extends TileEntity implements Analyzable, Environment
 
             if(pushStack != null){
                 if(pushStack.isItemEqual(pullStack)){
-                    if(pushStack.getMaxStackSize() - pushStack.stackSize >= count){
+                    if(pushStack.getMaxStackSize() - pushStack.stackSize >= count && useEnergy(count)){
                         pushStack.stackSize += count;
                         target.inventory.setInventorySlotContents(pullSlot, null);
-                    }else{
+                    }else if(useEnergy(count)){
                         pullStack.stackSize -= pushStack.getMaxStackSize() - pushStack.stackSize;
                         pushStack.stackSize = pushStack.getMaxStackSize();
                     }
                     return new Object[]{true};
                 }
             }else{
-                if(pullStack.stackSize > count){
+                if(pullStack.stackSize > count && useEnergy(count)){
                     ItemStack push = pullStack.copy();
                     pullStack.stackSize -= count;
                     push.stackSize = count;
                     inventory.setInventorySlotContents(pushSlot, push);
-                }else{
+                }else if(useEnergy(count)){
                     target.inventory.setInventorySlotContents(pullSlot, null);
                     inventory.setInventorySlotContents(pushSlot, pullStack);
                 }
@@ -169,11 +172,11 @@ public class TileEntityPIB extends TileEntity implements Analyzable, Environment
 
             if(pushStack != null){
                 if(pushStack.isItemEqual(pullStack)){
-                    if(pushStack.getMaxStackSize() - pushStack.stackSize >= count){
+                    if(pushStack.getMaxStackSize() - pushStack.stackSize >= count && useEnergy(count)){
                         pullStack.stackSize -= count;
                         pushStack.stackSize += count;
                         target.inventory.setInventorySlotContents(pullSlot, null);
-                    }else{
+                    }else if(useEnergy(count)){
                         pullStack.stackSize -= pushStack.getMaxStackSize() - pushStack.stackSize;
                         pushStack.stackSize = pushStack.getMaxStackSize();
                     }
@@ -183,12 +186,12 @@ public class TileEntityPIB extends TileEntity implements Analyzable, Environment
                     return new Object[]{true};
                 }
             }else{
-                if(pullStack.stackSize > count){
+                if(pullStack.stackSize > count && useEnergy(count)){
                     ItemStack push = pullStack.copy();
                     pullStack.stackSize -= count;
                     push.stackSize = count;
                     target.inventory.setInventorySlotContents(pushSlot, push);
-                }else{
+                }else if(useEnergy(count)){
                     target.inventory.setInventorySlotContents(pullSlot, null);
                     inventory.setInventorySlotContents(pushSlot, pullStack);
                 }
@@ -196,6 +199,36 @@ public class TileEntityPIB extends TileEntity implements Analyzable, Environment
             }
         }
         return new Object[]{false};
+    }
+
+    private boolean useEnergy(int itemCount){
+       try{
+           Connector connector = (Connector) node();
+           double count = 0;
+           double distance = calcDistance();
+           try {
+               OpenTechnology.SCRIPT_ENGINE.put("distance", distance);
+               OpenTechnology.SCRIPT_ENGINE.put("itemCount", itemCount);
+               count = (Double) OpenTechnology.SCRIPT_ENGINE.eval(Config.pibUsingEnergy);
+           } catch (ScriptException e) {
+               e.printStackTrace();
+           }
+
+           if(target.worldObj.provider.dimensionId != worldObj.provider.dimensionId)
+               count += Config.pibUsingEnergyDimension;
+
+           return connector.tryChangeBuffer(-count);
+       }catch (Exception e){
+           e.printStackTrace();
+       }
+       return false;
+    }
+
+    private double calcDistance(){
+        if(isConnected()){
+            return target.getDistance(xCoord, yCoord, zCoord);
+        }
+        return 0;
     }
 
     @Override
