@@ -134,6 +134,70 @@ public class TileEntityPIB extends TileEntity implements Analyzable, Environment
         return new Object[]{false};
     }
 
+    @Callback(doc="function(side:int, pullSlot:int, pushSlot:int, count:int):boolean, pull stack of target inventory and push in player inventory.")
+    public Object[] pushStackInSlot(Context context, Arguments arguments) throws Exception{
+        if(!isConnected())
+            return new Object[]{false};
+        int side = arguments.checkInteger(0);
+        int pullSlot = arguments.checkInteger(1) - 1;
+        int pushSlot = arguments.checkInteger(2) - 1;
+        int count = arguments.checkInteger(3);
+
+        if(pushSlot < 0)
+            return new Object[]{false, "push slot < 0"};
+        if(pushSlot > target.inventory.getSizeInventory())
+            return new Object[]{false, "push slot > target inventory size"};
+        if(pullSlot < 0)
+            return new Object[]{false, "pull slot < 0"};
+        if(count <= 0)
+            return new Object[]{false, "count <= 0"};
+
+        ForgeDirection direction = ForgeDirection.getOrientation(side);
+        TileEntity tileEntity = worldObj.getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
+        if(tileEntity != null && tileEntity instanceof IInventory){
+            IInventory inventory = (IInventory) tileEntity;
+            if(pullSlot > inventory.getSizeInventory())
+                return new Object[]{false, "pull slot > target inventory size"};
+
+            if(inventory.getStackInSlot(pullSlot) == null)
+                return new Object[]{false};
+
+            ItemStack pushStack = target.inventory.getStackInSlot(pushSlot);
+            ItemStack pullStack = inventory.getStackInSlot(pullSlot);
+            if(count > pullStack.stackSize)
+                count = pullStack.stackSize;
+
+            if(pushStack != null){
+                if(pushStack.isItemEqual(pullStack)){
+                    if(pushStack.getMaxStackSize() - pushStack.stackSize >= count){
+                        pullStack.stackSize -= count;
+                        pushStack.stackSize += count;
+                        target.inventory.setInventorySlotContents(pullSlot, null);
+                    }else{
+                        pullStack.stackSize -= pushStack.getMaxStackSize() - pushStack.stackSize;
+                        pushStack.stackSize = pushStack.getMaxStackSize();
+                    }
+                    if(pullStack.stackSize <= 0)
+                        inventory.setInventorySlotContents(pullSlot, null);
+
+                    return new Object[]{true};
+                }
+            }else{
+                if(pullStack.stackSize > count){
+                    ItemStack push = pullStack.copy();
+                    pullStack.stackSize -= count;
+                    push.stackSize = count;
+                    target.inventory.setInventorySlotContents(pushSlot, push);
+                }else{
+                    target.inventory.setInventorySlotContents(pullSlot, null);
+                    inventory.setInventorySlotContents(pushSlot, pullStack);
+                }
+                return new Object[]{true};
+            }
+        }
+        return new Object[]{false};
+    }
+
     @Override
     public Node[] onAnalyze(EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
         return new Node[]{node};
