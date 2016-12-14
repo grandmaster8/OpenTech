@@ -26,7 +26,9 @@ public class BlockPIBinder extends BasicBlockContainer {
     }
 
     @Override
-    public void onBlockClicked(World world, int x, int y, int z, EntityPlayer entityPlayer) {
-        ((TileEntityPIB)world.getTileEntity(x, y, z)).playerClicked(entityPlayer);
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int cx, float cy, float cz, float p_149727_9_) {
+        if(!world.isRemote)
+            ((TileEntityPIB)world.getTileEntity(x, y, z)).playerClicked(entityPlayer);
+        return true;
     }
 }
