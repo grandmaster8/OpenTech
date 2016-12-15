@@ -13,5 +13,5 @@ item.OpenTechnology_scanner.name=Сканер
 
 death.attack.electric=Электричество
 
-chat.scannner="Обнаружен робот: %d %d %d"
-lore.scanner.damage=Осталось попыток:
+chat.scannner=§4Обнаружен робот: x=%d y=%d z=%d
+lore.scanner.charge=

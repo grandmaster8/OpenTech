@@ -8,7 +8,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import ot.blocks.Blocks;
 import ot.recipes.RecipeItemCableDecor;
-import ot.recipes.RecipeRepairScanner;
 
 /**
  * Created by Avaja on 26.05.2016.
@@ -113,8 +112,17 @@ public class Recipes {
            );
        }
 
-       if(Config.registerScanner)
-           GameRegistry.addRecipe(new RecipeRepairScanner());
+       if(Config.registerScanner){
+           addRecipe(new ItemStack(ot.item.Items.scanner),
+                   "cbc",
+                   "iui",
+                   "cbc",
+                   'c', li.cil.oc.api.Items.get("chip2").createItemStack(1),
+                   'b', li.cil.oc.api.Items.get("batteryUpgrade3").createItemStack(1),
+                   'u', li.cil.oc.api.Items.get("cpu2").createItemStack(1),
+                   'i', Items.iron_ingot
+           );
+       }
     }
 
     private  static void addRecipe(ItemStack out, Object... stacks){

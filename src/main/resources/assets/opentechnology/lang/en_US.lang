@@ -14,5 +14,5 @@ item.OpenTechnology_scanner.name=Scanner
 
 death.attack.electric=Electricity
 
-chat.scanner=Robot detected: %d %d %d
-lore.scanner.damage=
+chat.scanner=§4Robot detected: x=%d y=%d z=%d
+lore.scanner.charge=

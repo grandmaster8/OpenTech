@@ -29,9 +29,8 @@ public class Config {
 
     public static String pibUsingEnergy;
     public static int pibUsingEnergyDimension;
-    public static int scannerUsageCount;
 
-    public static int scannerWidth, scannerHeight;
+    public static int scannerWidth, scannerHeight, scannerUsageCount, scannerUsageCost;
 
     public static boolean registerCreativeChatBox,
             registerChatBox,
@@ -80,7 +79,8 @@ public class Config {
 
         scannerWidth = configuration.getInt("scanner", "scannerWidth", 40, 0, 1000000, "");
         scannerHeight = configuration.getInt("scanner", "scannerHeight", 40, 0, 1000000, "");
-        scannerUsageCount = configuration.getInt("scanner", "scannerUsageCount", 256, 0, 10000000, "");
+        scannerUsageCount = configuration.getInt("scanner", "scannerUsageCount", 40000, 0, 10000000, "");
+        scannerUsageCost = configuration.getInt("scanner", "scannerUsageCost", 4000, 0, 10000000, "");
 
         configuration.save();
     }

@@ -1,5 +1,6 @@
 package ot.item;
 
+import li.cil.oc.api.driver.item.Chargeable;
 import li.cil.oc.common.block.RobotProxy;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * Created by Avaja on 14.12.2016.
  */
-public class ItemScanner extends Item {
+public class ItemScanner extends Item implements Chargeable {
 
 
     public ItemScanner() {
@@ -29,13 +30,14 @@ public class ItemScanner extends Item {
 
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b) {
-        list.add(EnumChatFormatting.YELLOW+ StatCollector.translateToLocal("lore.scanner.damage")+(itemStack.getMaxDamage() - itemStack.getItemDamage()));
+        list.add(EnumChatFormatting.YELLOW+ StatCollector.translateToLocal("lore.scanner.charge") + (itemStack.getMaxDamage() - itemStack.getItemDamage()) + "/" + itemStack.getMaxDamage());
     }
 
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int side, float dx, float dy, float dz) {
-        itemStack.setItemDamage(itemStack.getItemDamage() + 1);
-        if(!world.isRemote) {
+        if(itemStack.getMaxDamage() - itemStack.getItemDamage() >= Config.scannerUsageCost){
+            itemStack.setItemDamage(itemStack.getItemDamage() + Config.scannerUsageCost);
+        }else{
             return false;
         }
 
@@ -57,6 +59,23 @@ public class ItemScanner extends Item {
                 }
             }
         }
+        return false;
+    }
+
+    @Override
+    public boolean canCharge(ItemStack stack) {
         return true;
+    }
+
+    @Override
+    public double charge(ItemStack stack, double amount, boolean simulate) {
+        if(stack.getItemDamage() >= amount){
+            stack.setItemDamage((int) (stack.getItemDamage() - amount));
+            return 0;
+        }else{
+            int delta = stack.getMaxDamage() - stack.getItemDamage();
+            stack.setItemDamage(0);
+            return amount - delta;
+        }
     }
 }
