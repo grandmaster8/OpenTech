@@ -33,6 +33,17 @@ public class Recipes {
                     'c', li.cil.oc.api.Items.get("cable").createItemStack(1)
             );
         }
+
+        if(Config.registerTeslaUpgrade){
+            addRecipe(new ItemStack(ot.item.Items.tesla),
+                    "ccc",
+                    "pbp",
+                    "ccc",
+                    'c', IC2Items.getItem("ironCableBlock"),
+                    'p', li.cil.oc.api.Items.get("chip3").createItemStack(1),
+                    'b', IC2Items.getItem("hvTransformer")
+            );
+        }
     }
 
     public static void vanilla(){
@@ -43,6 +54,17 @@ public class Recipes {
                     "ici",
                     'i', new ItemStack(Item.getItemFromBlock(net.minecraft.init.Blocks.iron_block)),
                     'c', li.cil.oc.api.Items.get("cable").createItemStack(1)
+            );
+        }
+
+        if(Config.registerTeslaUpgrade){
+            addRecipe(new ItemStack(ot.item.Items.tesla),
+                    "ccc",
+                    "pbp",
+                    "ccc",
+                    'c', li.cil.oc.api.Items.get("cable").createItemStack(1),
+                    'p', li.cil.oc.api.Items.get("chip3").createItemStack(1),
+                    'b', li.cil.oc.api.Items.get("batteryUpgrade3").createItemStack(1)
             );
         }
     }
@@ -76,17 +98,6 @@ public class Recipes {
 
        if(Config.registerDecorativeCable){
            GameRegistry.addRecipe(new RecipeItemCableDecor());
-       }
-
-       if(Config.registerTeslaUpgrade){
-           addRecipe(new ItemStack(ot.item.Items.tesla),
-                   "ccc",
-                   "pbp",
-                   "ccc",
-                   'c', li.cil.oc.api.Items.get("cable").createItemStack(1),
-                   'p', li.cil.oc.api.Items.get("chip3").createItemStack(1),
-                   'b', li.cil.oc.api.Items.get("batteryUpgrade3").createItemStack(1)
-           );
        }
 
         if(Config.registerRadarUpgrade){
