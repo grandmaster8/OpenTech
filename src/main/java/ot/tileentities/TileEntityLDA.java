@@ -25,24 +25,18 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
     private boolean addToNetwork = false;
 
     private int distance, channel, transmitTime;
-    private boolean isStructure, isTransmit;
+    private boolean isStructure;
 
     public TileEntityLDA() {
         node = Network.newNode(this, Visibility.Network).withComponent(getComponentName()).withConnector().create();
         distance = Config.ldaMaxDistance;
         isStructure = false;
-        isTransmit = false;
 
         LDAS.addLDA(this);
     }
 
     @Override
     public void updateEntity() {
-        if(isTransmit){
-            transmitTime--;
-            if(transmitTime <= 0)
-                isTransmit = false;
-        }
         if(!addToNetwork){
             addToNetwork = true;
             Network.joinOrCreateNetwork(this);
@@ -97,12 +91,6 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
         return new Object[]{channel};
     }
 
-    @Callback(doc="check transmit.")
-    public Object[] isTransmit(Context context, Arguments arguments) throws Exception{
-        if(!isStructure) return new Object[]{false};
-        return new Object[]{isTransmit};
-    }
-
     @Callback(doc="function(channel:int), open channel.")
     public Object[] open(Context context, Arguments arguments) throws Exception{
         if(!isStructure) return new Object[]{false};
@@ -141,15 +129,11 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
     public Object[] broadcast(Context context, Arguments arguments) throws Exception{
         Connector connector = (Connector) node;
         if(distance > 0 && isStructure && (connector.tryChangeBuffer(Config.ldaEnergyUsage) || !API.isPowerEnabled)){
-            if(isTransmit)
-                return new Object[]{false};
-
             String data = arguments.checkString(0);
             if(data.length() > Config.ldaMaxPacketSize)
                 return new Object[]{false};
 
             LDAS.broadcastMessage(this, data);
-            isTransmit = true;
             transmitTime = 60;
             return new Object[]{true};
         }
@@ -160,16 +144,12 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
     public Object[] send(Context context, Arguments arguments) throws Exception{
         Connector connector = (Connector) node;
         if(distance > 0 && isStructure && (connector.tryChangeBuffer(Config.ldaEnergyUsage) || !API.isPowerEnabled)){
-            if(isTransmit)
-                return new Object[]{false};
-
             String address = arguments.checkString(0);
             String data = arguments.checkString(1);
             if(data.length() > Config.ldaMaxPacketSize)
                 return new Object[]{false};
 
             LDAS.sendMessage(this, address, data);
-            isTransmit = true;
             transmitTime = 60;
             return new Object[]{true};
         }
