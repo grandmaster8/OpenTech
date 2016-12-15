@@ -10,7 +10,7 @@ import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.ManagedEnvironment;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import ot.environment.TeslaUpgrade;
+import ot.environment.EnvTeslaUpgrade;
 import ot.item.Items;
 
 /**
@@ -29,7 +29,7 @@ public class DriverTeslaUpgrade implements Item, HostAware, EnvironmentProvider 
 
     @Override
     public ManagedEnvironment createEnvironment(ItemStack stack, EnvironmentHost host) {
-        return new TeslaUpgrade(host);
+        return new EnvTeslaUpgrade(host);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class DriverTeslaUpgrade implements Item, HostAware, EnvironmentProvider 
     @Override
     public Class<?> getEnvironment(ItemStack stack) {
         if(stack.getItem() == Items.tesla)
-            return TeslaUpgrade.class;
+            return EnvTeslaUpgrade.class;
         return null;
     }
 }

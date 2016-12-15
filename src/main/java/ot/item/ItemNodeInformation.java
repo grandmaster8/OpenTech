@@ -18,7 +18,11 @@ public abstract class ItemNodeInformation extends Item {
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean b) {
-        list.add("Tier: " + (API.driver.driverFor(stack).tier(stack) + 1));
+        li.cil.oc.api.driver.Item driver = API.driver.driverFor(stack);
+        if(driver == null)
+            return;
+
+        list.add("Tier: " + (driver.tier(stack) + 1));
         if(stack.hasTagCompound()){
             NBTTagCompound tagCompound = stack.getTagCompound();
             if(tagCompound.hasKey("oc:data")){

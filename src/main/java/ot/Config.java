@@ -32,6 +32,9 @@ public class Config {
 
     public static int scannerWidth, scannerHeight, scannerUsageCount, scannerUsageCost;
 
+    public static int NREfficiency;
+    public static int NRFuelCount;
+
     public static boolean registerCreativeChatBox,
             registerChatBox,
             registerRadarUpgrade,
@@ -40,7 +43,8 @@ public class Config {
             registerLDA,
             registerDecorativeCable,
             registerPIB,
-            registerScanner
+            registerScanner,
+            registerNR
     ;
 
 
@@ -54,7 +58,7 @@ public class Config {
 
         maxTeslaRadius = configuration.get("tesla", "maxTeslaRadius", 10).getInt();
         maxTeslaHeat = configuration.get("tesla", "maxTeslaHeat", 100, "").getInt();
-        teslaEnergyUsage = configuration.get("tesla", "teslaEnergyUsage", 1000, "").getInt();
+        teslaEnergyUsage = configuration.get("tesla", "teslaEnergyUsage", 10000, "").getInt();
         teslaDamage = (float) configuration.get("tesla", "teslaDamage", 10, "").getDouble();
 
         radarRange = configuration.get("radar", "radarRange", 15, "").getInt();
@@ -69,6 +73,7 @@ public class Config {
         registerDecorativeCable = configuration.getBoolean("registerDecorativeCable", "register", true, "");
         registerPIB = configuration.getBoolean("registerPIB", "register", true, "");
         registerScanner = configuration.getBoolean("registerScanner", "register", true, "");
+        registerNR = configuration.getBoolean("registerNR", "register", true, "");
 
         ldaMaxDistance = configuration.getInt("lda", "ldaMaxDistance", 2000, 0, 1000000, "");
         ldaMaxPacketSize = configuration.getInt("lda", "ldaMaxPacketSize", 1024 * 8, 0, 1000000, "");
@@ -81,6 +86,10 @@ public class Config {
         scannerHeight = configuration.getInt("scanner", "scannerHeight", 40, 0, 1000000, "");
         scannerUsageCount = configuration.getInt("scanner", "scannerUsageCount", 40000, 0, 10000000, "");
         scannerUsageCost = configuration.getInt("scanner", "scannerUsageCost", 4000, 0, 10000000, "");
+
+        NREfficiency = configuration.getInt("reactor", "NREfficiency", 10, 0, 10000000, "");
+        NRFuelCount = configuration.getInt("reactor", "NRFuelCount", 100000, 0, 10000000, "");
+
 
         configuration.save();
     }

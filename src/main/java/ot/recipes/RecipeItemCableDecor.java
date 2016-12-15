@@ -17,12 +17,12 @@ import java.util.List;
  */
 public class RecipeItemCableDecor implements IRecipe {
 
-    private Item chamelium;
+    private ItemStack chamelium;
 
     private List<Item> blackList;
 
     public RecipeItemCableDecor() {
-        chamelium = li.cil.oc.api.Items.get("chamelium").item();
+        chamelium = li.cil.oc.api.Items.get("chamelium").createItemStack(1);
         blackList = new ArrayList<Item>();
 
         blackList.add(Item.getItemFromBlock(li.cil.oc.api.Items.get("cable").block()));
@@ -37,12 +37,12 @@ public class RecipeItemCableDecor implements IRecipe {
         boolean b1 = false, b2 = false;
         for(int slot = 0; slot < inventoryCrafting.getSizeInventory(); slot++){
             if(inventoryCrafting.getStackInSlot(slot) != null){
-                Item item = inventoryCrafting.getStackInSlot(slot).getItem();
-                if(!b1 && item == chamelium)
+                ItemStack stack = inventoryCrafting.getStackInSlot(slot);
+                if(!b1 && stack.isItemEqual(chamelium))
                     b1 = true;
 
-                if(b1 && !b2 && item instanceof ItemBlock){
-                    ItemBlock itemBlock = (ItemBlock) item;
+                if(b1 && !b2 && stack.getItem() instanceof ItemBlock){
+                    ItemBlock itemBlock = (ItemBlock) stack.getItem();
                     return itemBlock.field_150939_a.isOpaqueCube();
                 }
             }
@@ -58,14 +58,14 @@ public class RecipeItemCableDecor implements IRecipe {
 
         for(int slot = 0; slot < inventoryCrafting.getSizeInventory(); slot++){
             if(inventoryCrafting.getStackInSlot(slot) != null){
-                Item item = inventoryCrafting.getStackInSlot(slot).getItem();
-                if(!b1 && item == chamelium){
+                ItemStack stack = inventoryCrafting.getStackInSlot(slot);
+                if(!b1 && stack.isItemEqual(chamelium)){
                     b1 = true;
                     chameliumSize = inventoryCrafting.getStackInSlot(slot).stackSize;
                 }
 
-                if(b1 && !b2 && item instanceof ItemBlock && !isBlackList(item)){
-                    ItemBlock itemBlock = (ItemBlock) item;
+                if(b1 && !b2 && stack.getItem() instanceof ItemBlock && !isBlackList(stack.getItem())){
+                    ItemBlock itemBlock = (ItemBlock) stack.getItem();
                     if(itemBlock.field_150939_a.isOpaqueCube())
                         return new ItemStack(Blocks.cableDecor, chameliumSize, Block.getIdFromBlock(itemBlock.field_150939_a));
                 }

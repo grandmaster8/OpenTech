@@ -41,6 +41,9 @@ public class ItemScanner extends Item implements Chargeable {
             return false;
         }
 
+        if(!world.isRemote)
+            return false;
+
         int minX = x - Config.scannerWidth / 2;
         int minY = y - Config.scannerHeight / 2;
         int minZ = z - Config.scannerWidth / 2;

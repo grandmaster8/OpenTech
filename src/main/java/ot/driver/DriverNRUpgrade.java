@@ -8,16 +8,16 @@ import li.cil.oc.api.network.EnvironmentHost;
 import li.cil.oc.api.network.ManagedEnvironment;
 import li.cil.oc.api.prefab.DriverItem;
 import net.minecraft.item.ItemStack;
-import ot.environment.EnvRadarUpgrade;
+import ot.environment.EnvNRUpgrade;
 import ot.item.Items;
 
 /**
- * Created by Avaja on 21.05.2016.
+ * Created by Avaja on 15.12.2016.
  */
-public class DriverRadarUpgrade extends DriverItem implements HostAware {
+public class DriverNRUpgrade extends DriverItem implements HostAware {
 
-    public DriverRadarUpgrade() {
-        super(new ItemStack[]{new ItemStack(Items.radar)});
+    public DriverNRUpgrade() {
+            super(new ItemStack[]{new ItemStack(Items.nr)});
     }
 
     @Override
@@ -27,11 +27,16 @@ public class DriverRadarUpgrade extends DriverItem implements HostAware {
 
     @Override
     public ManagedEnvironment createEnvironment(ItemStack stack, EnvironmentHost host) {
-        return new EnvRadarUpgrade(host);
+        return new EnvNRUpgrade(host);
     }
 
     @Override
     public String slot(ItemStack stack) {
         return Slot.Upgrade;
+    }
+
+    @Override
+    public int tier(ItemStack stack) {
+        return 2;
     }
 }

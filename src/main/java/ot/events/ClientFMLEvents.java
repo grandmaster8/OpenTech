@@ -20,10 +20,10 @@ public class ClientFMLEvents {
     public void clientTick(TickEvent.ClientTickEvent tickEvent){
         SparksSystem.updateAll();
 
-        if(Minecraft.getMinecraft().thePlayer != null){
-            ItemStack itemStack = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
-            Minecraft minecraft = Minecraft.getMinecraft();
+        Minecraft minecraft = Minecraft.getMinecraft();
 
+        if(minecraft.thePlayer != null){
+            ItemStack itemStack = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
             EntityPlayer player = minecraft.thePlayer;
 
 
@@ -52,6 +52,5 @@ public class ClientFMLEvents {
                 minecraft.renderGlobal.markBlockForRenderUpdate((int)player.posX, (int)player.posY, (int)player.posZ);
             }
         }
-
     }
 }

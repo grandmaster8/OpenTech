@@ -8,6 +8,7 @@ tile.OpenTechnology_Cell.name=Cell Antenna
 tile.OpenTechnology_CableDecor.name=Cable
 
 
+item.OpenTechnology_nrUpgrade.name=Reactor Upgrade
 item.OpenTechnology_teslaUpgrade.name=Tesla Upgrade
 item.OpenTechnology_RadarUpgrade.name=Radar Upgrade
 item.OpenTechnology_scanner.name=Scanner

@@ -24,7 +24,6 @@ public class OpenTechnology {
 	public static Logger logger;
 	public static CreativeTab tab = new CreativeTab();
 
-
 	public static DamageSource electricDamage = new DamageSource("electricDamage");
 
 	@Mod.Instance

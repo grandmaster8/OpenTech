@@ -24,10 +24,10 @@ import java.util.Map;
 /**
  * Created by Avaja on 21.05.2016.
  */
-public class RadarUpgrade extends ManagedEnvironment implements DeviceInfo {
+public class EnvRadarUpgrade extends ManagedEnvironment implements DeviceInfo {
     private EnvironmentHost container;
 
-    public RadarUpgrade(EnvironmentHost host) {
+    public EnvRadarUpgrade(EnvironmentHost host) {
         this.container = host;
         setNode(Network.newNode(this, Visibility.Network).withComponent("radar").withConnector().create());
     }

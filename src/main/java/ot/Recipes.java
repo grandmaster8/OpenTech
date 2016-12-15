@@ -44,6 +44,25 @@ public class Recipes {
                     'b', IC2Items.getItem("hvTransformer")
             );
         }
+
+        if(Config.registerNR){
+            ItemStack vent = IC2Items.getItem("reactorVentDiamond");
+            vent.setItemDamage(1);
+            ItemStack lead = IC2Items.getItem("leadBlock");
+            lead.setItemDamage(4);
+            ItemStack reflector = IC2Items.getItem("reactorReflectorThick");
+            reflector.setItemDamage(1);
+            addRecipe(new ItemStack(ot.item.Items.nr),
+                    "vvv",
+                    "oro",
+                    "lcl",
+                    'v', vent,
+                    'r', IC2Items.getItem("nuclearReactor"),
+                    'o', reflector,
+                    'l', lead,
+                    'c', li.cil.oc.api.Items.get("cpu3").createItemStack(1)
+            );
+        }
     }
 
     public static void vanilla(){

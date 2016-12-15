@@ -28,14 +28,14 @@ import java.util.Map;
 /**
  * Created by Avaja on 07.05.2016.
  */
-public class TeslaUpgrade extends ManagedEnvironment implements DeviceInfo {
+public class EnvTeslaUpgrade extends ManagedEnvironment implements DeviceInfo {
 
     private EnvironmentHost host;
 
     private boolean isHeat;
     private int heat;
 
-    public TeslaUpgrade(EnvironmentHost host) {
+    public EnvTeslaUpgrade(EnvironmentHost host) {
         this.setNode(Network.newNode(this, Visibility.Network).withComponent("tesla").withConnector().create());
         this.host = host;
         isHeat = false;

@@ -6,6 +6,8 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.common.MinecraftForge;
+import ot.events.ClientEvents;
 import ot.events.ClientFMLEvents;
 import ot.render.RenderCableDecorHandler;
 import ot.render.RenderingAntennaHandler;
@@ -29,7 +31,6 @@ public class ClientProxy extends CommonProxy{
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRadar.class, new RadarRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLDA.class, new TileAntennaRender());
 
-
 		RenderingRegistry.registerBlockHandler(radarRenderingId, new RenderingRadarHandler());
 		RenderingRegistry.registerBlockHandler(LDARenderingId, new RenderingAntennaHandler());
 		RenderingRegistry.registerBlockHandler(CableDecorRenderingId, new RenderCableDecorHandler());
@@ -38,6 +39,7 @@ public class ClientProxy extends CommonProxy{
 	@Override
 	public void init(FMLInitializationEvent e) {
 		super.init(e);
+		MinecraftForge.EVENT_BUS.register(new ClientEvents());
 		FMLCommonHandler.instance().bus().register(new ClientFMLEvents());
 	}
 
