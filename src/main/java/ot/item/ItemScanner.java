@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
@@ -25,24 +26,24 @@ public class ItemScanner extends Item implements Chargeable {
         setCreativeTab(OpenTechnology.tab);
         setTextureName(OpenTechnology.MODID + ":scanner");
         setUnlocalizedName(OpenTechnology.MODID + "_scanner");
-        setMaxDamage(Config.scannerUsageCount);
+        setMaxDamage(100);
     }
 
     @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean b) {
-        list.add(EnumChatFormatting.YELLOW+ StatCollector.translateToLocal("lore.scanner.charge") + (itemStack.getMaxDamage() - itemStack.getItemDamage()) + "/" + itemStack.getMaxDamage());
+    public void addInformation(ItemStack stack, EntityPlayer entityPlayer, List list, boolean b) {
+        list.add(EnumChatFormatting.YELLOW + StatCollector.translateToLocal("lore.scanner.charge") +
+                (getEnergy(stack) + "/" + Config.scannerEnergyCount));
     }
 
     @Override
-    public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int side, float dx, float dy, float dz) {
-        if(itemStack.getMaxDamage() - itemStack.getItemDamage() >= Config.scannerUsageCost){
-            itemStack.setItemDamage(itemStack.getItemDamage() + Config.scannerUsageCost);
-        }else{
-            return false;
+    public boolean onItemUse(ItemStack stack, EntityPlayer entityPlayer, World world, int x, int y, int z, int side, float dx, float dy, float dz) {
+        if(!world.isRemote && getEnergy(stack) >= Config.scannerUsageCost){
+            setEnergy(stack, getEnergy(stack) - Config.scannerUsageCost);
+            stack.setItemDamage(calcDamage(stack));
         }
 
-        if(!world.isRemote)
-            return false;
+        if(getEnergy(stack) < Config.scannerUsageCost)
+            return true;
 
         int minX = x - Config.scannerWidth / 2;
         int minY = y - Config.scannerHeight / 2;
@@ -57,12 +58,44 @@ public class ItemScanner extends Item implements Chargeable {
                 for(int iy = minY; iy < maxY; iy++){
                     Block block  = world.getBlock(ix, iy, iz);
                     if(block instanceof RobotProxy){
-                        entityPlayer.addChatComponentMessage(new ChatComponentText(String.format(StatCollector.translateToLocal("chat.scanner"), ix, iy, iz)));
+                        entityPlayer.addChatComponentMessage(new ChatComponentText(String.format(StatCollector.translateToLocal("chat.scanner"),
+                                ix, iy, iz)));
                     }
                 }
             }
         }
-        return false;
+        return true;
+    }
+
+    private int calcDamage(ItemStack stack){
+        float per = getEnergy(stack) / (Config.scannerEnergyCount / 100f);
+        return stack.getMaxDamage() - (int)per;
+    }
+
+    private int getEnergy(ItemStack stack){
+        if(stack.hasTagCompound() && stack.getTagCompound().hasKey("energy")){
+            return stack.getTagCompound().getInteger("energy");
+        }else{
+            NBTTagCompound nbt = new NBTTagCompound();
+            stack.setTagCompound(nbt);
+            nbt.setInteger("energy", 0);
+        }
+        return 0;
+    }
+
+    private void setEnergy(ItemStack stack, int energyCount){
+        if(stack.hasTagCompound() && stack.getTagCompound().hasKey("energy")){
+            stack.getTagCompound().setInteger("energy", energyCount);
+        }else{
+            NBTTagCompound nbt = new NBTTagCompound();
+            nbt.setInteger("energy", energyCount);
+            stack.setTagCompound(nbt);
+        }
+    }
+
+    @Override
+    public void setDamage(ItemStack stack, int damage) {
+        super.setDamage(stack, damage);
     }
 
     @Override
@@ -72,13 +105,18 @@ public class ItemScanner extends Item implements Chargeable {
 
     @Override
     public double charge(ItemStack stack, double amount, boolean simulate) {
-        if(stack.getItemDamage() >= amount){
-            stack.setItemDamage((int) (stack.getItemDamage() - amount));
+        int energy = Config.scannerEnergyCount - getEnergy(stack);
+
+        if(energy >= amount){
+            setEnergy(stack, (int) (getEnergy(stack) + amount));
+            stack.setItemDamage(calcDamage(stack));
             return 0;
         }else{
-            int delta = stack.getMaxDamage() - stack.getItemDamage();
-            stack.setItemDamage(0);
-            return amount - delta;
+            setEnergy(stack, Config.scannerEnergyCount);
+            stack.setItemDamage(calcDamage(stack));
+            return amount - energy;
         }
     }
+
+
 }

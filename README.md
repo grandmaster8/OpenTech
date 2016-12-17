@@ -82,4 +82,6 @@ Custom blocks for OpenComputers and Minecraft.
 #### `send(address:string, data:string)`.
 Отправляет сообщение конкретному адресату. Обое должны работать на одном канале.
 
+## Тесла Апгрейд
+
 *Описание дополняется...*
