@@ -1,5 +1,7 @@
 package ot.blocks.antenna;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
@@ -21,6 +23,7 @@ public class BlockCell extends Block {
         setHardness(5);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public int getRenderType() {
         return ClientProxy.LDARenderingId;
