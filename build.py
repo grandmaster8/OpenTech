@@ -65,7 +65,7 @@ if not os.path.exists('backup'):
 print '\n'
 
 mainClass = findFile('OpenTechnology.java')
-shutil.shutil.copyfile(mainClass, 'backup' + os.path.sep + 'OpenTechnology.java')
+shutil.copyfile(mainClass, 'backup' + os.path.sep + 'OpenTechnology.java')
 
 data = readFile(mainClass)
 result = re.findall('String.+VERSION.+=.+\"(.*)\"', data)
@@ -81,7 +81,7 @@ else:
     exit()
 
 mcInfo = findFile('mcmod.info')
-shutil.shutil.copyfile(mcInfo, 'backup' + os.path.sep + 'mcmod.info')
+shutil.copyfile(mcInfo, 'backup' + os.path.sep + 'mcmod.info')
 
 data = readFile(mcInfo)
 
