@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Avaja on 07.12.2016.
  */
-public class LDAS {
+public class LDASystem {
 
     private static List<TileEntityLDA> ldas = new ArrayList<TileEntityLDA>();
 

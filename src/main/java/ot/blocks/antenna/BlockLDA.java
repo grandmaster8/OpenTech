@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import ot.OpenTechnology;
 import ot.blocks.Blocks;
 import ot.proxy.ClientProxy;
-import ot.system.LDAS;
+import ot.system.LDASystem;
 import ot.tileentities.TileEntityLDA;
 
 /**
@@ -38,7 +38,7 @@ public class BlockLDA extends BlockContainer {
             }
         }
 
-        LDAS.removeLDA(tileEntityLDA);
+        LDASystem.removeLDA(tileEntityLDA);
         super.breakBlock(world, x, y, z, block, tileProvider);
     }
 

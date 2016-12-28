@@ -1,7 +1,8 @@
-import sys
+import fnmatch
 import os
 import re
-import fnmatch
+import shutil
+import sys
 
 workingPath = os.getcwd()
 
@@ -16,18 +17,6 @@ def findFile(name):
 
 def readFile(path):
     return open(path).read()
-
-
-def copyFile(srcPath, dstPath):
-    """
-    :type srcPath: str
-    :type dstPath: str
-    :return:
-    """
-    data = readFile(srcPath)
-    f = open(dstPath, 'w')
-    f.write(data)
-    f.close()
 
 
 if not os.path.isfile('build.cfg'):
@@ -76,7 +65,7 @@ if not os.path.exists('backup'):
 print '\n'
 
 mainClass = findFile('OpenTechnology.java')
-copyFile(mainClass, 'backup' + os.path.sep + 'OpenTechnology.java')
+shutil.shutil.copyfile(mainClass, 'backup' + os.path.sep + 'OpenTechnology.java')
 
 data = readFile(mainClass)
 result = re.findall('String.+VERSION.+=.+\"(.*)\"', data)
@@ -92,7 +81,7 @@ else:
     exit()
 
 mcInfo = findFile('mcmod.info')
-copyFile(mcInfo, 'backup' + os.path.sep + 'mcmod.info')
+shutil.shutil.copyfile(mcInfo, 'backup' + os.path.sep + 'mcmod.info')
 
 data = readFile(mcInfo)
 
@@ -108,7 +97,7 @@ else:
     exit()
 
 buildGradle = findFile('build.gradle')
-copyFile(buildGradle, 'backup' + os.path.sep + 'build.gradle')
+shutil.copyfile(buildGradle, 'backup' + os.path.sep + 'build.gradle')
 
 data = readFile(buildGradle)
 
@@ -134,7 +123,7 @@ os.system('gradlew build')
 
 pth = (workingPath + '/build/libs/OpenTechnology-' + sys.argv[1] + "_build_" + str(config['build']) + '.jar').replace('/', os.path.sep)
 
-copyFile(pth, ('C:/Users/Avaja/Desktop/OpenTechnology-' + sys.argv[1] + "_build_" + str(config['build']) + '.jar').replace('/', os.path.sep))
+shutil.copyfile(pth, ('C:/Users/Avaja/Desktop/OpenTechnology-' + sys.argv[1] + "_build_" + str(config['build']) + '.jar').replace('/', os.path.sep))
 
 f = open('build.cfg', 'w')
 f.write('build=' + str(config['build']))
