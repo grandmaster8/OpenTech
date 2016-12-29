@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Avaja on 10.12.2016.
  */
-public class PIBS {
+public class PIBSystem {
     private static List<TileEntityPIB> pibs = new ArrayList<TileEntityPIB>();
 
     public static void add(TileEntityPIB pib){

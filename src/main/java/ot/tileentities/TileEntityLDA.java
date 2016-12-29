@@ -14,7 +14,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 import ot.Config;
 import ot.blocks.Blocks;
-import ot.system.LDAS;
+import ot.system.LDASystem;
 
 /**
  * Created by Avaja on 07.12.2016.
@@ -32,7 +32,7 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
         distance = Config.ldaMaxDistance;
         isStructure = false;
 
-        LDAS.addLDA(this);
+        LDASystem.addLDA(this);
     }
 
     @Override
@@ -133,7 +133,7 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
             if(data.length() > Config.ldaMaxPacketSize)
                 return new Object[]{false};
 
-            LDAS.broadcastMessage(this, data);
+            LDASystem.broadcastMessage(this, data);
             transmitTime = 60;
             return new Object[]{true};
         }
@@ -149,7 +149,7 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
             if(data.length() > Config.ldaMaxPacketSize)
                 return new Object[]{false};
 
-            LDAS.sendMessage(this, address, data);
+            LDASystem.sendMessage(this, address, data);
             transmitTime = 60;
             return new Object[]{true};
         }
@@ -212,7 +212,7 @@ public class TileEntityLDA extends TileEntity  implements Analyzable, Environmen
     public void onChunkUnload() {
         super.onChunkUnload();
         if (node != null) node.remove();
-        LDAS.removeLDA(this);
+        LDASystem.removeLDA(this);
     }
 
     // ----------------------------------------------------------------------- //

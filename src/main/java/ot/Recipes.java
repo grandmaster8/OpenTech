@@ -39,7 +39,7 @@ public class Recipes {
                     "ccc",
                     "pbp",
                     "ccc",
-                    'c', IC2Items.getItem("ironCableBlock"),
+                    'c', IC2Items.getItem("ironCableItem"),
                     'p', li.cil.oc.api.Items.get("chip3").createItemStack(1),
                     'b', IC2Items.getItem("hvTransformer")
             );
