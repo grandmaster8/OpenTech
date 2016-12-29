@@ -27,6 +27,26 @@ public class BlockAntenna extends Block {
     }
 
     @Override
+    public boolean isNormalCube() {
+        return false;
+    }
+
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
+
+    @Override
+    public boolean canRenderInPass(int pass) {
+        return true;
+    }
+
+    @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int tileProvider) {
         super.breakBlock(world, x, y, z, block, tileProvider);
         Block b = world.getBlock(x, y - 1, z);
