@@ -204,10 +204,7 @@
         <root url="jar://$PROJECT_DIR$/eclipse/mods/OpenComputers-MC1.7.10-1.6.0.901-dev-dev.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/../../OpenComputers-MC1.7.10-1.6.0.9-sources.jar!/" />
-        <root url="jar://$PROJECT_DIR$/../../OpenComputers-MC1.7.10-1.6.0.9-sources.jar!/" />
-      </SOURCES>
+      <SOURCES />
     </library>
   </component>
   <component name="masterDetails">

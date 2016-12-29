@@ -1,12 +1,12 @@
-import fnmatch
+import sys
 import os
 import re
+import fnmatch
 import shutil
-import sys
 
 workingPath = os.getcwd()
 
-dirsBlackList = ["build", "\..*", 'backup', 'bin', 'out', 'eclipse', 'gradle', 'out', 'libs']
+dirsBlackList = ["build", "\..*", 'backup', 'bin', 'out', 'eclipse', 'gradle', 'out']
 
 
 def findFile(name):
@@ -112,6 +112,13 @@ else:
     print 'Error build.gradle'
     exit()
 
+version = findFile('LATEST_VERSION')
+if version != None:
+	shutil.copyfile(version, 'backup' + os.path.sep + 'LATEST_VERSION')
+	f = open(version, 'w')
+	f.write(sys.argv[1] + "_build_" + str(config['build']))
+	f.close()
+
 print 'create commit'
 
 os.system('git add ' + mainClass)
@@ -119,6 +126,7 @@ os.system('git add ' + mcInfo)
 os.system('git add ' + buildGradle)
 os.system('git commit -m "change version" --untracked-files=no')
 os.system('git push')
+
 os.system('gradlew build')
 
 pth = (workingPath + '/build/libs/OpenTechnology-' + sys.argv[1] + "_build_" + str(config['build']) + '.jar').replace('/', os.path.sep)
