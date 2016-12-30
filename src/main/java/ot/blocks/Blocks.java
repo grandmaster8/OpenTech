@@ -26,7 +26,7 @@ public class Blocks {
         cableDecor = new BlockCableDecor();
 
         if (Config.registerCreativeChatBox){
-            GameRegistry.registerBlock(creativeChatbox, "OT_AdminChatBox");
+            GameRegistry.registerBlock(creativeChatbox, "OT_CreativeChatBox");
         }else {
             System.out.println("CreativeChatBox off.");
         }

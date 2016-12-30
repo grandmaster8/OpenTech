@@ -59,6 +59,6 @@ public class ClientFMLEvents {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent loggedInEvent){
-        CheckVersion.check();
+        CheckVersion.check(loggedInEvent.player);
     }
 }

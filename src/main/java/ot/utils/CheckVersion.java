@@ -1,6 +1,5 @@
 package ot.utils;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import ot.OpenTechnology;
@@ -13,12 +12,11 @@ import java.net.URL;
  */
 public class CheckVersion {
 
-    public static void check() {
+    public static void check(EntityPlayer player) {
         try{
             String latestVersion = getLatestVersion();
             if(latestVersion != null){
                 latestVersion = latestVersion.replace("\n", "");
-                EntityPlayer player = Minecraft.getMinecraft().thePlayer;
                 if(!latestVersion.equals(OpenTechnology.VERSION)){
                     player.addChatComponentMessage(new ChatComponentText(String.format("§aOpenTechnology§f: A newer version is available: %s", latestVersion)));
                 }else{
