@@ -1,8 +1,8 @@
-import sys
+import fnmatch
 import os
 import re
-import fnmatch
 import shutil
+import sys
 
 workingPath = os.getcwd()
 
