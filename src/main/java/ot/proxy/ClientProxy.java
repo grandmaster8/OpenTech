@@ -14,8 +14,10 @@ import ot.render.RenderingAntennaHandler;
 import ot.render.RenderingRadarHandler;
 import ot.render.specialRender.RadarRender;
 import ot.render.specialRender.TileAntennaRender;
+import ot.render.specialRender.TileShieldGeneratorRender;
 import ot.tileentities.TileEntityLDA;
 import ot.tileentities.TileEntityRadar;
+import ot.tileentities.TileEntityShieldGenerator;
 
 public class ClientProxy extends CommonProxy{
 
@@ -30,6 +32,7 @@ public class ClientProxy extends CommonProxy{
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRadar.class, new RadarRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLDA.class, new TileAntennaRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityShieldGenerator.class, new TileShieldGeneratorRender());
 
 		RenderingRegistry.registerBlockHandler(radarRenderingId, new RenderingRadarHandler());
 		RenderingRegistry.registerBlockHandler(LDARenderingId, new RenderingAntennaHandler());
