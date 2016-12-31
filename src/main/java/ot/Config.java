@@ -44,7 +44,8 @@ public class Config {
             registerDecorativeCable,
             registerPIB,
             registerScanner,
-            registerNR
+            registerNR,
+            registerShieldGenerator
     ;
 
 
@@ -54,41 +55,42 @@ public class Config {
 
         chatboxMaxRadius = configuration.get("chatbox", "chatboxMaxRadius", 128, "").getInt();
         prefixChat = configuration.get("chatbox", "prefixChat", "@", "").getString();
-        maxMessageLength = configuration.get("chatbox", "maxMessageLength", 100).getInt();
+        maxMessageLength = configuration.get("chatbox", "maxMessageLength", 128).getInt();
 
-        maxTeslaRadius = configuration.get("tesla", "maxTeslaRadius", 10).getInt();
-        maxTeslaHeat = configuration.get("tesla", "maxTeslaHeat", 100, "").getInt();
-        teslaEnergyUsage = configuration.get("tesla", "teslaEnergyUsage", 10000, "").getInt();
-        teslaDamage = (float) configuration.get("tesla", "teslaDamage", 10, "").getDouble();
+        maxTeslaRadius = configuration.get("TESLA_UPGRADE", "maxTeslaRadius", 10).getInt();
+        maxTeslaHeat = configuration.get("TESLA_UPGRADE", "maxTeslaHeat",   100, "").getInt();
+        teslaEnergyUsage = configuration.get("TESLA_UPGRADE", "teslaEnergyUsage",  10000, "").getInt();
+        teslaDamage = (float) configuration.get("TESLA_UPGRADE", "teslaDamage",  10, "").getDouble();
 
-        radarRange = configuration.get("radar", "radarRange", 15, "").getInt();
-        radarEnergyUsage = configuration.get("radar", "radarEnergyUsage", 30).getDouble();
+        radarRange = configuration.get("RADAR", "radarRange", 15, "").getInt();
+        radarEnergyUsage = configuration.get("RADAR", "radarEnergyUsage", 30).getDouble();
 
-        registerCreativeChatBox = configuration.getBoolean("registerCreativeChatBox", "register", true, "");
-        registerChatBox = configuration.getBoolean("registerChatBox", "register", true, "");
-        registerRadarUpgrade = configuration.getBoolean("registerRadarUpgrade", "register", true, "");
-        registerTeslaUpgrade = configuration.getBoolean("registerTeslaUpgrade", "register", true, "");
-        registerRadar = configuration.getBoolean("registerRadar", "register", true, "");
-        registerLDA = configuration.getBoolean("registerLDA", "register", true, "");
-        registerDecorativeCable = configuration.getBoolean("registerDecorativeCable", "register", true, "");
-        registerPIB = configuration.getBoolean("registerPIB", "register", true, "");
-        registerScanner = configuration.getBoolean("registerScanner", "register", true, "");
-        registerNR = configuration.getBoolean("registerNR", "register", true, "");
+        registerCreativeChatBox = configuration.getBoolean("registerCreativeChatBox", "REGISTER", true, "");
+        registerChatBox = configuration.getBoolean("registerChatBox", "REGISTER", true, "");
+        registerRadarUpgrade = configuration.getBoolean("registerRadarUpgrade", "REGISTER", true, "");
+        registerTeslaUpgrade = configuration.getBoolean("registerTeslaUpgrade", "REGISTER", true, "");
+        registerRadar = configuration.getBoolean("registerRadar", "REGISTER", true, "");
+        registerLDA = configuration.getBoolean("registerLDA", "REGISTER", true, "");
+        registerDecorativeCable = configuration.getBoolean("registerDecorativeCable", "REGISTER", true, "");
+        registerPIB = configuration.getBoolean("registerPIB", "REGISTER", true, "");
+        registerScanner = configuration.getBoolean("registerScanner", "REGISTER", true, "");
+        registerNR = configuration.getBoolean("registerNR", "REGISTER", true, "");
+        registerShieldGenerator = configuration.getBoolean("registerShieldGenerator", "REGISTER", true, "");
 
-        ldaMaxDistance = configuration.getInt("lda", "ldaMaxDistance", 2000, 0, 1000000, "");
-        ldaMaxPacketSize = configuration.getInt("lda", "ldaMaxPacketSize", 1024 * 8, 0, 1000000, "");
-        ldaEnergyUsage = configuration.getInt("lda", "ldaEnergyUsage", 1000, 0, 1000000, "");
+        ldaMaxDistance = configuration.getInt("ldaMaxDistance", "LDA", 2000, 0, 1000000, "");
+        ldaMaxPacketSize = configuration.getInt("ldaMaxPacketSize", "LDA", 1024 * 8, 0, 1000000, "");
+        ldaEnergyUsage = configuration.getInt("ldaEnergyUsage", "LDA", 1000, 0, 1000000, "");
 
-        pibUsingEnergy = configuration.getString("pib", "pibUsingEnergy", "distance * (distance / 16) * itemCount", "");
-        pibUsingEnergyDimension = configuration.getInt("pib", "pibUsingEnergyDimension", 1000, 0, 100000000, "");
+        pibUsingEnergy = configuration.getString("pibUsingEnergy", "pib", "distance * (distance / 16) * itemCount", "");
+        pibUsingEnergyDimension = configuration.getInt("pibUsingEnergyDimension", "pib", 1000, 0, 100000000, "");
 
-        scannerWidth = configuration.getInt("scanner", "scannerWidth", 40, 0, 1000000, "");
-        scannerHeight = configuration.getInt("scanner", "scannerHeight", 40, 0, 1000000, "");
-        scannerEnergyCount = configuration.getInt("scanner", "scannerEnergyCount", 40000, 0, 10000000, "");
-        scannerUsageCost = configuration.getInt("scanner", "scannerUsageCost", 4000, 0, 10000000, "");
+        scannerWidth = configuration.getInt("scannerWidth", "scanner", 40, 0, 1000000, "");
+        scannerHeight = configuration.getInt("scannerHeight", "scanner", 40, 0, 1000000, "");
+        scannerEnergyCount = configuration.getInt("scannerEnergyCount", "scanner", 40000, 0, 10000000, "");
+        scannerUsageCost = configuration.getInt("scannerUsageCost", "scanner", 4000, 0, 10000000, "");
 
-        NREfficiency = configuration.getInt("reactor", "NREfficiency", 10, 0, 10000000, "");
-        NRFuelCount = configuration.getInt("reactor", "NRFuelCount", 100000, 0, 10000000, "");
+        NREfficiency = configuration.getInt("NREfficiency", "reactor", 10, 0, 10000000, "");
+        NRFuelCount = configuration.getInt("NRFuelCount", "reactor", 100000, 0, 10000000, "");
 
 
         configuration.save();
