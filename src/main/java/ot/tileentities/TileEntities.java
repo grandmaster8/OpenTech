@@ -26,7 +26,5 @@ public class TileEntities {
 
         if(Config.registerPIB)
             GameRegistry.registerTileEntity(TileEntityPIB.class, "TileEntityPIB");
-
-        GameRegistry.registerTileEntity(TileEntityShieldGenerator.class, "TileEntityShieldGenerator");
     }
 }

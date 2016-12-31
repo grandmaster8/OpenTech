@@ -31,7 +31,11 @@ public class SparksSystem {
 
             int count = r.nextInt(2);
             for(int q = 0; q < count; q++){
-                minecraft.effectRenderer.addEffect(new SparkEffect(pair.entity));
+                if(pair.entity != null){
+                    minecraft.effectRenderer.addEffect(new SparkEffect(pair.entity));
+                }else{
+                    entities.remove(i);
+                }
             }
         }
     }
