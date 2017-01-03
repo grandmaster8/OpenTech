@@ -16,10 +16,15 @@ public class SparksSystem {
     private static List<Pair> entities = new ArrayList<Pair>();
 
     public static void addEntity(Entity entity){
+        if(Minecraft.getMinecraft().gameSettings.particleSetting != 0)
+            return;
         entities.add(new Pair(0, entity));
     }
 
     public static void updateAll(){
+        if(Minecraft.getMinecraft().gameSettings.particleSetting != 0)
+            return;
+
         Random r = new Random(System.currentTimeMillis());
         Minecraft minecraft = Minecraft.getMinecraft();
 
