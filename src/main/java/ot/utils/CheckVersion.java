@@ -19,8 +19,6 @@ public class CheckVersion {
                 latestVersion = latestVersion.replace("\n", "");
                 if(!latestVersion.equals(OpenTechnology.VERSION)){
                     player.addChatComponentMessage(new ChatComponentText(String.format("§aOpenTechnology§f: A newer version is available: %s", latestVersion)));
-                }else{
-                    player.addChatComponentMessage(new ChatComponentText("§aOpenTechnology§f: Running the latest version."));
                 }
             }
         }catch (Exception e){
