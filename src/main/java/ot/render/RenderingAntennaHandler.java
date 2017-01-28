@@ -50,7 +50,7 @@ public class RenderingAntennaHandler implements ISimpleBlockRenderingHandler {
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-        if(world.getBlockMetadata(x, y, z) == 0)
+        if(world.getBlockMetadata(x, y, z) == 0 && block != null && modelId == getRenderId())
             renderer.renderStandardBlock(block, x, y, z);
         return true;
     }

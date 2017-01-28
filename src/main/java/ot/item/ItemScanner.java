@@ -12,9 +12,11 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.text.StrSubstitutor;
 import ot.Config;
 import ot.OpenTechnology;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -64,9 +66,15 @@ public class ItemScanner extends Item implements Chargeable {
             for(int iz = minZ; iz < maxZ; iz++){
                 for(int iy = minY; iy < maxY; iy++){
                     Block block  = world.getBlock(ix, iy, iz);
+                    int distance = (int) Math.abs(entityPlayer.getDistance(ix, iy, iz));
                     if(block instanceof RobotProxy){
-                        entityPlayer.addChatComponentMessage(new ChatComponentText(String.format(StatCollector.translateToLocal("chat.scanner"),
-                                ix, iy, iz)));
+                        HashMap<String, Object> values = new HashMap<String, Object>();
+                        values.put("x", ix);
+                        values.put("y", iy);
+                        values.put("z", iz);
+                        values.put("distance", distance);
+                        StrSubstitutor strSubstitutor = new StrSubstitutor(values);
+                        entityPlayer.addChatComponentMessage(new ChatComponentText(strSubstitutor.replace(StatCollector.translateToLocal("chat.scanner"))));
                     }
                 }
             }
