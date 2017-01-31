@@ -12,7 +12,6 @@ public class Config {
 
     public static boolean logging;
     public static int chatboxMaxRadius;
-    public static String prefixChat;
     public static int maxMessageLength;
 
     public static int maxTeslaRadius;
@@ -54,7 +53,6 @@ public class Config {
         configuration.load();
 
         chatboxMaxRadius = configuration.get("chatbox", "chatboxMaxRadius", 128, "").getInt();
-        prefixChat = configuration.get("chatbox", "prefixChat", "@", "").getString();
         maxMessageLength = configuration.get("chatbox", "maxMessageLength", 128).getInt();
 
         maxTeslaRadius = configuration.get("TESLA_UPGRADE", "maxTeslaRadius", 10).getInt();

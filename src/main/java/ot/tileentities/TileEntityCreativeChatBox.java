@@ -11,7 +11,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
-import ot.Config;
 import ot.system.ChatBoxEventSystem;
 
 import java.util.List;
@@ -90,20 +89,6 @@ public class TileEntityCreativeChatBox extends TileEntity implements Analyzable,
         List<EntityPlayer> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
         for (EntityPlayer player : players){
             player.addChatMessage(new ChatComponentText(String.format("%s", arguments.checkString(0))));
-        }
-        return new Object[]{};
-    }
-
-    @Callback(doc="function(message:string); formatting function, @ replace §. It works like, say.")
-    public Object[] sayColored(Context context, Arguments arguments) throws Exception{
-
-        System.out.println(String.format("say: x=%d, y=%d, z=%d", xCoord, yCoord, zCoord));
-
-        String message = arguments.checkString(0).replace(Config.prefixChat.charAt(0), (char) 167);
-
-        List<EntityPlayer> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
-        for (EntityPlayer player : players){
-            player.addChatMessage(new ChatComponentText(String.format("%s", message)));
         }
         return new Object[]{};
     }

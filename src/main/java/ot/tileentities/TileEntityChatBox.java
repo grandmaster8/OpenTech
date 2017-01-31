@@ -80,27 +80,6 @@ public class TileEntityChatBox extends TileEntity implements Analyzable, Environ
         return new Object[]{};
     }
 
-    @Callback(doc="function(message:string); formatting function, @ replace §. It works like, say.")
-    public Object[] sayColored(Context context, Arguments arguments) throws Exception{
-
-        String message = arguments.checkString(0);
-
-        if (message.length() > Config.maxMessageLength)
-            message = message.substring(0, Config.maxMessageLength);
-
-        System.out.println(String.format("say: x=%d, y=%d, z=%d", xCoord, yCoord, zCoord));
-
-        message = message.replace(Config.prefixChat.charAt(0), (char)167);
-
-        List<EntityPlayer> players = worldObj.playerEntities;
-        for (EntityPlayer player : players){
-            if (player.getDistance(this.xCoord, this.yCoord, this.zCoord) <= radius){
-                player.addChatMessage(new ChatComponentText(message));
-            }
-        }
-        return new Object[]{};
-    }
-
     @Callback
     public Object[] setRadius(Context context, Arguments arguments) throws Exception{
         int tmp = arguments.checkInteger(0);
