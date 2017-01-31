@@ -1,6 +1,7 @@
 package ot.system;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.DamageSource;
 import ot.tileentities.TileEntityChatBox;
 import ot.tileentities.TileEntityCreativeChatBox;
 
@@ -64,15 +65,21 @@ public class ChatBoxEventSystem {
         }
     }
 
-    public static void eventDeath(EntityPlayer player){
+    public static void eventDeath(EntityPlayer player, DamageSource damageSource){
         for (TileEntityCreativeChatBox box : adminChatBoxs){
-            box.eventDeath(player);
+            box.eventDeath(player, damageSource);
         }
     }
 
-    public static void eventLogging(EntityPlayer player) {
+    public static void eventLoggedIn(EntityPlayer player) {
         for (TileEntityCreativeChatBox box : adminChatBoxs){
-            box.eventLogging(player);
+            box.eventLoggedIn(player);
+        }
+    }
+
+    public static void eventLoggedOut(EntityPlayer player) {
+        for (TileEntityCreativeChatBox box : adminChatBoxs){
+            box.eventLoggedOut(player);
         }
     }
 }

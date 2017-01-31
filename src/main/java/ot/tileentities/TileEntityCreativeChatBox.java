@@ -9,6 +9,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
 import ot.Config;
 import ot.system.ChatBoxEventSystem;
 
@@ -51,16 +53,28 @@ public class TileEntityCreativeChatBox extends TileEntity implements Analyzable,
 
     }
 
-    public void eventDeath(EntityPlayer player){
+    public void eventDeath(EntityPlayer player, DamageSource damageSource){
+        if(node != null){
+            if(damageSource instanceof EntityDamageSource){
+                EntityDamageSource entityDamageSource = (EntityDamageSource) damageSource;
+                node.sendToReachable("computer.signal", "player_death", player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, getDistanceFrom(player.posX, player.posY, player.posZ), player.getDisplayName(), damageSource.damageType, entityDamageSource.func_151519_b(player).getFormattedText());
+            }else{
+
+                node.sendToReachable("computer.signal", "player_death", player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, getDistanceFrom(player.posX, player.posY, player.posZ), player.getDisplayName(), damageSource.damageType, null);
+            }
+        }
+    }
+
+    public void eventLoggedIn(EntityPlayer player){
         if(node != null)
-            node.sendToReachable("computer.signal", "player_death", player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, getDistanceFrom(player.posX, player.posY, player.posZ), player.getDisplayName());
+            node.sendToReachable("computer.signal", "player_join", player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, getDistanceFrom(player.posX, player.posY, player.posZ), player.getDisplayName());
 
     }
 
-    public void eventLogging(EntityPlayer player){
-        if(node != null)
-            node.sendToReachable("computer.signal", "player_logging", player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, getDistanceFrom(player.posX, player.posY, player.posZ), player.getDisplayName());
 
+    public void eventLoggedOut(EntityPlayer player) {
+        if(node != null)
+            node.sendToReachable("computer.signal", "player_quit", player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, getDistanceFrom(player.posX, player.posY, player.posZ), player.getDisplayName());
     }
 
     @Override

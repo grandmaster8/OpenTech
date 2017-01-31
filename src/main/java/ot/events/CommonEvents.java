@@ -22,13 +22,18 @@ public class CommonEvents {
     @SubscribeEvent
     public void playerDeath(LivingDeathEvent event){
         if (event.entityLiving instanceof EntityPlayer){
-            ChatBoxEventSystem.eventDeath((EntityPlayer) event.entityLiving);
+            ChatBoxEventSystem.eventDeath((EntityPlayer) event.entityLiving, event.source);
         }
     }
 
     @SubscribeEvent
-    public void playerLogging(PlayerEvent.PlayerLoggedInEvent loggedInEvent){
-        ChatBoxEventSystem.eventLogging(loggedInEvent.player);
+    public void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent loggedInEvent){
+        ChatBoxEventSystem.eventLoggedIn(loggedInEvent.player);
         PIBSystem.checkPlayer(loggedInEvent.player);
+    }
+
+    @SubscribeEvent
+    public void playerLoggedOut(PlayerEvent.PlayerLoggedOutEvent playerLoggedOutEvent){
+        ChatBoxEventSystem.eventLoggedOut(playerLoggedOutEvent.player);
     }
 }
