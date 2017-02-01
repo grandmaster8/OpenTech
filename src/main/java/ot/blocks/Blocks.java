@@ -1,5 +1,6 @@
 package ot.blocks;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import ot.Config;
@@ -63,6 +64,16 @@ public class Blocks {
             GameRegistry.registerBlock(pib, "OT_PIB");
         }
 
-        GameRegistry.registerBlock(energyController, "OT_ENERGY_CONTROLLER");
+        if(Loader.isModLoaded("IC2")){
+            ic2();
+        }
+    }
+
+    private static void ic2(){
+        if(Config.registerEnergyController){
+            GameRegistry.registerBlock(energyController, "OT_ENERGY_CONTROLLER");
+        }else{
+            System.out.println("EnergyController off.");
+        }
     }
 }

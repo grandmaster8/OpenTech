@@ -5,7 +5,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
-import ot.tileentities.TileEntityEnergyController;
+import ot.tileentities.ic.TileEntityEnergyController;
 
 /**
  * Created by Avaja on 31.01.2017.

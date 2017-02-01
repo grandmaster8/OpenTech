@@ -6,7 +6,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import ot.OpenTechnology;
-import ot.tileentities.TileEntityEnergyController;
+import ot.tileentities.ic.TileEntityEnergyController;
 
 /**
  * Created by Avaja on 31.01.2017.

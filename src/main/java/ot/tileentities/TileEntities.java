@@ -1,7 +1,9 @@
 package ot.tileentities;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ot.Config;
+import ot.tileentities.ic.TileEntityEnergyController;
 
 /**
  * Created by Avaja on 10.12.2016.
@@ -26,7 +28,14 @@ public class TileEntities {
 
         if(Config.registerPIB)
             GameRegistry.registerTileEntity(TileEntityPIB.class, "TileEntityPIB");
+        
+        if(Loader.isModLoaded("IC2")){
+            ic2();
+        }
+    }
 
-        GameRegistry.registerTileEntity(TileEntityEnergyController.class, "TileEntityEnergyController");
+    private static void ic2(){
+        if(Config.registerEnergyController)
+            GameRegistry.registerTileEntity(TileEntityEnergyController.class, "TileEntityEnergyController");
     }
 }

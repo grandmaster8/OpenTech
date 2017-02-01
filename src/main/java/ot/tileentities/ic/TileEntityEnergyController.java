@@ -1,4 +1,4 @@
-package ot.tileentities;
+package ot.tileentities.ic;
 
 import ic2.api.energy.event.EnergyTileLoadEvent;
 import ic2.api.energy.event.EnergyTileUnloadEvent;

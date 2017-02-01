@@ -15,7 +15,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import ot.OpenTechnology;
-import ot.tileentities.TileEntityEnergyController;
+import ot.tileentities.ic.TileEntityEnergyController;
 import ot.utils.Utils;
 
 /**

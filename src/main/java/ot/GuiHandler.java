@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import ot.container.EnergyControllerContainer;
 import ot.render.gui.GuiEnergyController;
-import ot.tileentities.TileEntityEnergyController;
+import ot.tileentities.ic.TileEntityEnergyController;
 
 /**
  * Created by Avaja on 31.01.2017.
