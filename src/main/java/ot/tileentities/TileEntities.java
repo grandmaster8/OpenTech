@@ -26,5 +26,7 @@ public class TileEntities {
 
         if(Config.registerPIB)
             GameRegistry.registerTileEntity(TileEntityPIB.class, "TileEntityPIB");
+
+        GameRegistry.registerTileEntity(TileEntityEnergyController.class, "TileEntityEnergyController");
     }
 }

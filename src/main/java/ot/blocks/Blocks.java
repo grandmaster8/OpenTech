@@ -6,13 +6,14 @@ import ot.Config;
 import ot.blocks.antenna.BlockAntenna;
 import ot.blocks.antenna.BlockCell;
 import ot.blocks.antenna.BlockLDA;
+import ot.blocks.ic.BlockEnergyController;
 import ot.item.ItemBlockCableDecor;
 
 /**
  * Created by Avaja on 05.05.2016.
  */
 public class Blocks {
-    public static Block creativeChatbox, chatbox, radar, lda, antennaCell, antenna, pib;
+    public static Block creativeChatbox, chatbox, radar, lda, antennaCell, antenna, pib, energyController;
     public static BlockCableDecor cableDecor;
 
     public static void init(){
@@ -24,6 +25,7 @@ public class Blocks {
         antenna = new BlockAntenna();
         pib = new BlockPIBinder();
         cableDecor = new BlockCableDecor();
+        energyController = new BlockEnergyController();
 
         if (Config.registerCreativeChatBox){
             GameRegistry.registerBlock(creativeChatbox, "OT_CreativeChatBox");
@@ -60,5 +62,7 @@ public class Blocks {
         if(Config.registerPIB){
             GameRegistry.registerBlock(pib, "OT_PIB");
         }
+
+        GameRegistry.registerBlock(energyController, "OT_ENERGY_CONTROLLER");
     }
 }

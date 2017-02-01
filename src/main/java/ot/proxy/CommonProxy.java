@@ -8,6 +8,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraftforge.common.MinecraftForge;
+import ot.GuiHandler;
 import ot.OpenTechnology;
 import ot.Recipes;
 import ot.blocks.Blocks;
@@ -30,6 +31,7 @@ public class CommonProxy {
     public void init(FMLInitializationEvent e) {
         MinecraftForge.EVENT_BUS.register(new CommonEvents());
         FMLCommonHandler.instance().bus().register(new FMLEvents());
+        NetworkRegistry.INSTANCE.registerGuiHandler(OpenTechnology.instance, new GuiHandler());
 
         wrapper = NetworkRegistry.INSTANCE.newSimpleChannel(OpenTechnology.MODID);
         wrapper.registerMessage(new SparkPacketHandler(), SparkPacket.class, 0, Side.CLIENT);

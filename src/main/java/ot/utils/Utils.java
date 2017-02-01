@@ -1,14 +1,16 @@
 package ot.utils;
 
 import li.cil.oc.api.network.Node;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,10 +38,10 @@ public class Utils {
         return 0;
     }
 
-    public static MovingObjectPosition getLookAt(EntityPlayer entityPlayer){
-        World world = entityPlayer.worldObj;
-        Vec3 origin = Vec3.createVectorHelper(entityPlayer.posX, entityPlayer.posY + entityPlayer.getEyeHeight(), entityPlayer.posZ);
-        Vec3 direction = entityPlayer.getLookVec();
+    public static MovingObjectPosition getLookAt(EntityLivingBase livingBase){
+        World world = livingBase.worldObj;
+        Vec3 origin = Vec3.createVectorHelper(livingBase.posX, livingBase.posY + livingBase.getEyeHeight(), livingBase.posZ);
+        Vec3 direction = livingBase.getLookVec();
         Vec3 lookAt = origin.addVector(direction.xCoord * 20, direction.yCoord * 20, direction.zCoord * 20);
         return world.rayTraceBlocks(origin, lookAt);
     }
@@ -82,6 +84,58 @@ public class Utils {
             }
         }
         return false;
+    }
+
+    public static int getForgeDirectionId(ForgeDirection forgeDirection){
+        int id = 0;
+        for(ForgeDirection direction : ForgeDirection.values()){
+            if(direction.equals(forgeDirection))
+                return id;
+            id++;
+        }
+        return 7;
+    }
+
+    public static ForgeDirection getDirection(int side){
+        switch(side){
+            case 0:
+                return ForgeDirection.SOUTH;
+            case 1:
+                return ForgeDirection.WEST;
+            case 2:
+                return ForgeDirection.NORTH;
+            case 3:
+                return ForgeDirection.EAST;
+        }
+        return null;
+    }
+
+    public static ForgeDirection getLookDirection(EntityLivingBase livingBase){
+        double side = MathHelper.floor_double((double)(livingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        switch((int) side){
+            case 0:
+                return ForgeDirection.SOUTH;
+            case 1:
+                return ForgeDirection.WEST;
+            case 2:
+                return ForgeDirection.NORTH;
+            case 3:
+                return ForgeDirection.EAST;
+        }
+        return null;
+    }
+
+    public static Vec3 getLook(EntityLivingBase livingBase) {
+        float f1;
+        float f2;
+        float f3;
+        float f4;
+
+        f1 = MathHelper.cos(-livingBase.rotationYaw * 0.017453292F - (float)Math.PI);
+        f2 = MathHelper.sin(-livingBase.rotationYaw * 0.017453292F - (float)Math.PI);
+        f3 = -MathHelper.cos(-livingBase.rotationPitch * 0.017453292F);
+        f4 = MathHelper.sin(-livingBase.rotationPitch * 0.017453292F);
+        return Vec3.createVectorHelper((double)(f2 * f3), (double)f4, (double)(f1 * f3));
     }
 
     public static boolean addToIInventory( IInventory inventory, int min, ItemStack stack ){
