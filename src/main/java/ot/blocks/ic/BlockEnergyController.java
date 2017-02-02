@@ -3,7 +3,6 @@ package ot.blocks.ic;
 import ic2.api.energy.event.EnergyTileUnloadEvent;
 import ic2.api.energy.tile.IEnergyTile;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,18 +14,19 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import ot.OpenTechnology;
+import ot.blocks.basic.BasicBlockContainer;
 import ot.tileentities.ic.TileEntityEnergyController;
 import ot.utils.Utils;
 
 /**
  * Created by Avaja on 27.01.2017.
  */
-public class BlockEnergyController extends BlockContainer {
+public class BlockEnergyController extends BasicBlockContainer {
 
     private static IIcon sides, out;
 
     public BlockEnergyController() {
-        super(Material.iron);
+        super(Material.iron, "efc");
         setCreativeTab(OpenTechnology.tab);
     }
 

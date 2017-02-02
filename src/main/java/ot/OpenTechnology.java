@@ -15,7 +15,7 @@ import ot.proxy.CommonProxy;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
-@Mod(modid = OpenTechnology.MODID, name = OpenTechnology.MODID, version = OpenTechnology.VERSION, dependencies = "OpenComputers")
+@Mod(modid = OpenTechnology.MODID, name = OpenTechnology.MODID, version = OpenTechnology.VERSION)
 public class OpenTechnology {
 	public final static String MODID = "OpenTechnology";
 	public final static String VERSION = "0.4.0a_build_16";

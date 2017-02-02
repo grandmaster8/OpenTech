@@ -6,6 +6,7 @@ tile.OpenTechnology_lda.name=Controller LD
 tile.OpenTechnology_Antenna.name=Part Antenna
 tile.OpenTechnology_Cell.name=Cell Antenna
 tile.OpenTechnology_CableDecor.name=Cable
+tile.OpenTechnology_efc.name=Power Controller
 
 
 item.OpenTechnology_nrUpgrade.name=Reactor Upgrade

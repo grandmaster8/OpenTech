@@ -11,6 +11,7 @@ import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -209,5 +210,31 @@ public class TileEntityEnergyController extends TileEntity implements Analyzable
         int metadata = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
         ForgeDirection direction2 = ForgeDirection.getOrientation(metadata);
         return direction != direction2;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+
+        nbt.setInteger("in", energyInputBuffer);
+        nbt.setInteger("out", energyOutputBuffer);
+
+        if (node != null && node.host() == this) {
+            node.load(nbt.getCompoundTag("oc:node"));
+        }
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
+        super.writeToNBT(nbt);
+
+        energyInputBuffer = nbt.getInteger("in");
+        energyOutputBuffer = nbt.getInteger("out");
+
+        if (node != null && node.host() == this) {
+            final NBTTagCompound nodeNbt = new NBTTagCompound();
+            node.save(nodeNbt);
+            nbt.setTag("oc:node", nodeNbt);
+        }
     }
 }
