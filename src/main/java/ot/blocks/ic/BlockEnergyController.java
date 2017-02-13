@@ -37,9 +37,9 @@ public class BlockEnergyController extends BasicBlockContainer {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase livingBase, ItemStack p_149689_6_) {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase livingBase, ItemStack stack) {
         world.setBlockMetadataWithNotify(x, y, z, Utils.getLookAt(livingBase).sideHit, 0);
-        super.onBlockPlacedBy(world, x, y, z, livingBase, p_149689_6_);
+        super.onBlockPlacedBy(world, x, y, z, livingBase, stack);
     }
 
     @Override

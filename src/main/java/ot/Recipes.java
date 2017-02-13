@@ -63,6 +63,20 @@ public class Recipes {
                     'c', li.cil.oc.api.Items.get("cpu3").createItemStack(1)
             );
         }
+
+        if(Config.registerEnergyController){
+            ItemStack advBattery = IC2Items.getItem("advBattery");
+            advBattery.setItemDamage(26);
+            addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.energyController)),
+                    "ibi",
+                    "cpc",
+                    "ibi",
+                    'i', new ItemStack(Items.iron_ingot),
+                    'c', IC2Items.getItem("insulatedGoldCableItem"),
+                    'p', li.cil.oc.api.Items.get("cpu1").createItemStack(1),
+                    'b', advBattery
+            );
+        }
     }
 
     public static void vanilla(){
@@ -156,6 +170,7 @@ public class Recipes {
     }
 
     private  static void addRecipe(ItemStack out, Object... stacks){
+        OpenTechnology.logger.info("Register recipe " + out.getItem().getItemStackDisplayName(out));
         GameRegistry.addRecipe(out, stacks);
     }
 }
