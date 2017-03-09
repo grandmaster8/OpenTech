@@ -7,6 +7,7 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import ot.Config;
 import ot.blocks.Blocks;
 import ot.proxy.CommonProxy;
 import ot.system.SparksSystem;
@@ -23,22 +24,31 @@ public class ClientFMLEvents {
     public void clientTick(TickEvent.ClientTickEvent tickEvent){
         SparksSystem.updateAll();
 
-        Minecraft minecraft = Minecraft.getMinecraft();
+        if(Config.registerDecorativeCable){
+            Minecraft minecraft = Minecraft.getMinecraft();
 
-        if(minecraft.thePlayer != null){
-            ItemStack itemStack = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
-            EntityPlayer player = minecraft.thePlayer;
+            if(minecraft.thePlayer != null){
+                ItemStack itemStack = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
+                EntityPlayer player = minecraft.thePlayer;
 
 
-            if(itemStack != null){
-                if(itemStack.getItem() == ot.item.Items.wrench && !detectWrench){
-                    CommonProxy.isWrench = !CommonProxy.isWrench;
-                    detectWrench = true;
-                    CommonProxy.isWrench = true;
-                    Blocks.cableDecor.setLightOpacity(0);
+                if(itemStack != null){
+                    if(itemStack.getItem() == ot.item.Items.wrench && !detectWrench){
+                        CommonProxy.isWrench = !CommonProxy.isWrench;
+                        detectWrench = true;
+                        CommonProxy.isWrench = true;
+                        Blocks.cableDecor.setLightOpacity(0);
 
-                    minecraft.renderGlobal.markBlockForRenderUpdate((int)player.posX, (int)player.posY, (int)player.posZ);
-                }else if(itemStack.getItem() != ot.item.Items.wrench){
+                        minecraft.renderGlobal.markBlockForRenderUpdate((int)player.posX, (int)player.posY, (int)player.posZ);
+                    }else if(itemStack.getItem() != ot.item.Items.wrench){
+                        CommonProxy.isWrench = false;
+                        detectWrench = false;
+
+                        Blocks.cableDecor.setLightOpacity(255);
+
+                        minecraft.renderGlobal.markBlockForRenderUpdate((int)player.posX, (int)player.posY, (int)player.posZ);
+                    }
+                }else if(detectWrench && CommonProxy.isWrench){
                     CommonProxy.isWrench = false;
                     detectWrench = false;
 
@@ -46,13 +56,6 @@ public class ClientFMLEvents {
 
                     minecraft.renderGlobal.markBlockForRenderUpdate((int)player.posX, (int)player.posY, (int)player.posZ);
                 }
-            }else if(detectWrench && CommonProxy.isWrench){
-                CommonProxy.isWrench = false;
-                detectWrench = false;
-
-                Blocks.cableDecor.setLightOpacity(255);
-
-                minecraft.renderGlobal.markBlockForRenderUpdate((int)player.posX, (int)player.posY, (int)player.posZ);
             }
         }
     }

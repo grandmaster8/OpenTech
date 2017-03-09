@@ -19,7 +19,9 @@ public class Items {
         scanner = new ItemScanner();
         nr = new ItemNRUpgrade();
         wrench = li.cil.oc.api.Items.get("wrench").item();
-        uranCell = IC2Items.getItem("reactorUraniumSimple").getItem();
+
+        if(Loader.isModLoaded("IC2"))
+            uranCell = IC2Items.getItem("reactorUraniumSimple").getItem();
 
         if(Config.registerTeslaUpgrade)
             GameRegistry.registerItem(tesla, "ot_teslaUpgrade");

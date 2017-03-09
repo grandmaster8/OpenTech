@@ -2,7 +2,6 @@ package ot.environment;
 
 import li.cil.oc.api.API;
 import li.cil.oc.api.Network;
-import li.cil.oc.api.driver.DeviceInfo;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
@@ -21,14 +20,12 @@ import ot.network.SparkPacket;
 import ot.proxy.CommonProxy;
 import ot.utils.Utils;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Avaja on 07.05.2016.
  */
-public class EnvTeslaUpgrade extends ManagedEnvironment implements DeviceInfo {
+public class EnvTeslaUpgrade extends ManagedEnvironment  {
 
     private EnvironmentHost host;
 
@@ -129,11 +126,5 @@ public class EnvTeslaUpgrade extends ManagedEnvironment implements DeviceInfo {
         super.save(nbt);
         nbt.setBoolean("isHeat", isHeat);
         nbt.setInteger("heat", heat);
-    }
-
-    @Override
-    public Map<String, String> getDeviceInfo() {
-        Map<String, String> info = new HashMap<String, String>();
-        return info;
     }
 }
