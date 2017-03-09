@@ -33,6 +33,7 @@ public class Config {
 
     public static int NREfficiency;
     public static int NRFuelCount;
+    public static int turretDamage, turretEnergyShoot, turretMaxHeat;
 
     public static boolean registerCreativeChatBox,
             registerChatBox,
@@ -93,6 +94,9 @@ public class Config {
         NREfficiency = configuration.getInt("NREfficiency", "reactor", 10, 0, 10000000, "");
         NRFuelCount = configuration.getInt("NRFuelCount", "reactor", 100000, 0, 10000000, "");
 
+        turretDamage = configuration.getInt("turretDamage", "turret", 5, 0, 10000000, "");
+        turretEnergyShoot = configuration.getInt("turretEnergyShoot", "turret", 500, 0, 10000000, "");
+        turretMaxHeat = configuration.getInt("turretMaxHeat", "turret", 500, 0, 10000000, "");
 
         configuration.save();
     }

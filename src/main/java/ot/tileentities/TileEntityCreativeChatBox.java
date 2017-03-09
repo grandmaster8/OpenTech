@@ -19,6 +19,7 @@ import java.util.List;
  * Created by Avaja on 05.05.2016.
  */
 public class TileEntityCreativeChatBox extends TileEntity implements Analyzable, Environment {
+
     protected Node node;
     private boolean addToNetwork = false;
 

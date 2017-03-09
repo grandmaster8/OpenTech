@@ -28,6 +28,8 @@ public class TileEntities {
 
         if(Config.registerPIB)
             GameRegistry.registerTileEntity(TileEntityPIB.class, "TileEntityPIB");
+
+        GameRegistry.registerTileEntity(TileEntityGenerator.class, "TileEntityGenerator");
         
         if(Loader.isModLoaded("IC2")){
             ic2();

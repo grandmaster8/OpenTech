@@ -8,6 +8,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.relauncher.Side;
+import li.cil.oc.Settings;
+import li.cil.oc.Settings$;
 import net.minecraftforge.common.MinecraftForge;
 import ot.Config;
 import ot.GuiHandler;
@@ -22,6 +24,8 @@ import ot.item.Items;
 import ot.network.SparkPacket;
 import ot.network.SparkPacketHandler;
 import ot.tileentities.TileEntities;
+
+import java.lang.reflect.Field;
 
 public class CommonProxy {
     public static SimpleNetworkWrapper wrapper;
@@ -47,8 +51,21 @@ public class CommonProxy {
 
         if(Config.registerTurretUpgrade)
             EntityRegistry.registerModEntity(EntityEnergyBolt.class, "ot_energybolt", 0, OpenTechnology.instance, 64, 20, true);
+	}
+
+    private void powerOn(){
+        try {
+            Field field = Settings.class.getDeclaredField("ignorePower");
+            field.setAccessible(true);
+            field.set(Settings$.MODULE$.get(), false);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     public void postInit(FMLPostInitializationEvent e) {
+        powerOn();
     }
 }

@@ -22,6 +22,7 @@ public class ClientFMLEvents {
 
     @SubscribeEvent
     public void clientTick(TickEvent.ClientTickEvent tickEvent){
+
         SparksSystem.updateAll();
 
         if(Config.registerDecorativeCable){
