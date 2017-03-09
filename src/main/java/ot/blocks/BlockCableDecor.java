@@ -87,10 +87,6 @@ public class BlockCableDecor extends li.cil.oc.common.block.Cable {
     @Override
     public boolean isOpaqueCube() {
         return super.isOpaqueCube();
-        /*if(ClientFMLEvents.isWrench){
-        }else{
-            return true;
-        }*/
     }
 
 

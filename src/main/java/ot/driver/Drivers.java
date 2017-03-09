@@ -9,12 +9,13 @@ import ot.Config;
  * Created by Avaja on 07.05.2016.
  */
 public class Drivers {
-    public static Item driverTeslaUpgrade, driverRadarUpgrade, driverNRUpgrade;
+    public static Item driverTeslaUpgrade, driverRadarUpgrade, driverNRUpgrade, driverTurretUpgrade;
 
     public static void init(){
         driverTeslaUpgrade = new DriverTeslaUpgrade();
         driverRadarUpgrade = new DriverRadarUpgrade();
         driverNRUpgrade = new DriverNRUpgrade();
+        driverTurretUpgrade = new DriverTurretUpgrade();
 
         if(Config.registerTeslaUpgrade)
             API.driver.add(driverTeslaUpgrade);
@@ -24,5 +25,8 @@ public class Drivers {
 
         if(Config.registerNR && Loader.isModLoaded("IC2"))
             API.driver.add(driverNRUpgrade);
+
+        if(Config.registerTurretUpgrade)
+            API.driver.add(driverTurretUpgrade);
     }
 }

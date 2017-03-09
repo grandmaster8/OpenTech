@@ -2,6 +2,7 @@ package ot.system;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
+import ot.OpenTechnology;
 import ot.tileentities.TileEntityChatBox;
 import ot.tileentities.TileEntityCreativeChatBox;
 
@@ -23,23 +24,29 @@ public class ChatBoxEventSystem {
     }
 
     public static void remove(TileEntityCreativeChatBox tile){
+        OpenTechnology.PROFILER.start("chatbox_remove");
         for (int i = 0; i < adminChatBoxs.size(); i++){
-            if (adminChatBoxs.get(i) == tile)
+            if (adminChatBoxs.get(i) == tile) {
                 adminChatBoxs.remove(i);
+            }
         }
+        OpenTechnology.PROFILER.end();
     }
 
     public static void remove(TileEntityChatBox tile){
+        OpenTechnology.PROFILER.start("chatbox_remove");
         for (int i = 0; i < chatBoxes.size(); i++){
             if (chatBoxes.get(i) == tile)
                 chatBoxes.remove(i);
         }
+        OpenTechnology.PROFILER.end();
     }
 
     public static boolean eventMessage(EntityPlayer player, String message){
-
+        OpenTechnology.PROFILER.start("handle_message");
         if (message.startsWith("#")){
             eventCommand(player, message);
+            OpenTechnology.PROFILER.end();
             return true;
         }else{
             for (TileEntityChatBox box : chatBoxes){
@@ -50,6 +57,7 @@ public class ChatBoxEventSystem {
                 box.eventMessage(player, message);
             }
         }
+        OpenTechnology.PROFILER.end();
         return false;
     }
 
@@ -66,20 +74,26 @@ public class ChatBoxEventSystem {
     }
 
     public static void eventDeath(EntityPlayer player, DamageSource damageSource){
+        OpenTechnology.PROFILER.start("event_death");
         for (TileEntityCreativeChatBox box : adminChatBoxs){
             box.eventDeath(player, damageSource);
         }
+        OpenTechnology.PROFILER.end();
     }
 
     public static void eventLoggedIn(EntityPlayer player) {
+        OpenTechnology.PROFILER.start("event_loggedIn");
         for (TileEntityCreativeChatBox box : adminChatBoxs){
             box.eventLoggedIn(player);
         }
+        OpenTechnology.PROFILER.end();
     }
 
     public static void eventLoggedOut(EntityPlayer player) {
+        OpenTechnology.PROFILER.start("event_loggedOut");
         for (TileEntityCreativeChatBox box : adminChatBoxs){
             box.eventLoggedOut(player);
         }
+        OpenTechnology.PROFILER.end();
     }
 }

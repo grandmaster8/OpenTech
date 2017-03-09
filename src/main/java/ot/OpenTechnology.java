@@ -22,6 +22,7 @@ public class OpenTechnology {
 	public final static String VERSION = "0.5.0a_build_19";
 
 	public final static ScriptEngine SCRIPT_ENGINE = (new ScriptEngineManager()).getEngineByName("js");
+	public final static Profiler PROFILER = new Profiler(10);
 
 	public static Logger logger;
 	public static CreativeTab tab = new CreativeTab();

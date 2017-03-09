@@ -45,8 +45,8 @@ public class Config {
             registerScanner,
             registerNR,
             registerShieldGenerator,
-            registerEnergyController;
-    ;
+            registerEnergyController,
+            registerTurretUpgrade;
 
 
     public static void init(File file){
@@ -76,6 +76,7 @@ public class Config {
         registerNR = configuration.getBoolean("registerNR", "REGISTER", true, "");
         registerShieldGenerator = configuration.getBoolean("registerShieldGenerator", "REGISTER", true, "");
         registerEnergyController = configuration.getBoolean("registerEnergyController", "REGISTER", true, "");
+        registerTurretUpgrade = configuration.getBoolean("registerTurretUpgrade", "REGISTER", true, "");
 
         ldaMaxDistance = configuration.getInt("ldaMaxDistance", "LDA", 2000, 0, 1000000, "");
         ldaMaxPacketSize = configuration.getInt("ldaMaxPacketSize", "LDA", 1024 * 8, 0, 1000000, "");

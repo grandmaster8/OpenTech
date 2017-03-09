@@ -6,13 +6,16 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraftforge.common.MinecraftForge;
+import ot.Config;
 import ot.GuiHandler;
 import ot.OpenTechnology;
 import ot.Recipes;
 import ot.blocks.Blocks;
 import ot.driver.Drivers;
+import ot.entity.EntityEnergyBolt;
 import ot.events.CommonEvents;
 import ot.events.FMLEvents;
 import ot.item.Items;
@@ -41,6 +44,9 @@ public class CommonProxy {
         Drivers.init();
         Recipes.init();
         TileEntities.init();
+
+        if(Config.registerTurretUpgrade)
+            EntityRegistry.registerModEntity(EntityEnergyBolt.class, "ot_energybolt", 0, OpenTechnology.instance, 64, 20, true);
     }
 
     public void postInit(FMLPostInitializationEvent e) {

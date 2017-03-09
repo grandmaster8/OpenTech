@@ -14,6 +14,7 @@ item.OpenTechnology_nrUpgrade.name=Reactor Upgrade
 item.OpenTechnology_teslaUpgrade.name=Tesla Upgrade
 item.OpenTechnology_RadarUpgrade.name=Radar Upgrade
 item.OpenTechnology_scanner.name=Scanner
+item.OpenTechnology_turretUpgrade.name=Turret Upgrade
 
 death.attack.electric=Electricity
 

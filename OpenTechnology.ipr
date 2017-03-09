@@ -175,6 +175,14 @@
       </item>
     </group>
   </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="Avaja">
+      <words>
+        <w>chatbox</w>
+        <w>pickaxe</w>
+      </words>
+    </dictionary>
+  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/OpenTechnology.iml" filepath="$PROJECT_DIR$/OpenTechnology.iml" />

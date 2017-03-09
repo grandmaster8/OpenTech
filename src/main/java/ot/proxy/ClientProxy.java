@@ -7,9 +7,12 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.MinecraftForge;
+import ot.Config;
+import ot.entity.EntityEnergyBolt;
 import ot.events.ClientEvents;
 import ot.events.ClientFMLEvents;
 import ot.render.RenderCableDecorHandler;
+import ot.render.RenderEntityEnergyBolt;
 import ot.render.RenderingAntennaHandler;
 import ot.render.RenderingRadarHandler;
 import ot.render.specialRender.RadarRender;
@@ -34,6 +37,9 @@ public class ClientProxy extends CommonProxy{
 		RenderingRegistry.registerBlockHandler(radarRenderingId, new RenderingRadarHandler());
 		RenderingRegistry.registerBlockHandler(LDARenderingId, new RenderingAntennaHandler());
 		RenderingRegistry.registerBlockHandler(CableDecorRenderingId, new RenderCableDecorHandler());
+
+		if(Config.registerTurretUpgrade)
+			RenderingRegistry.registerEntityRenderingHandler(EntityEnergyBolt.class, new RenderEntityEnergyBolt());
 	}
 
 	@Override

@@ -13,8 +13,9 @@ item.OpenTechnology_teslaUpgrade.name=Тесла Апгрейд
 item.OpenTechnology_RadarUpgrade.name=Радар Апгрейд
 item.OpenTechnology_nrUpgrade.name=Реактор Апгрейд
 item.OpenTechnology_scanner.name=Сканер
+item.OpenTechnology_turretUpgrade.name=Туррель Апгрейд
 
 death.attack.electric=Электричество
 
-chat.scannner=§4Обнаружен робот: x=%d y=%d z=%d
+chat.scanner=§4Обнаружен робот: x=%d y=%d z=%d
 lore.scanner.charge=
