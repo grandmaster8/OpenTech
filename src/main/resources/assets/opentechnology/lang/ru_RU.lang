@@ -7,6 +7,7 @@ tile.OpenTechnology_Antenna.name=Часть Антенны
 tile.OpenTechnology_Cell.name=Ячейка Антенны
 tile.OpenTechnology_CableDecor.name=Кабель
 tile.OpenTechnology_efc.name=Контроллер мощности
+tile.OpenTechnology_pib.name=Связыватель инвентаря
 
 item.OpenTechnology_teslaUpgrade.name=Тесла Апгрейд
 item.OpenTechnology_RadarUpgrade.name=Радар Апгрейд
