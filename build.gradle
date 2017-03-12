@@ -19,7 +19,7 @@ apply plugin: 'forge'
 
 compileJava.options.encoding = 'UTF-8'
 
-version = "0.5.1a_build_20"
+version = "0.5.2a_build_21"
 group= "net.avaja"
 archivesBaseName = "OpenTechnology"
 
