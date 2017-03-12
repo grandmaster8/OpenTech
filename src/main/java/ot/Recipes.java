@@ -117,17 +117,17 @@ public class Recipes {
                     'm', li.cil.oc.api.Items.get("ram6").createItemStack(1),
                     'p', li.cil.oc.api.Items.get("cpu3").createItemStack(1)
             );
-        }
 
-        addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.antennaCell)),
+            addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.antennaCell)),
                     "www",
-                "ccc",
-                "mbm",
-                'w', li.cil.oc.api.Items.get("wlanCard").createItemStack(1),
-                'c', li.cil.oc.api.Items.get("cpu3").createItemStack(1),
-                'm', li.cil.oc.api.Items.get("ram6").createItemStack(1),
-                'b', li.cil.oc.api.Items.get("componentBus3").createItemStack(1)
-                );
+                    "ccc",
+                    "mbm",
+                    'w', li.cil.oc.api.Items.get("wlanCard").createItemStack(1),
+                    'c', li.cil.oc.api.Items.get("cpu3").createItemStack(1),
+                    'm', li.cil.oc.api.Items.get("ram6").createItemStack(1),
+                    'b', li.cil.oc.api.Items.get("componentBus3").createItemStack(1)
+            );
+        }
 
        if(Config.registerDecorativeCable){
            GameRegistry.addRecipe(new RecipeItemCableDecor());
