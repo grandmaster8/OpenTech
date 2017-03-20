@@ -14,7 +14,7 @@ import ot.item.ItemBlockCableDecor;
  * Created by Avaja on 05.05.2016.
  */
 public class Blocks {
-    public static Block creativeChatbox, chatbox, radar, lda, antennaCell, antenna, pib, energyController;
+    public static Block creativeChatbox, chatbox, radar, lda, antennaCell, antenna, pib, energyController, worldInterface;
     public static BlockCableDecor cableDecor;
 
     public static void init(){
@@ -27,6 +27,7 @@ public class Blocks {
         pib = new BlockPIBinder();
         cableDecor = new BlockCableDecor();
         energyController = new BlockEnergyController();
+        worldInterface = new BlockWorldInterface();
 
         if (Config.registerCreativeChatBox){
             GameRegistry.registerBlock(creativeChatbox, "OT_CreativeChatBox");
@@ -63,6 +64,8 @@ public class Blocks {
         if(Config.registerPIB){
             GameRegistry.registerBlock(pib, "OT_PIB");
         }
+
+        GameRegistry.registerBlock(worldInterface, "OT_WorldInterface");
 
         if(Loader.isModLoaded("IC2")){
             ic2();

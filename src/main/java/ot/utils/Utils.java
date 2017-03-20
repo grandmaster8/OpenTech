@@ -1,8 +1,11 @@
 package ot.utils;
 
+import cpw.mods.fml.common.registry.FMLControlledNamespacedRegistry;
+import cpw.mods.fml.common.registry.GameData;
 import li.cil.oc.api.network.Node;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -23,6 +26,11 @@ public class Utils {
 
     public static List getEntitiesInBound( Class c, World world, int minx, int miny, int minz, int maxx, int maxy, int maxz ){
         return world.getEntitiesWithinAABB( c, AxisAlignedBB.getBoundingBox( minx, miny, minz, maxx, maxy, maxz ) );
+    }
+
+    public static String getForgeName(Item item){
+        FMLControlledNamespacedRegistry<Item> items = GameData.getItemRegistry();
+        return items.getNameForObject(item);
     }
 
     public static double distance( Node n1, Node n2 ){
