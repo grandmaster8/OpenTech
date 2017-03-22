@@ -1,6 +1,10 @@
 package ot.blocks;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.particle.EffectRenderer;
+import net.minecraft.client.particle.EntitySpellParticleFX;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -31,29 +35,32 @@ public class BlockWorldInterface extends BasicBlockContainer implements OTBlock 
 
     @Override
     public EnumRarity getRarity() {
-        return EnumRarity.epic;
+        Random rand = Minecraft.getMinecraft().theWorld.rand;
+        if(rand.nextBoolean()){
+            return EnumRarity.valueOf("unreal");
+        }else{
+            return EnumRarity.epic;
+        }
     }
 
     @Override
     public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-        for (int l = 0; l < 3; ++l)
+        EffectRenderer effectRenderer = Minecraft.getMinecraft().effectRenderer;
+        FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+        for (int l = 0; l < 10; ++l)
         {
-            double d6 = (double)((float)x + random.nextFloat());
-            double particle_y = (double)((float)y + random.nextFloat());
-            d6 = (double)((float)z + random.nextFloat());
-            double particle_moving_x = 0.0D;
-            double particle_moving_y = 0.0D;
-            double particle_moving_z = 0.0D;
-            int i1 = random.nextInt(2) * 2 - 1;
-            int j1 = random.nextInt(2) * 2 - 1;
-            particle_moving_x = ((double)random.nextFloat() - 0.5D) * 0.125D;
-            particle_moving_y = ((double)random.nextFloat() - 0.5D) * 0.125D;
-            particle_moving_z = ((double)random.nextFloat() - 0.5D) * 0.125D;
-            double particle_z = (double)z + 0.5D + 0.25D * (double)j1;
-            particle_moving_z = (double)(random.nextFloat() * 1.0F * (float)j1);
-            double particle_x = (double)x + 0.5D + 0.25D * (double)i1;
-            particle_moving_x = (double)(random.nextFloat() * 1.0F * (float)i1);
-            world.spawnParticle("mobSpell", particle_x, particle_y, particle_z, particle_moving_x, particle_moving_y, particle_moving_z);
+            double px, py, pz, pmx, pmy, pmz;
+            px = x + 0.5;
+            py = y + 0.5;
+            pz = z + 0.5;
+            pmx = random.nextBoolean() ? random.nextGaussian() * - 1 : random.nextGaussian();
+            pmy = random.nextGaussian();
+            pmz = random.nextBoolean() ? random.nextGaussian() * - 1 : random.nextGaussian();
+
+            EntitySpellParticleFX particleFX = new EntitySpellParticleFX(world, px, py, pz, pmx, pmy, pmz);
+            particleFX.setRBGColorF(random.nextFloat(), random.nextFloat(), random.nextFloat());
+
+            effectRenderer.addEffect(particleFX);
         }
     }
 }

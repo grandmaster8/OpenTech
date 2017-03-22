@@ -2,6 +2,7 @@ package ot.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ot.blocks.basic.BasicBlockContainer;
@@ -11,7 +12,7 @@ import ot.tileentities.TileEntityCreativeChatBox;
 /**
  * Created by Avaja on 05.05.2016.
  */
-public class BlockCreativeChatBox extends BasicBlockContainer {
+public class BlockCreativeChatBox extends BasicBlockContainer implements OTBlock {
 
     public BlockCreativeChatBox() {
         super(Material.iron, "creativeChatbox");
@@ -31,5 +32,10 @@ public class BlockCreativeChatBox extends BasicBlockContainer {
         ChatBoxEventSystem.remove(box);
 
         super.breakBlock(world, x, y, z, block, p_149749_6_);
+    }
+
+    @Override
+    public EnumRarity getRarity() {
+        return EnumRarity.epic;
     }
 }
