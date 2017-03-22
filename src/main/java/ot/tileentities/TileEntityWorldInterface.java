@@ -1,5 +1,6 @@
 package ot.tileentities;
 
+import li.cil.oc.api.Network;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
@@ -8,32 +9,32 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.ChunkCoordinates;
 import ot.utils.Utils;
 
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 
 
 /**
  * Created by Avaja on 20.03.2017.
  */
-public class TileEntityWorldInterface extends TileEntity implements Analyzable, Environment, SidedComponent {
+public class TileEntityWorldInterface extends TileEntity implements Analyzable, Environment {
 
     protected Node node;
     private boolean addToNetwork = false;
 
     public TileEntityWorldInterface() {
-        node = li.cil.oc.api.Network.newNode(this, Visibility.Network).withComponent(getComponentName()).create();
+        node = Network.newNode(this, Visibility.Network).withComponent(getComponentName()).create();
     }
 
     @Override
     public void updateEntity() {
         if(!addToNetwork){
             addToNetwork = true;
-            li.cil.oc.api.Network.joinOrCreateNetwork(this);
+            Network.joinOrCreateNetwork(this);
         }
     }
 
@@ -41,21 +42,21 @@ public class TileEntityWorldInterface extends TileEntity implements Analyzable, 
     public Object[] getStackInSlot(Context context, Arguments arguments) throws Exception{
         String name = arguments.checkString(1);
         int slot = arguments.checkInteger(2) + 1;
-        Iterator iterator = MinecraftServer.getServer().getConfigurationManager().playerEntityList.iterator();
-        while (iterator.hasNext())
-        {
-            EntityPlayerMP player = (EntityPlayerMP)iterator.next();
+        EntityPlayer player = Utils.findPlayer(name);
+        if(player != null){
             if(player.getCommandSenderName().equals(name)){
                 if(slot >= 0 && slot < player.inventory.getSizeInventory()){
                     ItemStack itemStack = player.inventory.getStackInSlot(slot);
                     if(itemStack != null){
-                        HashMap<Object, Object> values = new HashMap<Object, Object>();
-                        values.put("name", Utils.getForgeName(itemStack.getItem()));
-                        values.put("damage", itemStack.getItemDamage());
-                        values.put("maxDamage", itemStack.getMaxDamage());
-                        values.put("size", itemStack.stackSize);
-                        values.put("label", itemStack.getItem().getItemStackDisplayName(itemStack));
-                        values.put("hasTag", itemStack.hasTagCompound());
+                        HashMap values = Utils.createStringTable(
+                                "name", Utils.getForgeName(itemStack.getItem()),
+                                "damage", itemStack.getItemDamage(),
+                                "maxDamage", itemStack.getMaxDamage(),
+                                "size", itemStack.stackSize,
+                                "label", itemStack.getItem().getItemStackDisplayName(itemStack),
+                                "hasTag", itemStack.hasTagCompound()
+                        );
+
                         return new Object[]{values};
                     }else{
                         return new Object[]{null};
@@ -64,18 +65,129 @@ public class TileEntityWorldInterface extends TileEntity implements Analyzable, 
                     return new Object[]{false, "invalid slot"};
                 }
             }
+        }
+        return new Object[]{false, "player not found"};
+    }
 
+    @Callback(doc="function(player:string); get current and max player health.")
+    public Object[] getPlayerHealth(Context context, Arguments arguments) throws Exception{
+        String name = arguments.checkString(0);
+        EntityPlayer player = Utils.findPlayer(name);
+        if(player != null){
+            return new Object[]{player.getHealth(), player.getMaxHealth()};
+        }
+        return new Object[]{false, "player not found"};
+    }
+
+    @Callback
+    public Object[] heal(Context context, Arguments arguments) throws Exception{
+        String name = arguments.checkString(0);
+        EntityPlayer player = Utils.findPlayer(name);
+        if(player != null){
+            double health = arguments.checkDouble(1);
+            player.heal((float) health);
+            return new Object[]{true};
+        }
+        return new Object[]{false, "player not found"};
+    }
+
+    @Callback
+    public Object[] kill(Context machine, Arguments args) throws Exception{
+        String name = args.checkString(0);
+        EntityPlayer player = Utils.findPlayer(name);
+        if(player != null){
+            player.setDead();
+            return new Object[]{true};
+        }
+        return new Object[]{false, "player not found"};
+    }
+
+    @Callback(doc="function(player:string, dimension:integer); get bed location.")
+    public Object[] getSpawnLocation(Context machine, Arguments args) throws Exception{
+        String name = args.checkString(0);
+        EntityPlayer player = Utils.findPlayer(name);
+        if(player != null){
+            int dimention = args.checkInteger(1);
+            ChunkCoordinates chunkCoordinates = player.getBedLocation(dimention);
+            if(chunkCoordinates != null)
+                return new Object[]{chunkCoordinates.posX, chunkCoordinates.posY, chunkCoordinates.posZ};
+            else
+                return new Object[]{false, "spawn location not found"};
+        }
+        return new Object[]{false, "player not found"};
+    }
+
+    @Callback
+    public Object[] getPlayerFoodStats(Context machine, Arguments args) throws Exception{
+        String name = args.checkString(0);
+        EntityPlayer player = Utils.findPlayer(name);
+        if(player != null){
+            return new Object[]{player.getFoodStats().needFood(), player.getFoodStats().getFoodLevel(), player.getFoodStats().getSaturationLevel()};
+        }
+        return new Object[]{false, "player not found"};
+    }
+
+    @Callback
+    public Object[] isFlying(Context context, Arguments args) throws Exception{
+        String name = args.checkString(0);
+        EntityPlayerMP player = Utils.findPlayer(name);
+        if(player != null){
+           return new Object[]{player.capabilities.isFlying};
+        }
+        return new Object[]{false, "player not found"};
+    }
+
+    @Callback(doc="return player position and dimention, x, y, z, dimension")
+    public Object[] getPlayerPosition(Context context, Arguments args) throws Exception{
+        String name = args.checkString(0);
+        EntityPlayerMP player = Utils.findPlayer(name);
+        if(player != null){
+            return new Object[]{player.posX, player.posY, player.posZ, player.dimension};
+        }
+        return new Object[]{false, "player not found"};
+    }
+
+    @Callback(doc="function(player:string); get current potion effects.")
+    public Object[] getActiveEffects(Context context, Arguments arguments) throws Exception{
+        String name = arguments.checkString(0);
+        EntityPlayer player = Utils.findPlayer(name);
+        if(player != null){
+            List<HashMap<Object, Object>> outEffects = new ArrayList<HashMap<Object, Object>>();
+            Collection collection = player.getActivePotionEffects();
+            Iterator iterator = collection.iterator();
+            while(iterator.hasNext()){
+                PotionEffect potionEffect = (PotionEffect) iterator.next();
+                HashMap<Object, Object> values2 = new HashMap<Object, Object>();
+                values2.put("potionId", potionEffect.getPotionID());
+                values2.put("duration", potionEffect.getDuration());
+                values2.put("amplifier", potionEffect.getAmplifier());
+                values2.put("name", potionEffect.getEffectName());
+                outEffects.add(values2);
+            }
+            return new Object[]{outEffects.toArray()};
+        }
+        return new Object[]{false, "player not found"};
+    }
+
+    @Callback
+    public Object[] getOnlinePlayers(Context machine, Arguments args) throws Exception{
+        return new Object[]{MinecraftServer.getServer().getConfigurationManager().getAllUsernames()};
+    }
+
+    @Callback(doc="function(player:string, message:string); kick player")
+    public Object[] kick(Context context, Arguments arguments) throws Exception{
+        String name = arguments.checkString(0);
+        String message = arguments.checkString(1);
+        EntityPlayerMP player = Utils.findPlayer(name);
+        if(player != null){
+            player.playerNetServerHandler.kickPlayerFromServer(message);
+            return new Object[]{true};
         }
         return new Object[]{false, "player not found"};
     }
 
     private String getComponentName() {
         return "world_interface";
-    }
-
-    @Override
-    public boolean canConnectNode(ForgeDirection side) {
-        return false;
     }
 
     @Override
