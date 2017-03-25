@@ -32,6 +32,8 @@ public class TileEntities {
         if(Loader.isModLoaded("IC2")){
             ic2();
         }
+
+        GameRegistry.registerTileEntity(TileEntityWorldInterface.class, "TileEntityWorldInterface");
     }
 
     private static void ic2(){

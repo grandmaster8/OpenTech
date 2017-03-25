@@ -6,7 +6,9 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.EnumHelper;
 import ot.events.ClientEvents;
 import ot.events.ClientFMLEvents;
 import ot.render.RenderCableDecorHandler;
@@ -34,6 +36,8 @@ public class ClientProxy extends CommonProxy{
 		RenderingRegistry.registerBlockHandler(radarRenderingId, new RenderingRadarHandler());
 		RenderingRegistry.registerBlockHandler(LDARenderingId, new RenderingAntennaHandler());
 		RenderingRegistry.registerBlockHandler(CableDecorRenderingId, new RenderCableDecorHandler());
+
+		EnumHelper.addRarity("unreal", EnumChatFormatting.OBFUSCATED, "unreal");
 	}
 
 	@Override

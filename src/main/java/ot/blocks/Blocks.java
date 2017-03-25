@@ -9,12 +9,13 @@ import ot.blocks.antenna.BlockCell;
 import ot.blocks.antenna.BlockLDA;
 import ot.blocks.ic.BlockEnergyController;
 import ot.item.ItemBlockCableDecor;
+import ot.item.ItemOTBlock;
 
 /**
  * Created by Avaja on 05.05.2016.
  */
 public class Blocks {
-    public static Block creativeChatbox, chatbox, radar, lda, antennaCell, antenna, pib, energyController;
+    public static Block creativeChatbox, chatbox, radar, lda, antennaCell, antenna, pib, energyController, worldInterface;
     public static BlockCableDecor cableDecor;
 
     public static void init(){
@@ -27,41 +28,50 @@ public class Blocks {
         pib = new BlockPIBinder();
         cableDecor = new BlockCableDecor();
         energyController = new BlockEnergyController();
+        worldInterface = new BlockWorldInterface();
 
         if (Config.registerCreativeChatBox){
-            GameRegistry.registerBlock(creativeChatbox, "OT_CreativeChatBox");
+            registerBlock(creativeChatbox, "OT_CreativeChatBox");
         }else {
-            System.out.println("CreativeChatBox off.");
+            System.out.println("CreativeChatBox disable");
         }
 
         if (Config.registerChatBox){
-            GameRegistry.registerBlock(chatbox, "OT_ChatBox");
+            registerBlock(chatbox, "OT_ChatBox");
         }else{
-            System.out.println("ChatBox off.");
+            System.out.println("ChatBox disable");
         }
 
         if (Config.registerRadar){
-            GameRegistry.registerBlock(radar, "OT_Radar");
+            registerBlock(radar, "OT_Radar");
         }else{
-            System.out.println("Radar off.");
+            System.out.println("Radar disable");
         }
 
         if(Config.registerLDA){
-            GameRegistry.registerBlock(lda, "OT_LDA");
-            GameRegistry.registerBlock(antennaCell, "OT_CELL");
-            GameRegistry.registerBlock(antenna, "OT_ANTENNA");
+            registerBlock(lda, "OT_LDA");
+            registerBlock(antennaCell, "OT_CELL");
+            registerBlock(antenna, "OT_ANTENNA");
         }else{
-            System.out.println("LDA off.");
+            System.out.println("LDA disable");
         }
 
         if(Config.registerDecorativeCable){
             GameRegistry.registerBlock(cableDecor, ItemBlockCableDecor.class, "OT_CableDecor");
         }else{
-            System.out.println("Decorative Cable off.");
+            System.out.println("Decorative Cable disable");
         }
 
         if(Config.registerPIB){
-            GameRegistry.registerBlock(pib, "OT_PIB");
+            registerBlock(pib, "OT_PIB");
+        }else{
+            System.out.println("pib disable");
+        }
+
+        if(Config.registerWorldInterface){
+            registerBlock(worldInterface, "OT_WorldInterface");
+        }else{
+            System.out.println("world interface disable");
         }
 
         if(Loader.isModLoaded("IC2")){
@@ -73,7 +83,11 @@ public class Blocks {
         if(Config.registerEnergyController){
             GameRegistry.registerBlock(energyController, "OT_ENERGY_CONTROLLER");
         }else{
-            System.out.println("EnergyController off.");
+            System.out.println("EnergyController disable");
         }
+    }
+
+    private static void registerBlock(Block block, String name){
+        GameRegistry.registerBlock(block, ItemOTBlock.class, name);
     }
 }

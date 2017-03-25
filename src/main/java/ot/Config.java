@@ -45,7 +45,8 @@ public class Config {
             registerScanner,
             registerNR,
             registerShieldGenerator,
-            registerEnergyController;
+            registerEnergyController,
+            registerWorldInterface
     ;
 
 
@@ -76,6 +77,7 @@ public class Config {
         registerNR = configuration.getBoolean("registerNR", "REGISTER", true, "");
         registerShieldGenerator = configuration.getBoolean("registerShieldGenerator", "REGISTER", true, "");
         registerEnergyController = configuration.getBoolean("registerEnergyController", "REGISTER", true, "");
+        registerWorldInterface = configuration.getBoolean("registerWorldInterface", "REGISTER", true, "");
 
         ldaMaxDistance = configuration.getInt("ldaMaxDistance", "LDA", 2000, 0, 1000000, "");
         ldaMaxPacketSize = configuration.getInt("ldaMaxPacketSize", "LDA", 1024 * 8, 0, 1000000, "");

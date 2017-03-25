@@ -10,6 +10,7 @@ import ot.Config;
  * Created by Avaja on 07.05.2016.
  */
 public class Items {
+
     public static Item tesla, radar, wrench, scanner, nr, uranCell;
 
     public static void init(){

@@ -1,9 +1,14 @@
 package ot.utils;
 
+import cpw.mods.fml.common.registry.FMLControlledNamespacedRegistry;
+import cpw.mods.fml.common.registry.GameData;
 import li.cil.oc.api.network.Node;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
@@ -13,6 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +29,11 @@ public class Utils {
 
     public static List getEntitiesInBound( Class c, World world, int minx, int miny, int minz, int maxx, int maxy, int maxz ){
         return world.getEntitiesWithinAABB( c, AxisAlignedBB.getBoundingBox( minx, miny, minz, maxx, maxy, maxz ) );
+    }
+
+    public static String getForgeName(Item item){
+        FMLControlledNamespacedRegistry<Item> items = GameData.getItemRegistry();
+        return items.getNameForObject(item);
     }
 
     public static double distance( Node n1, Node n2 ){
@@ -188,6 +199,16 @@ public class Utils {
                 hashMap.put( i, objects[i] );
             }
             return hashMap;
+        }
+        return null;
+    }
+
+    public static EntityPlayerMP findPlayer(String name){
+        Iterator iterator = MinecraftServer.getServer().getConfigurationManager().playerEntityList.iterator();
+        while(iterator.hasNext()){
+            EntityPlayerMP player = (EntityPlayerMP) iterator.next();
+            if(player.getCommandSenderName().equals(name))
+                return player;
         }
         return null;
     }

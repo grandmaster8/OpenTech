@@ -19,7 +19,7 @@ import ot.system.LDASystem;
 /**
  * Created by Avaja on 07.12.2016.
  */
-public class TileEntityLDA extends TileEntity  implements Analyzable, Environment, SidedComponent {
+public class TileEntityLDA extends TileEntity implements Analyzable, Environment, SidedComponent {
 
     protected Node node;
     private boolean addToNetwork = false;
