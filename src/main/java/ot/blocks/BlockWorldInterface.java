@@ -1,5 +1,7 @@
 package ot.blocks;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -43,6 +45,7 @@ public class BlockWorldInterface extends BasicBlockContainer implements OTBlock 
         }
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void randomDisplayTick(World world, int x, int y, int z, Random random) {
         EffectRenderer effectRenderer = Minecraft.getMinecraft().effectRenderer;
