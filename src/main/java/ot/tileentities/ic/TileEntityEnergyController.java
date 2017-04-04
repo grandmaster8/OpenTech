@@ -185,7 +185,7 @@ public class TileEntityEnergyController extends TileEntity implements Analyzable
 
     @Override
     public double getDemandedEnergy() {
-        return 128;
+        return 2048;
     }
 
     @Override
@@ -197,8 +197,11 @@ public class TileEntityEnergyController extends TileEntity implements Analyzable
     public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage) {
         if(energyInputBuffer < inputBufferCapacity){
             energyInputBuffer += amount;
-            if(energyInputBuffer > inputBufferCapacity)
+            if(energyInputBuffer > inputBufferCapacity) {
+                int ret = energyInputBuffer - inputBufferCapacity;
                 energyInputBuffer = inputBufferCapacity;
+                return ret;
+            }
             return 0;
         }else{
             return amount;
@@ -216,8 +219,8 @@ public class TileEntityEnergyController extends TileEntity implements Analyzable
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
 
-        nbt.setInteger("in", energyInputBuffer);
-        nbt.setInteger("out", energyOutputBuffer);
+        energyInputBuffer = nbt.getInteger("in_energy");
+        energyOutputBuffer = nbt.getInteger("out_energy");
 
         if (node != null && node.host() == this) {
             node.load(nbt.getCompoundTag("oc:node"));
@@ -228,8 +231,8 @@ public class TileEntityEnergyController extends TileEntity implements Analyzable
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
 
-        energyInputBuffer = nbt.getInteger("in");
-        energyOutputBuffer = nbt.getInteger("out");
+        nbt.setInteger("in_energy", energyInputBuffer);
+        nbt.setInteger("out_energy", energyOutputBuffer);
 
         if (node != null && node.host() == this) {
             final NBTTagCompound nodeNbt = new NBTTagCompound();

@@ -19,7 +19,7 @@ apply plugin: 'forge'
 
 compileJava.options.encoding = 'UTF-8'
 
-version = "0.6.7a_build_25"
+version = "0.6.8a_build_26"
 group = "ot"
 archivesBaseName = "OpenTechnology"
 
