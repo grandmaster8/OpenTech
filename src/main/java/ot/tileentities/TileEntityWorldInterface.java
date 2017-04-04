@@ -1,5 +1,6 @@
 package ot.tileentities;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import li.cil.oc.api.Network;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
@@ -7,6 +8,7 @@ import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
@@ -40,8 +42,8 @@ public class TileEntityWorldInterface extends TileEntity implements Analyzable, 
 
     @Callback
     public Object[] getStackInSlot(Context context, Arguments arguments) throws Exception{
-        String name = arguments.checkString(1);
-        int slot = arguments.checkInteger(2) + 1;
+        String name = arguments.checkString(0);
+        int slot = arguments.checkInteger(1) - 1;
         EntityPlayer player = Utils.findPlayer(name);
         if(player != null){
             if(player.getCommandSenderName().equals(name)){
@@ -60,6 +62,30 @@ public class TileEntityWorldInterface extends TileEntity implements Analyzable, 
                         return new Object[]{values};
                     }else{
                         return new Object[]{null};
+                    }
+                }else{
+                    return new Object[]{false, "invalid slot"};
+                }
+            }
+        }
+        return new Object[]{false, "player not found"};
+    }
+
+    @Callback
+    public Object[] setStackInSlot(Context machine, Arguments args){
+        String name = args.checkString(0);
+        int slot = args.checkInteger(1) - 1;
+        EntityPlayer player = Utils.findPlayer(name);
+        if(player != null){
+            if(player.getCommandSenderName().equals(name)) {
+                if (slot >= 0 && slot < player.inventory.getSizeInventory()) {
+                    String id = args.checkString(2);
+                    int count = args.checkInteger(3);
+                    int meta = args.checkInteger(4);
+                    String[] split = id.split(":");
+                    Item item = GameRegistry.findItem(split[0], split[1]);
+                    if(item != null){
+                        player.inventory.setInventorySlotContents(slot, new ItemStack(item, count, meta));
                     }
                 }else{
                     return new Object[]{false, "invalid slot"};
@@ -165,6 +191,42 @@ public class TileEntityWorldInterface extends TileEntity implements Analyzable, 
                 outEffects.add(values2);
             }
             return new Object[]{outEffects.toArray()};
+        }
+        return new Object[]{false, "player not found"};
+    }
+
+    @Callback(doc="function(name:string, potionId:number, duration:number, amplifier:number);")
+    public Object[] setEffect(Context machine, Arguments args) throws Exception{
+        String name = args.checkString(0);
+        EntityPlayer player = Utils.findPlayer(name);
+        if(player != null){
+            int potionId = args.checkInteger(1);
+            int duration = args.checkInteger(2);
+            int amplifier = args.checkInteger(3);
+            player.addPotionEffect(new PotionEffect(potionId, duration, amplifier));
+            return new Object[]{true};
+        }
+        return new Object[]{false, "player not found"};
+    }
+
+    @Callback(doc="function(name:string, x:number, y:number, z:number);")
+    public Object[] setPosition(Context machine, Arguments args){
+        String name = args.checkString(0);
+        EntityPlayer player = Utils.findPlayer(name);
+        if(player != null){
+            player.setPosition(args.checkDouble(1), args.checkDouble(2), args.checkDouble(3));
+            return new Object[]{true};
+        }
+        return new Object[]{false, "player not found"};
+    }
+
+    @Callback
+    public Object[] setHealth(Context machine, Arguments args){
+        String name = args.checkString(0);
+        EntityPlayer player = Utils.findPlayer(name);
+        if(player != null){
+            player.setHealth(args.checkInteger(1));
+            return new Object[]{true};
         }
         return new Object[]{false, "player not found"};
     }

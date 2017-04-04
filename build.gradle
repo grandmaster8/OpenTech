@@ -19,12 +19,16 @@ apply plugin: 'forge'
 
 compileJava.options.encoding = 'UTF-8'
 
-version = "0.6.6a_build_22"
-group= "net.avaja"
+version = "0.6.7a_build_25"
+group = "ot"
 archivesBaseName = "OpenTechnology"
 
 minecraft {
     version = "1.7.10-10.13.4.1558-1.7.10"
+
+    replace "@VERSION@", project.version
+    replaceIn "OpenTechnology.java"
+
     runDir = "eclipse"
 }
 
