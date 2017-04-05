@@ -58,7 +58,7 @@ public class TileEntityCreativeChatBox extends TileEntity implements Analyzable,
                 EntityDamageSource entityDamageSource = (EntityDamageSource) damageSource;
                 String damage = "";
                 try{
-                    damage = entityDamageSource.func_151519_b(player).getFormattedText();
+                    damage = entityDamageSource.func_151519_b(player).getUnformattedTextForChat();
                 }catch (Exception e){
                     e.printStackTrace();
                 }
