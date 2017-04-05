@@ -19,7 +19,7 @@ import javax.script.ScriptEngineManager;
 public class OpenTechnology {
 
 	public final static String MODID = "OpenTechnology";
-	public final static String VERSION = "0.6.9a_build_27";
+	public final static String VERSION = "0.6.10a_build_28";
 
 	public final static ScriptEngine SCRIPT_ENGINE = (new ScriptEngineManager()).getEngineByName("js");
 
