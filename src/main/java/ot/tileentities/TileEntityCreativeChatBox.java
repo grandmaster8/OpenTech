@@ -56,7 +56,13 @@ public class TileEntityCreativeChatBox extends TileEntity implements Analyzable,
         if(node != null){
             if(damageSource instanceof EntityDamageSource){
                 EntityDamageSource entityDamageSource = (EntityDamageSource) damageSource;
-                node.sendToReachable("computer.signal", "player_death", player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, getDistanceFrom(player.posX, player.posY, player.posZ), player.getDisplayName(), damageSource.damageType, entityDamageSource.func_151519_b(player).getFormattedText());
+                String damage = "";
+                try{
+                    damage = entityDamageSource.func_151519_b(player).getFormattedText();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                node.sendToReachable("computer.signal", "player_death", player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, getDistanceFrom(player.posX, player.posY, player.posZ), player.getDisplayName(), damageSource.damageType, damage);
             }else{
 
                 node.sendToReachable("computer.signal", "player_death", player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, getDistanceFrom(player.posX, player.posY, player.posZ), player.getDisplayName(), damageSource.damageType, null);
