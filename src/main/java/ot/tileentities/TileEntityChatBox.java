@@ -8,7 +8,7 @@ import li.cil.oc.api.network.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
+import net.minecraftforge.common.ForgeHooks;
 import ot.Config;
 import ot.system.ChatBoxEventSystem;
 
@@ -74,7 +74,7 @@ public class TileEntityChatBox extends TileEntity implements Analyzable, Environ
         List<EntityPlayer> players = worldObj.playerEntities;
         for (EntityPlayer player : players){
             if (player.getDistance(this.xCoord, this.yCoord, this.zCoord) <= radius){
-                player.addChatMessage(new ChatComponentText(message));
+                player.addChatMessage(ForgeHooks.newChatWithLinks(message));
             }
         }
         return new Object[]{};

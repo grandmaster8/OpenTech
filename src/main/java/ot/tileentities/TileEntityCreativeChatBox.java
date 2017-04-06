@@ -8,9 +8,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
+import net.minecraftforge.common.ForgeHooks;
 import ot.system.ChatBoxEventSystem;
 
 import java.util.List;
@@ -94,7 +94,7 @@ public class TileEntityCreativeChatBox extends TileEntity implements Analyzable,
 
         List<EntityPlayer> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
         for (EntityPlayer player : players){
-            player.addChatMessage(new ChatComponentText(String.format("%s", arguments.checkString(0))));
+            player.addChatMessage(ForgeHooks.newChatWithLinks(arguments.checkString(0)));
         }
         return new Object[]{};
     }
@@ -107,7 +107,7 @@ public class TileEntityCreativeChatBox extends TileEntity implements Analyzable,
         List<EntityPlayer> players = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
         for (EntityPlayer player : players){
             if (player.getDisplayName().equals(name))
-                player.addChatMessage(new ChatComponentText(message));
+                player.addChatMessage(ForgeHooks.newChatWithLinks(message));
         }
         return new Object[]{};
     }
