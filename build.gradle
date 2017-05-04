@@ -19,8 +19,8 @@ apply plugin: 'forge'
 
 compileJava.options.encoding = 'UTF-8'
 
-version = "0.6.4a_build_21"
-group= "net.avaja"
+version = "0.6.12a"
+group= "ot"
 archivesBaseName = "OpenTechnology"
 
 minecraft {

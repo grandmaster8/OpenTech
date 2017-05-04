@@ -14,8 +14,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import ot.Config;
 import ot.OpenTechnology;
 import ot.network.SparkPacket;
@@ -80,14 +78,10 @@ public class EnvTeslaUpgrade extends ManagedEnvironment  {
                 List<EntityPlayer> players = Utils.getEntitiesInBound(EntityPlayer.class, host.world(), (int)host.xPosition() - 200, (int)host.yPosition() - 200, (int)host.zPosition() - 200, (int)host.xPosition() + 200, (int)host.yPosition() + 200, (int)host.zPosition() + 200);
                 for(Object o : entities){
                     EntityLivingBase livingBase = (EntityLivingBase) o;
-                    LivingAttackEvent livingAttackEvent = new LivingAttackEvent(livingBase, OpenTechnology.electricDamage, damage);
-                    MinecraftForge.EVENT_BUS.post(livingAttackEvent);
-                    if(!livingAttackEvent.isCanceled()){
-                        livingBase.attackEntityFrom(OpenTechnology.electricDamage, damage);
+                    livingBase.attackEntityFrom(OpenTechnology.electricDamage, damage);
 
-                        for(EntityPlayer player : players)
-                            CommonProxy.wrapper.sendTo(new SparkPacket(livingBase.getEntityId()), (EntityPlayerMP) player);
-                    }
+                    for(EntityPlayer player : players)
+                        CommonProxy.wrapper.sendTo(new SparkPacket(livingBase.getEntityId()), (EntityPlayerMP) player);
                 }
                 host.world().playSoundEffect(host.xPosition(), host.yPosition(), host.zPosition(), OpenTechnology.MODID+":tesla_attack", 1, 1);
             }
