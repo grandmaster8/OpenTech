@@ -69,6 +69,23 @@ public class TileEntityWorldInterface extends TileEntity implements Analyzable, 
         return new Object[]{false, "player not found"};
     }
 
+    public Object[] destroyStackInSlot(Context context, Arguments arguments) throws Exception{
+        String name = arguments.checkString(1);
+        int slot = arguments.checkInteger(2) + 1;
+        EntityPlayer player = Utils.findPlayer(name);
+        if(player != null){
+            if(player.getCommandSenderName().equals(name)) {
+                if (slot >= 0 && slot < player.inventory.getSizeInventory()) {
+                    player.inventory.setInventorySlotContents(slot, null);
+                    return new Object[]{true};
+                }else{
+                    return new Object[]{false, "invalid slot"};
+                }
+            }
+        }
+        return new Object[]{false, "player not found"};
+    }
+
     @Callback(doc="function(player:string); get current and max player health.")
     public Object[] getPlayerHealth(Context context, Arguments arguments) throws Exception{
         String name = arguments.checkString(0);

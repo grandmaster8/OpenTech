@@ -6,7 +6,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import ot.system.ChatBoxEventSystem;
-import ot.system.PIBSystem;
 
 /**
  * Created by Avaja on 05.05.2016.
@@ -29,7 +28,6 @@ public class CommonEvents {
     @SubscribeEvent
     public void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent loggedInEvent){
         ChatBoxEventSystem.eventLoggedIn(loggedInEvent.player);
-        PIBSystem.checkPlayer(loggedInEvent.player);
     }
 
     @SubscribeEvent

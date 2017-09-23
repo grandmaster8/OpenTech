@@ -9,12 +9,30 @@
       <entry name="!?*.java" />
       <entry name="!?*.groovy" />
     </wildcardResourcePatterns>
+    <bytecodeTargetLevel>
+      <module name="OpenTechnology_api" target="1.6" />
+      <module name="OpenTechnology_main" target="1.6" />
+      <module name="OpenTechnology_test" target="1.6" />
+    </bytecodeTargetLevel>
   </component>
   <component name="CopyrightManager" default="" />
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
   <component name="GradleUISettings">
     <setting name="root" />
   </component>
@@ -175,9 +193,22 @@
       </item>
     </group>
   </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="Avaja">
+      <words>
+        <w>avaja</w>
+        <w>pibs</w>
+        <w>pickaxe</w>
+        <w>uran</w>
+      </words>
+    </dictionary>
+  </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/OpenTechnology.iml" filepath="$PROJECT_DIR$/OpenTechnology.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OpenTechnology_main.iml" filepath="$PROJECT_DIR$/OpenTechnology_main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OpenTechnology_api.iml" filepath="$PROJECT_DIR$/OpenTechnology_api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OpenTechnology_test.iml" filepath="$PROJECT_DIR$/OpenTechnology_test.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" project-jdk-name="1.8" project-jdk-type="JavaSDK">
@@ -188,24 +219,6 @@
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-  </component>
-  <component name="libraryTable">
-    <library name="industrialcraft-2-2.2.827-experimental-api">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/libs/industrialcraft-2-2.2.827-experimental-api.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/libs/industrialcraft-2-2.2.827-experimental-api.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="OpenComputers-MC1.7.10-1.6.0.901-dev-dev">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/eclipse/mods/OpenComputers-MC1.7.10-1.6.0.901-dev-dev.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
   </component>
   <component name="masterDetails">
     <states>

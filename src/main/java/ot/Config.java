@@ -46,7 +46,8 @@ public class Config {
             registerNR,
             registerShieldGenerator,
             registerEnergyController,
-            registerWorldInterface
+            registerWorldInterface,
+            registerPIM
     ;
 
 
@@ -78,6 +79,7 @@ public class Config {
         registerShieldGenerator = configuration.getBoolean("registerShieldGenerator", "REGISTER", true, "");
         registerEnergyController = configuration.getBoolean("registerEnergyController", "REGISTER", true, "");
         registerWorldInterface = configuration.getBoolean("registerWorldInterface", "REGISTER", true, "");
+        registerPIM = configuration.getBoolean("registerPIM", "REGISTER", true, "");
 
         ldaMaxDistance = configuration.getInt("ldaMaxDistance", "LDA", 2000, 0, 1000000, "");
         ldaMaxPacketSize = configuration.getInt("ldaMaxPacketSize", "LDA", 1024 * 8, 0, 1000000, "");

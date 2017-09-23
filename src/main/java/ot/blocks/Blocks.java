@@ -15,7 +15,7 @@ import ot.item.ItemOTBlock;
  * Created by Avaja on 05.05.2016.
  */
 public class Blocks {
-    public static Block creativeChatbox, chatbox, radar, lda, antennaCell, antenna, pib, energyController, worldInterface;
+    public static Block creativeChatbox, chatbox, radar, lda, antennaCell, antenna, pib, energyController, worldInterface, pim;
     public static BlockCableDecor cableDecor;
 
     public static void init(){
@@ -29,6 +29,7 @@ public class Blocks {
         cableDecor = new BlockCableDecor();
         energyController = new BlockEnergyController();
         worldInterface = new BlockWorldInterface();
+        pim = new BlockPIM();
 
         if (Config.registerCreativeChatBox){
             registerBlock(creativeChatbox, "OT_CreativeChatBox");
@@ -73,6 +74,9 @@ public class Blocks {
         }else{
             System.out.println("world interface disable");
         }
+
+        if(Config.registerPIM)
+            registerBlock(pim, "OT_PIM");
 
         if(Loader.isModLoaded("IC2")){
             ic2();

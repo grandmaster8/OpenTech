@@ -11,6 +11,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import ot.events.ClientEvents;
 import ot.events.ClientFMLEvents;
+import ot.render.BlockPIMRender;
 import ot.render.RenderCableDecorHandler;
 import ot.render.RenderingAntennaHandler;
 import ot.render.RenderingRadarHandler;
@@ -24,6 +25,7 @@ public class ClientProxy extends CommonProxy{
 	public static int radarRenderingId = RenderingRegistry.getNextAvailableRenderId();
 	public static int LDARenderingId = RenderingRegistry.getNextAvailableRenderId();
 	public static int CableDecorRenderingId = RenderingRegistry.getNextAvailableRenderId();
+	public static int PIMRenderingId = RenderingRegistry.getNextAvailableRenderId();
 
 
 	@Override
@@ -36,6 +38,7 @@ public class ClientProxy extends CommonProxy{
 		RenderingRegistry.registerBlockHandler(radarRenderingId, new RenderingRadarHandler());
 		RenderingRegistry.registerBlockHandler(LDARenderingId, new RenderingAntennaHandler());
 		RenderingRegistry.registerBlockHandler(CableDecorRenderingId, new RenderCableDecorHandler());
+		RenderingRegistry.registerBlockHandler(PIMRenderingId, new BlockPIMRender());
 
 		EnumHelper.addRarity("unreal", EnumChatFormatting.OBFUSCATED, "unreal");
 	}
