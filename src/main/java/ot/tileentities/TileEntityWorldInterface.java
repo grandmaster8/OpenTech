@@ -38,10 +38,10 @@ public class TileEntityWorldInterface extends TileEntity implements Analyzable, 
         }
     }
 
-    @Callback
+    @Callback(doc="function(name:string, slot:integer); get information about the stack from the player by name.")
     public Object[] getStackInSlot(Context context, Arguments arguments) throws Exception{
-        String name = arguments.checkString(1);
-        int slot = arguments.checkInteger(2) + 1;
+        String name = arguments.checkString(0);
+        int slot = arguments.checkInteger(0) + 1;
         EntityPlayer player = Utils.findPlayer(name);
         if(player != null){
             if(player.getCommandSenderName().equals(name)){
@@ -69,9 +69,10 @@ public class TileEntityWorldInterface extends TileEntity implements Analyzable, 
         return new Object[]{false, "player not found"};
     }
 
+    @Callback(doc = "function(name:string, slot:integer); destroy stack.")
     public Object[] destroyStackInSlot(Context context, Arguments arguments) throws Exception{
-        String name = arguments.checkString(1);
-        int slot = arguments.checkInteger(2) + 1;
+        String name = arguments.checkString(0);
+        int slot = arguments.checkInteger(1) + 1;
         EntityPlayer player = Utils.findPlayer(name);
         if(player != null){
             if(player.getCommandSenderName().equals(name)) {
