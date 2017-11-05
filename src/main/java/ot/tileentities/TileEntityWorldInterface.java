@@ -41,7 +41,7 @@ public class TileEntityWorldInterface extends TileEntity implements Analyzable, 
     @Callback(doc="function(name:string, slot:integer); get information about the stack from the player by name.")
     public Object[] getStackInSlot(Context context, Arguments arguments) throws Exception{
         String name = arguments.checkString(0);
-        int slot = arguments.checkInteger(0) + 1;
+        int slot = arguments.checkInteger(1) + 1;
         EntityPlayer player = Utils.findPlayer(name);
         if(player != null){
             if(player.getCommandSenderName().equals(name)){
