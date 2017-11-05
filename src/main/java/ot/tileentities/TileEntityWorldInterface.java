@@ -41,12 +41,12 @@ public class TileEntityWorldInterface extends TileEntity implements Analyzable, 
     @Callback(doc="function(name:string, slot:integer); get information about the stack from the player by name.")
     public Object[] getStackInSlot(Context context, Arguments arguments) throws Exception{
         String name = arguments.checkString(0);
-        int slot = arguments.checkInteger(1) + 1;
+        int slot = arguments.checkInteger(1);
         EntityPlayer player = Utils.findPlayer(name);
         if(player != null){
             if(player.getCommandSenderName().equals(name)){
-                if(slot >= 0 && slot < player.inventory.getSizeInventory()){
-                    ItemStack itemStack = player.inventory.getStackInSlot(slot);
+                if(slot > 0 && slot < player.inventory.getSizeInventory()){
+                    ItemStack itemStack = player.inventory.getStackInSlot(slot - 1);
                     if(itemStack != null){
                         HashMap values = Utils.createStringTable(
                                 "name", Utils.getForgeName(itemStack.getItem()),
@@ -72,12 +72,12 @@ public class TileEntityWorldInterface extends TileEntity implements Analyzable, 
     @Callback(doc = "function(name:string, slot:integer); destroy stack.")
     public Object[] destroyStackInSlot(Context context, Arguments arguments) throws Exception{
         String name = arguments.checkString(0);
-        int slot = arguments.checkInteger(1) + 1;
+        int slot = arguments.checkInteger(1);
         EntityPlayer player = Utils.findPlayer(name);
         if(player != null){
             if(player.getCommandSenderName().equals(name)) {
-                if (slot >= 0 && slot < player.inventory.getSizeInventory()) {
-                    player.inventory.setInventorySlotContents(slot, null);
+                if (slot > 0 && slot < player.inventory.getSizeInventory()) {
+                    player.inventory.setInventorySlotContents(slot - 1, null);
                     return new Object[]{true};
                 }else{
                     return new Object[]{false, "invalid slot"};
