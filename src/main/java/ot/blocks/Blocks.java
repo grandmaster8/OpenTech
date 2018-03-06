@@ -19,37 +19,31 @@ public class Blocks {
     public static BlockCableDecor cableDecor;
 
     public static void init(){
-        creativeChatbox = new BlockCreativeChatBox();
-        chatbox = new BlockChatBox();
-        radar = new BlockRadar();
-        lda = new BlockLDA();
-        antennaCell = new BlockCell();
-        antenna = new BlockAntenna();
-        pib = new BlockPIBinder();
-        cableDecor = new BlockCableDecor();
-        energyController = new BlockEnergyController();
-        worldInterface = new BlockWorldInterface();
-        pim = new BlockPIM();
-
         if (Config.registerCreativeChatBox){
+            creativeChatbox = new BlockCreativeChatBox();
             registerBlock(creativeChatbox, "OT_CreativeChatBox");
         }else {
             System.out.println("CreativeChatBox disable");
         }
 
         if (Config.registerChatBox){
+            chatbox = new BlockChatBox();
             registerBlock(chatbox, "OT_ChatBox");
         }else{
             System.out.println("ChatBox disable");
         }
 
         if (Config.registerRadar){
+            radar = new BlockRadar();
             registerBlock(radar, "OT_Radar");
         }else{
             System.out.println("Radar disable");
         }
 
         if(Config.registerLDA){
+            lda = new BlockLDA();
+            antenna = new BlockAntenna();
+            antennaCell = new BlockCell();
             registerBlock(lda, "OT_LDA");
             registerBlock(antennaCell, "OT_CELL");
             registerBlock(antenna, "OT_ANTENNA");
@@ -58,25 +52,32 @@ public class Blocks {
         }
 
         if(Config.registerDecorativeCable){
+            cableDecor = new BlockCableDecor();
             GameRegistry.registerBlock(cableDecor, ItemBlockCableDecor.class, "OT_CableDecor");
         }else{
             System.out.println("Decorative Cable disable");
         }
 
         if(Config.registerPIB){
+            pib = new BlockPIBinder();
             registerBlock(pib, "OT_PIB");
         }else{
             System.out.println("pib disable");
         }
 
         if(Config.registerWorldInterface){
+            worldInterface = new BlockWorldInterface();
             registerBlock(worldInterface, "OT_WorldInterface");
         }else{
             System.out.println("world interface disable");
         }
 
-        if(Config.registerPIM)
+        if(Config.registerPIM) {
+            pim = new BlockPIM();
             registerBlock(pim, "OT_PIM");
+        }else{
+            System.out.println("pim disable");
+        }
 
         if(Loader.isModLoaded("IC2")){
             ic2();
@@ -85,6 +86,7 @@ public class Blocks {
 
     private static void ic2(){
         if(Config.registerEnergyController){
+            energyController = new BlockEnergyController();
             GameRegistry.registerBlock(energyController, "OT_ENERGY_CONTROLLER");
         }else{
             System.out.println("EnergyController disable");

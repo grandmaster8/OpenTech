@@ -37,6 +37,8 @@ public class ChatBoxEventSystem {
     }
 
     public static boolean eventMessage(EntityPlayer player, String message){
+        if(!(player instanceof EntityPlayer))
+            return false;
 
         if (message.startsWith("#")){
             eventCommand(player, message);
