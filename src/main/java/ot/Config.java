@@ -34,6 +34,8 @@ public class Config {
     public static int NREfficiency;
     public static int NRFuelCount;
 
+    public static boolean chatBoxCatchOnlyPlayer = false;
+
     public static boolean registerCreativeChatBox,
             registerChatBox,
             registerRadarUpgrade,
@@ -57,6 +59,7 @@ public class Config {
 
         chatboxMaxRadius = configuration.get("chatbox", "chatboxMaxRadius", 128, "").getInt();
         maxMessageLength = configuration.get("chatbox", "maxMessageLength", 128).getInt();
+        chatBoxCatchOnlyPlayer = configuration.get("chatbox", "charBoxCatchOnlyPlayer", false).getBoolean();
 
         maxTeslaRadius = configuration.get("TESLA_UPGRADE", "maxTeslaRadius", 10).getInt();
         maxTeslaHeat = configuration.get("TESLA_UPGRADE", "maxTeslaHeat",   100, "").getInt();

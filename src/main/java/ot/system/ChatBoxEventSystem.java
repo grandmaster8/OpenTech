@@ -2,6 +2,7 @@ package ot.system;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
+import ot.Config;
 import ot.tileentities.TileEntityChatBox;
 import ot.tileentities.TileEntityCreativeChatBox;
 
@@ -37,7 +38,7 @@ public class ChatBoxEventSystem {
     }
 
     public static boolean eventMessage(EntityPlayer player, String message){
-        if(!(player instanceof EntityPlayer))
+        if(Config.chatBoxCatchOnlyPlayer && !(player instanceof EntityPlayer))
             return false;
 
         if (message.startsWith("#")){
