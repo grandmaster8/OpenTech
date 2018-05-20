@@ -21,7 +21,7 @@ import javax.script.ScriptEngineManager;
 public class OpenTechnology {
 
 	public final static String MODID = "OpenTechnology";
-	public final static String VERSION = "0.7.16a";
+	public final static String VERSION = "0.7.17";
 
 	public final static ScriptEngine SCRIPT_ENGINE = (new ScriptEngineManager()).getEngineByName("js");
 	public static final GameProfile MOD_PROFILE = new GameProfile(EntityPlayer.func_146094_a(new GameProfile(null, MODID)), MODID);
