@@ -1,7 +1,7 @@
 package ot.item;
 
 import li.cil.oc.api.driver.item.Chargeable;
-import li.cil.oc.common.block.RobotProxy;
+import li.cil.oc.api.internal.Robot;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -67,7 +67,7 @@ public class ItemScanner extends Item implements Chargeable {
                 for(int iy = minY; iy < maxY; iy++){
                     Block block  = world.getBlock(ix, iy, iz);
                     int distance = (int) Math.abs(entityPlayer.getDistance(ix, iy, iz));
-                    if(block instanceof RobotProxy){
+                    if(block instanceof Robot){
                         HashMap<String, Object> values = new HashMap<String, Object>();
                         values.put("x", ix);
                         values.put("y", iy);

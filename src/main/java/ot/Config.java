@@ -42,7 +42,6 @@ public class Config {
             registerTeslaUpgrade,
             registerRadar,
             registerLDA,
-            registerDecorativeCable,
             registerPIB,
             registerScanner,
             registerNR,
@@ -75,7 +74,6 @@ public class Config {
         registerTeslaUpgrade = configuration.getBoolean("registerTeslaUpgrade", "REGISTER", true, "");
         registerRadar = configuration.getBoolean("registerRadar", "REGISTER", true, "");
         registerLDA = configuration.getBoolean("registerLDA", "REGISTER", true, "");
-        registerDecorativeCable = configuration.getBoolean("registerDecorativeCable", "REGISTER", true, "");
         registerPIB = configuration.getBoolean("registerPIB", "REGISTER", true, "");
         registerScanner = configuration.getBoolean("registerScanner", "REGISTER", true, "");
         registerNR = configuration.getBoolean("registerNR", "REGISTER", true, "");

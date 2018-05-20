@@ -24,14 +24,4 @@ public class CommonEvents {
             ChatBoxEventSystem.eventDeath((EntityPlayer) event.entityLiving, event.source);
         }
     }
-
-    @SubscribeEvent
-    public void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent loggedInEvent){
-        ChatBoxEventSystem.eventLoggedIn(loggedInEvent.player);
-    }
-
-    @SubscribeEvent
-    public void playerLoggedOut(PlayerEvent.PlayerLoggedOutEvent playerLoggedOutEvent){
-        ChatBoxEventSystem.eventLoggedOut(playerLoggedOutEvent.player);
-    }
 }

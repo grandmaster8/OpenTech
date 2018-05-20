@@ -8,7 +8,6 @@ import ot.blocks.antenna.BlockAntenna;
 import ot.blocks.antenna.BlockCell;
 import ot.blocks.antenna.BlockLDA;
 import ot.blocks.ic.BlockEnergyController;
-import ot.item.ItemBlockCableDecor;
 import ot.item.ItemOTBlock;
 
 /**
@@ -16,7 +15,6 @@ import ot.item.ItemOTBlock;
  */
 public class Blocks {
     public static Block creativeChatbox, chatbox, radar, lda, antennaCell, antenna, pib, energyController, worldInterface, pim;
-    public static BlockCableDecor cableDecor;
 
     public static void init(){
         if (Config.registerCreativeChatBox){
@@ -49,13 +47,6 @@ public class Blocks {
             registerBlock(antenna, "OT_ANTENNA");
         }else{
             System.out.println("LDA disable");
-        }
-
-        if(Config.registerDecorativeCable){
-            cableDecor = new BlockCableDecor();
-            GameRegistry.registerBlock(cableDecor, ItemBlockCableDecor.class, "OT_CableDecor");
-        }else{
-            System.out.println("Decorative Cable disable");
         }
 
         if(Config.registerPIB){

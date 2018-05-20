@@ -11,7 +11,7 @@ import ot.Config;
  */
 public class Items {
 
-    public static Item tesla, radar, wrench, scanner, nr, uranCell;
+    public static Item tesla, radar, scanner, nr, uranCell;
 
     public static void init(){
 
@@ -19,7 +19,6 @@ public class Items {
         radar = new ItemRadarUpgrade();
         scanner = new ItemScanner();
         nr = new ItemNRUpgrade();
-        wrench = li.cil.oc.api.Items.get("wrench").item();
 
         if(Loader.isModLoaded("IC2"))
             uranCell = IC2Items.getItem("reactorUraniumSimple").getItem();

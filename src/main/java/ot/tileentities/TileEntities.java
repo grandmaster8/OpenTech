@@ -23,9 +23,6 @@ public class TileEntities {
         if(Config.registerLDA)
             GameRegistry.registerTileEntity(TileEntityLDA.class, "OT_TileEntityLDA");
 
-        if(Config.registerDecorativeCable)
-            GameRegistry.registerTileEntity(TileEntityCableDecor.class, "OT_TileEntityCableDecor");
-
         if(Config.registerPIB)
             GameRegistry.registerTileEntity(TileEntityPIB.class, "OT_TileEntityPIB");
 

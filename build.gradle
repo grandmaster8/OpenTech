@@ -28,8 +28,16 @@ minecraft {
     runDir = "eclipse"
 }
 
+repositories {
+    maven {
+        name = "OC repo"
+        url = "http://maven.cil.li/"
+    }
+}
+
 dependencies {
     runtime fileTree(dir: 'libs', include: '*.jar')
+    compile "li.cil.oc:OpenComputers:MC1.7.10-1.7.+:api"
 }
 
 processResources

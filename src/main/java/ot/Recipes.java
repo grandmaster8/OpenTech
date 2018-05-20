@@ -7,7 +7,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import ot.blocks.Blocks;
-import ot.recipes.RecipeItemCableDecor;
 
 /**
  * Created by Avaja on 26.05.2016.
@@ -128,10 +127,6 @@ public class Recipes {
                     'b', li.cil.oc.api.Items.get("componentBus3").createItemStack(1)
             );
         }
-
-       if(Config.registerDecorativeCable){
-           GameRegistry.addRecipe(new RecipeItemCableDecor());
-       }
 
         if(Config.registerRadarUpgrade){
             addRecipe(new ItemStack(ot.item.Items.radar),
