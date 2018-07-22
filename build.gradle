@@ -19,9 +19,9 @@ apply plugin: 'forge'
 
 compileJava.options.encoding = 'UTF-8'
 
-version = "0.6.12a"
+version = "0.7.18"
 group= "ot"
-archivesBaseName = "OpenTechnology"
+archivesBaseName = "opentechnology"
 
 minecraft {
     version = "1.7.10-10.13.4.1558-1.7.10"

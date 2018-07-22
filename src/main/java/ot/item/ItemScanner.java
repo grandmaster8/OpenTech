@@ -1,5 +1,6 @@
 package ot.item;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import li.cil.oc.api.driver.item.Chargeable;
 import li.cil.oc.api.internal.Robot;
 import net.minecraft.block.Block;
@@ -15,6 +16,7 @@ import net.minecraft.world.World;
 import org.apache.commons.lang3.text.StrSubstitutor;
 import ot.Config;
 import ot.OpenTechnology;
+import ot.blocks.Blocks;
 
 import java.util.HashMap;
 import java.util.List;
@@ -62,12 +64,15 @@ public class ItemScanner extends Item implements Chargeable {
         int maxY = y + Config.scannerHeight / 2;
         int maxZ = z + Config.scannerWidth / 2;
 
+        Block robotBlock = Block.getBlockFromName("Robot.name");
+
         for(int ix = minX; ix < maxX; ix++){
             for(int iz = minZ; iz < maxZ; iz++){
                 for(int iy = minY; iy < maxY; iy++){
                     Block block  = world.getBlock(ix, iy, iz);
                     int distance = (int) Math.abs(entityPlayer.getDistance(ix, iy, iz));
-                    if(block instanceof Robot){
+
+                    if(block.getLocalizedName().equals("Robot.name")){
                         HashMap<String, Object> values = new HashMap<String, Object>();
                         values.put("x", ix);
                         values.put("y", iy);

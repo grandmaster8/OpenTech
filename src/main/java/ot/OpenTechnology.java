@@ -1,6 +1,5 @@
 package ot;
 
-import com.mojang.authlib.GameProfile;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -8,7 +7,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import org.apache.logging.log4j.Logger;
 import ot.command.OTCommand;
@@ -20,11 +18,10 @@ import javax.script.ScriptEngineManager;
 @Mod(modid = OpenTechnology.MODID, name = OpenTechnology.MODID, version = OpenTechnology.VERSION)
 public class OpenTechnology {
 
-	public final static String MODID = "OpenTechnology";
-	public final static String VERSION = "0.7.17";
+	public final static String MODID = "opentechnology";
+	public final static String VERSION = "0.7.18";
 
 	public final static ScriptEngine SCRIPT_ENGINE = (new ScriptEngineManager()).getEngineByName("js");
-	public static final GameProfile MOD_PROFILE = new GameProfile(EntityPlayer.func_146094_a(new GameProfile(null, MODID)), MODID);
 
 	public static Logger logger;
 	public static CreativeTab tab = new CreativeTab();
