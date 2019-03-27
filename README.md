@@ -1,4 +1,4 @@
-# OpenTechnology
+# OpenTech
 Custom blocks for OpenComputers and Minecraft.
 
 Аддон добавляет разные по смыслу и применению блоки и предметы.
